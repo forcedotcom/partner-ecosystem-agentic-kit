@@ -8,7 +8,35 @@
       "salesforce.*documentation.*search",
       "salesforce.*documentation.*fetch"
     ],
-    "install_candidates": [],
+    "install_candidates": [
+      {
+        "id": "salesforce-docs",
+        "publisher": "Salesforce",
+        "source": "Salesforce Agentforce Labs",
+        "source_url": "https://labs.agentforce.com/docs/salesforce-docs-mcp",
+        "verified": true,
+        "verified_at": "2026-07-31",
+        "transport": "streamable_http",
+        "url": "https://salesforce-docs-76258744c9d7.herokuapp.com/api/mcp",
+        "protocol_version": "2025-06-18",
+        "server_info": {
+          "name": "mcp-semantic-search",
+          "version": "1.0.0"
+        },
+        "harnesses": [
+          "claude-code",
+          "codex",
+          "cursor",
+          "vscode",
+          "windsurf"
+        ],
+        "authentication": "No authentication is required by the published default and a read-only initialize/tools-list verification; clients that require headers can supply a bearer token.",
+        "expected_tools": [
+          "salesforce_docs_search",
+          "salesforce_docs_fetch"
+        ]
+      }
+    ],
     "missing_install_source_behavior": "recommend_salesforce_managed_catalog_or_workspace_admin"
   },
   "approved_documentation": {

@@ -42,8 +42,8 @@ Start a new session after installation.
 On first use, the advisor checks the tools exposed by the harness:
 
 1. If Salesforce Docs MCP is connected, it is preferred.
-2. If a verified MCP installation is offered by the harness, the advisor asks
-   before installing or connecting it.
+2. The plugin declares Salesforce's published `salesforce-docs` MCP dependency.
+   The advisor asks before installing or connecting it.
 3. If no verified installation source is available, the advisor offers exact,
    read-only Salesforce documentation domains as fallback.
 4. If the customer declines or enterprise policy blocks access, the advisor
@@ -51,9 +51,10 @@ On first use, the advisor checks the tools exposed by the harness:
    unknown.
 
 Customer consent never bypasses host or enterprise security policy. The
-repository intentionally contains no guessed Salesforce Docs MCP endpoint.
-When Salesforce publishes or administrators provide a verified server identity,
-add it to the preflight policy and dependency metadata through normal review.
+Salesforce Docs MCP identity, endpoint, tools, and Claude Code command are
+verified against
+`https://labs.agentforce.com/docs/salesforce-docs-mcp`. Changes to that source
+must be reviewed before updating the packaged dependency.
 
 ## Validate
 
@@ -64,4 +65,3 @@ python3 /path/to/skill-creator/scripts/quick_validate.py skills/advisor-capabili
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the normal human review process.
-

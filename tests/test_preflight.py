@@ -37,23 +37,34 @@ class PreflightTests(unittest.TestCase):
         self.assertEqual("salesforce_docs_mcp", result["fallback"])
         self.assertTrue(result["ready"])
 
-    def test_missing_unverified_mcp_does_not_offer_fake_install(self):
+    def test_missing_mcp_offers_verified_salesforce_install(self):
         result = self.module.evaluate(self.policy, "claude-code", [], {})
         self.assertEqual("unavailable", result["salesforce_docs_mcp"]["status"])
-        self.assertEqual([], result["salesforce_docs_mcp"]["verified_install_candidates"])
-        self.assertIn("mcp_install_source", result["consent_required"])
+        candidates = result["salesforce_docs_mcp"]["verified_install_candidates"]
+        self.assertEqual("salesforce-docs", candidates[0]["id"])
+        self.assertEqual(
+            "https://salesforce-docs-76258744c9d7.herokuapp.com/api/mcp",
+            candidates[0]["url"],
+        )
+        self.assertEqual(
+            ["salesforce_docs_search", "salesforce_docs_fetch"],
+            candidates[0]["expected_tools"],
+        )
+        self.assertEqual("2025-06-18", candidates[0]["protocol_version"])
+        self.assertEqual("mcp-semantic-search", candidates[0]["server_info"]["name"])
+        self.assertIn("mcp_install_consent", result["consent_required"])
         self.assertFalse(result["host_security_override"])
 
     def test_runtime_catalog_candidate_must_be_verified_and_identified(self):
         candidate = {
             "verified": True,
-            "harnesses": ["codex"],
+            "harnesses": ["test-harness"],
             "publisher": "Salesforce",
             "source": "Salesforce-managed catalog",
             "marketplace_identity": "salesforce-docs",
             "authentication": "declared by catalog",
         }
-        result = self.module.evaluate(self.policy, "codex", [], {}, [candidate])
+        result = self.module.evaluate(self.policy, "test-harness", [], {}, [candidate])
         self.assertEqual([candidate], result["salesforce_docs_mcp"]["verified_install_candidates"])
         self.assertIn("mcp_install_consent", result["consent_required"])
 
@@ -110,6 +121,21 @@ class PreflightTests(unittest.TestCase):
         self.assertEqual(codex["version"], claude["version"])
         self.assertTrue((ROOT / "skills" / "oem-isv-advisor" / "SKILL.md").exists())
         self.assertTrue((ROOT / "skills" / "advisor-capability-preflight" / "SKILL.md").exists())
+        self.assertEqual("./.mcp.json", codex["mcpServers"])
+        mcp = json.loads((ROOT / ".mcp.json").read_text(encoding="utf-8"))
+        self.assertEqual(
+            "https://salesforce-docs-76258744c9d7.herokuapp.com/api/mcp",
+            mcp["mcpServers"]["salesforce-docs"]["url"],
+        )
+
+    def test_openai_metadata_declares_verified_docs_dependency(self):
+        metadata = (SKILL / "agents" / "openai.yaml").read_text(encoding="utf-8")
+        self.assertIn('value: "salesforce-docs"', metadata)
+        self.assertIn('transport: "streamable_http"', metadata)
+        self.assertIn(
+            'url: "https://salesforce-docs-76258744c9d7.herokuapp.com/api/mcp"',
+            metadata,
+        )
 
     def test_entry_skill_requires_preflight_without_copying_domain_knowledge(self):
         entry = (ROOT / "skills" / "oem-isv-advisor" / "SKILL.md").read_text(encoding="utf-8")

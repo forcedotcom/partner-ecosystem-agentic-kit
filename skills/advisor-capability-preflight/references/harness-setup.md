@@ -4,10 +4,15 @@ Read only the section for the active harness.
 
 ## Codex
 
-- Prefer a declared MCP dependency in `agents/openai.yaml` when Salesforce
-  publishes a verified documentation MCP URL or marketplace identity.
+- Use the declared `salesforce-docs` dependency in `agents/openai.yaml`.
 - If Codex offers a missing-dependency installation prompt, show the identity
   and ask the customer before accepting it.
+- For a direct project-scoped setup, the reviewed command is:
+
+  ```bash
+  codex mcp add salesforce-docs --url https://salesforce-docs-76258744c9d7.herokuapp.com/api/mcp
+  ```
+
 - Store project-scoped MCP configuration in `.codex/config.toml` only in a
   trusted project. Do not edit user-global configuration without separate
   approval.
@@ -16,8 +21,15 @@ Read only the section for the active harness.
 
 ## Claude Code
 
-- A project may provide `.mcp.json`, but Claude Code must ask the customer to
-  approve a project-scoped MCP server before using it.
+- This plugin provides `.mcp.json`. Claude Code must ask the customer to approve
+  the project-scoped `salesforce-docs` server before using it.
+- The Salesforce-published direct command is:
+
+  ```bash
+  claude mcp add --transport http salesforce-docs https://salesforce-docs-76258744c9d7.herokuapp.com/api/mcp
+  ```
+
+- Restart Claude Code after adding the server.
 - Add exact `WebFetch(domain:...)` entries to
   `.claude/settings.local.json` only after project-level approval.
 - Do not use `--dangerously-skip-permissions`.
@@ -39,6 +51,8 @@ A Salesforce Docs MCP installation candidate must include:
 - authentication requirements;
 - expected read-only documentation tools.
 
-Until Salesforce publishes or administrators provide that metadata, recommend
-the managed catalog/admin route and use approved web fallback. Salesforce
-Hosted MCP org/data servers are not documentation MCP substitutes.
+The verified metadata is published at
+`https://labs.agentforce.com/docs/salesforce-docs-mcp`. Re-verify that source
+before changing the endpoint, transport, authentication statement, or expected
+tools. Salesforce Hosted MCP org/data servers are not documentation MCP
+substitutes.
