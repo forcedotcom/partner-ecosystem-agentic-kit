@@ -8,6 +8,10 @@ description: Check and configure documentation capabilities before an OEM/ISV Ad
 Establish documentation capability without touching a Salesforce org. Keep this
 setup separate from the partner's advisory decision.
 
+Salesforce Docs MCP is optional but highly recommended. Missing or declined MCP
+access must never block the advisor; continue with the approved fallback and
+label unsupported current claims as unknown.
+
 ## Preflight
 
 1. Read `references/documentation-policy.json`.
@@ -18,7 +22,7 @@ setup separate from the partner's advisory decision.
    remembered installation.
 4. Read `.advisor/capabilities.json` when it exists. Treat it as the customer's
    recorded preference, not proof that the harness granted access.
-5. If MCP is missing, offer exactly these choices:
+5. If MCP is missing, recommend it once and offer exactly these choices:
    - install or connect Salesforce Docs MCP when the harness exposes a verified
      installation candidate;
    - continue with approved official Salesforce web documentation;
@@ -35,7 +39,8 @@ setup separate from the partner's advisory decision.
 9. Record an approved or declined choice only after the customer answers. Run
    `scripts/record_preference.py` to save the decision without secrets.
 10. Continue in degraded mode when the customer declines or configuration is
-    blocked. Label unsupported current claims as unknown.
+    blocked. Do not fail readiness solely because MCP is absent. Label
+    unsupported current claims as unknown.
 
 Run `scripts/check_preflight.py --harness <active-harness>` when deterministic
 status output is useful. Pass each known exposed tool as `--tool <name>`; do not

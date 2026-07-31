@@ -46,8 +46,9 @@ def evaluate(
     docs_choice = preferences.get("approved_documentation_domains")
     mcp_choice = preferences.get("salesforce_docs_mcp_install")
     needs = []
+    recommendations = []
     if mcp_status != "connected" and mcp_choice not in {"declined", "deferred"}:
-        needs.append("mcp_install_consent" if candidates else "mcp_install_source")
+        recommendations.append("offer_salesforce_docs_mcp" if candidates else "identify_verified_mcp_source")
     if docs_choice not in {"approved", "declined"}:
         needs.append("documentation_domain_consent")
 
@@ -63,11 +64,13 @@ def evaluate(
         "harness": harness,
         "salesforce_docs_mcp": {
             "status": mcp_status,
+            "requirement": mcp.get("requirement", "optional"),
             "matching_tools": matching_tools,
             "verified_install_candidates": candidates,
         },
         "approved_documentation_domains": docs_choice or "not_decided",
         "consent_required": needs,
+        "recommended_actions": recommendations,
         "fallback": fallback,
         "ready": not needs,
         "host_security_override": False,

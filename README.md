@@ -42,8 +42,9 @@ Start a new session after installation.
 On first use, the advisor checks the tools exposed by the harness:
 
 1. If Salesforce Docs MCP is connected, it is preferred.
-2. The plugin declares Salesforce's published `salesforce-docs` MCP dependency.
-   The advisor asks before installing or connecting it.
+2. The plugin offers Salesforce's published `salesforce-docs` MCP as an
+   optional, highly recommended integration. The advisor asks before installing
+   or connecting it; declining never blocks the advisor.
 3. If no verified installation source is available, the advisor offers exact,
    read-only Salesforce documentation domains as fallback.
 4. If the customer declines or enterprise policy blocks access, the advisor

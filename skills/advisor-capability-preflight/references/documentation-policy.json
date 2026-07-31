@@ -2,6 +2,8 @@
   "schema_version": 1,
   "policy_version": "2026-07-31",
   "salesforce_docs_mcp": {
+    "requirement": "optional-highly-recommended",
+    "decline_behavior": "continue with approved public documentation or packaged knowledge; do not block the advisor or repeatedly prompt",
     "tool_name_patterns": [
       "salesforce.*docs.*search",
       "salesforce.*docs.*fetch",

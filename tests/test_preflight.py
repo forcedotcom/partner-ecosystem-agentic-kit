@@ -52,7 +52,9 @@ class PreflightTests(unittest.TestCase):
         )
         self.assertEqual("2025-06-18", candidates[0]["protocol_version"])
         self.assertEqual("mcp-semantic-search", candidates[0]["server_info"]["name"])
-        self.assertIn("mcp_install_consent", result["consent_required"])
+        self.assertNotIn("mcp_install_consent", result["consent_required"])
+        self.assertIn("offer_salesforce_docs_mcp", result["recommended_actions"])
+        self.assertEqual("optional-highly-recommended", result["salesforce_docs_mcp"]["requirement"])
         self.assertFalse(result["host_security_override"])
 
     def test_runtime_catalog_candidate_must_be_verified_and_identified(self):
@@ -66,7 +68,7 @@ class PreflightTests(unittest.TestCase):
         }
         result = self.module.evaluate(self.policy, "test-harness", [], {}, [candidate])
         self.assertEqual([candidate], result["salesforce_docs_mcp"]["verified_install_candidates"])
-        self.assertIn("mcp_install_consent", result["consent_required"])
+        self.assertIn("offer_salesforce_docs_mcp", result["recommended_actions"])
 
     def test_declined_mcp_and_approved_domains_use_web_fallback(self):
         result = self.module.evaluate(
@@ -128,14 +130,10 @@ class PreflightTests(unittest.TestCase):
             mcp["mcpServers"]["salesforce-docs"]["url"],
         )
 
-    def test_openai_metadata_declares_verified_docs_dependency(self):
+    def test_openai_metadata_does_not_make_docs_mcp_a_hard_dependency(self):
         metadata = (SKILL / "agents" / "openai.yaml").read_text(encoding="utf-8")
-        self.assertIn('value: "salesforce-docs"', metadata)
-        self.assertIn('transport: "streamable_http"', metadata)
-        self.assertIn(
-            'url: "https://salesforce-docs-76258744c9d7.herokuapp.com/api/mcp"',
-            metadata,
-        )
+        self.assertNotIn("dependencies:", metadata)
+        self.assertNotIn('value: "salesforce-docs"', metadata)
 
     def test_entry_skill_requires_preflight_without_copying_domain_knowledge(self):
         entry = (ROOT / "skills" / "oem-isv-advisor" / "SKILL.md").read_text(encoding="utf-8")
