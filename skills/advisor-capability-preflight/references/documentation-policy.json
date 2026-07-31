@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "policy_version": "2026-07-31",
+  "salesforce_docs_mcp": {
+    "tool_name_patterns": [
+      "salesforce.*docs.*search",
+      "salesforce.*docs.*fetch",
+      "salesforce.*documentation.*search",
+      "salesforce.*documentation.*fetch"
+    ],
+    "install_candidates": [],
+    "missing_install_source_behavior": "recommend_salesforce_managed_catalog_or_workspace_admin"
+  },
+  "approved_documentation": {
+    "scheme": "https",
+    "exact_hosts": [
+      "admin.salesforce.com",
+      "architect.salesforce.com",
+      "developer.salesforce.com",
+      "engineering.salesforce.com",
+      "help.salesforce.com",
+      "resources.docs.salesforce.com",
+      "trailhead.salesforce.com"
+    ],
+    "url_prefixes": [
+      "https://github.com/forcedotcom/",
+      "https://github.com/salesforcecli/",
+      "https://github.com/SalesforceAIResearch/"
+    ],
+    "access": "read_only",
+    "per_run_advisor_approval_required_after_project_approval": false,
+    "host_security_override": false
+  },
+  "excluded": [
+    "Salesforce org endpoints",
+    "authentication endpoints",
+    "partner portals",
+    "internal Salesforce systems",
+    "unlisted Salesforce subdomains"
+  ]
+}

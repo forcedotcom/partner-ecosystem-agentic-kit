@@ -1,0 +1,122 @@
+import importlib.util
+import json
+import subprocess
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SKILL = ROOT / "skills" / "advisor-capability-preflight"
+CHECK = SKILL / "scripts" / "check_preflight.py"
+RECORD = SKILL / "scripts" / "record_preference.py"
+POLICY = SKILL / "references" / "documentation-policy.json"
+
+
+def load_check_module():
+    spec = importlib.util.spec_from_file_location("check_preflight", CHECK)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+class PreflightTests(unittest.TestCase):
+    def setUp(self):
+        self.module = load_check_module()
+        self.policy = json.loads(POLICY.read_text(encoding="utf-8"))
+
+    def test_connected_mcp_is_detected_from_exposed_tools_only(self):
+        result = self.module.evaluate(
+            self.policy,
+            "codex",
+            ["mcp__salesforce_docs__search", "unrelated_tool"],
+            {"approved_documentation_domains": "approved"},
+        )
+        self.assertEqual("connected", result["salesforce_docs_mcp"]["status"])
+        self.assertEqual("salesforce_docs_mcp", result["fallback"])
+        self.assertTrue(result["ready"])
+
+    def test_missing_unverified_mcp_does_not_offer_fake_install(self):
+        result = self.module.evaluate(self.policy, "claude-code", [], {})
+        self.assertEqual("unavailable", result["salesforce_docs_mcp"]["status"])
+        self.assertEqual([], result["salesforce_docs_mcp"]["verified_install_candidates"])
+        self.assertIn("mcp_install_source", result["consent_required"])
+        self.assertFalse(result["host_security_override"])
+
+    def test_runtime_catalog_candidate_must_be_verified_and_identified(self):
+        candidate = {
+            "verified": True,
+            "harnesses": ["codex"],
+            "publisher": "Salesforce",
+            "source": "Salesforce-managed catalog",
+            "marketplace_identity": "salesforce-docs",
+            "authentication": "declared by catalog",
+        }
+        result = self.module.evaluate(self.policy, "codex", [], {}, [candidate])
+        self.assertEqual([candidate], result["salesforce_docs_mcp"]["verified_install_candidates"])
+        self.assertIn("mcp_install_consent", result["consent_required"])
+
+    def test_declined_mcp_and_approved_domains_use_web_fallback(self):
+        result = self.module.evaluate(
+            self.policy,
+            "codex",
+            ["web_search"],
+            {
+                "approved_documentation_domains": "approved",
+                "salesforce_docs_mcp_install": "declined",
+            },
+        )
+        self.assertEqual("approved_official_web", result["fallback"])
+        self.assertEqual([], result["consent_required"])
+        self.assertTrue(result["ready"])
+
+    def test_preference_recorder_writes_no_credentials(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / ".advisor" / "capabilities.json"
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(RECORD),
+                    "--output",
+                    str(output),
+                    "--harness",
+                    "codex",
+                    "--documentation-domains",
+                    "approved",
+                    "--mcp-install",
+                    "deferred",
+                    "--policy-version",
+                    "2026-07-31",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            value = json.loads(output.read_text(encoding="utf-8"))
+            self.assertFalse(value["contains_credentials"])
+            self.assertEqual("approved", value["approved_documentation_domains"])
+
+    def test_policy_uses_exact_salesforce_hosts(self):
+        hosts = self.policy["approved_documentation"]["exact_hosts"]
+        self.assertIn("developer.salesforce.com", hosts)
+        self.assertNotIn("salesforce.com", hosts)
+        self.assertFalse(self.policy["approved_documentation"]["host_security_override"])
+
+    def test_plugin_manifests_package_both_entry_skills(self):
+        codex = json.loads((ROOT / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
+        claude = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
+        self.assertEqual("oem-isv-advisor", codex["name"])
+        self.assertEqual(codex["version"], claude["version"])
+        self.assertTrue((ROOT / "skills" / "oem-isv-advisor" / "SKILL.md").exists())
+        self.assertTrue((ROOT / "skills" / "advisor-capability-preflight" / "SKILL.md").exists())
+
+    def test_entry_skill_requires_preflight_without_copying_domain_knowledge(self):
+        entry = (ROOT / "skills" / "oem-isv-advisor" / "SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("$advisor-capability-preflight", entry)
+        self.assertIn("references/routing.md", entry)
+        self.assertLess(len(entry.splitlines()), 90)
+
+
+if __name__ == "__main__":
+    unittest.main()

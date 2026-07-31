@@ -1,0 +1,6 @@
+{
+  "name": "oem-isv-advisor",
+  "version": "0.1.0",
+  "description": "Salesforce OEM/ISV advisory entry, routing, and trusted documentation preflight.",
+  "skills": "./skills/"
+}
