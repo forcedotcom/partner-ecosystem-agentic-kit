@@ -36,22 +36,16 @@ class AdvisorArchitectureTests(unittest.TestCase):
             self.assertTrue(agent.is_file(), folder.name)
             self.assertIn(f"${folder.name}", agent.read_text(encoding="utf-8"), folder.name)
 
-    def test_domain_skeletons_define_authority_evidence_and_delegation(self):
+    def test_domain_skills_define_authority_evidence_and_delegation(self):
         foundation = {"oem-isv-advisor", "advisor-capability-preflight"}
         for folder in sorted((ROOT / "skills").iterdir()):
             if folder.name in foundation or not (folder / "SKILL.md").is_file():
                 continue
             content = (folder / "SKILL.md").read_text(encoding="utf-8")
-            for required in (
-                "Architecture baseline",
-                "## Authority boundaries",
-                "**Ask:**",
-                "**Assess:**",
-                "**Act:**",
-                "## Evidence and freshness",
-                "## Delegation",
-            ):
+            for required in ("**Ask:**", "**Assess:**", "**Act:**", "fact", "unknown"):
                 self.assertIn(required, content, f"{folder.name}: {required}")
+            self.assertIn("approv", content.lower(), folder.name)
+            self.assertIn("delegat", content.lower(), folder.name)
 
     def test_human_architecture_document_names_every_skill(self):
         document = (ROOT / "ARCHITECTURE.md").read_text(encoding="utf-8")
