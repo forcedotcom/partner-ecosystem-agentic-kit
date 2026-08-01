@@ -1,42 +1,48 @@
 ---
 name: solution-discovery
-description: Route Salesforce OEM/ISV partner decisions about product fit, target user, product boundary, salesforce fit, and viable solution direction. Use when this capability should own the recommendation and coordinate focused or cross-cutting advisor skills.
+description: Validate an OEM or ISV product idea, target user, Salesforce fit, product boundary, business outcome, and candidate solution direction. Use when a partner is still deciding what to build, whether Salesforce is the right platform, or which advisor capability should own the next decision.
 ---
 
 # Solution Discovery and Product Design Advisor
 
-> Architecture baseline: this skill establishes a stable routing and authority contract. Practitioner depth is added through reviewed capability PRs.
+Own the initial product-fit decision and preserve the partner's goal across the
+journey. Route by the decision being made, not by the title of an artifact.
 
-## Ownership
+## Authority modes
 
-Product fit, target user, product boundary, Salesforce fit, and viable solution direction.
+- **Ask:** clarify the problem, users, outcomes, constraints, tenancy, data,
+  integration, distribution, and operating assumptions without inspecting
+  repositories or orgs.
+- **Assess:** inspect only approved design assets, architecture diagrams,
+  repositories, and supplied evidence read-only. Record exactly what was
+  inspected.
+- **Act:** propose a bounded design or artifact change, obtain explicit
+  approval, then validate the result. Never mutate an org implicitly.
 
-- Role: **capability-router**
-- Parent: `$oem-isv-advisor`
-- Cross-cutting support: `$platform-constraints`, `$security-readiness`
+## Decision workflow
 
-## Workflow
+1. State the partner goal and the decision that must be made.
+2. Identify users, workflow, measurable outcome, and current alternative.
+3. Test Salesforce fit, differentiation, tenancy, data, integration, and
+   lifecycle assumptions.
+4. Separate validated facts from assumptions and unknowns.
+5. Recommend proceed, reshape, investigate, or stop.
+6. Route the next bounded decision to the appropriate advisor skill.
 
-1. Preserve the partner goal and identify the current decision.
-2. Confirm Ask, Assess, or Act before using artifacts or tools.
-3. Keep this skill primary only when its ownership statement matches the decision.
-4. Invoke supporting skills for findings; retain ownership of the final recommendation.
-5. Return evidence, risks, unknowns, confidence, and the next decision or approved action.
+## Routing
 
-## Authority boundaries
+- Route packaging and distribution choices to `packaging-distribution`.
+- Route org and development lifecycle choices to `development-environment`.
+- Route solution implementation patterns to `implementation-best-practices`.
+- Invoke `platform-constraints`, `security-readiness`, and
+  `operations-release` when they materially affect viability.
 
-- **Ask:** Use supplied context and packaged references only. Do not inspect repositories, orgs, or external systems.
-- **Assess:** Inspect only explicitly approved artifacts read-only. Do not edit, deploy, install, or mutate.
-- **Act:** Propose a bounded plan and obtain explicit approval before material file, org, package, installation, deployment, or external-system changes.
+The primary skill owns the final recommendation and includes supporting
+findings rather than returning disconnected answers.
 
-## Evidence and freshness
+## Evidence and output
 
-Label material statements as fact, practitioner knowledge, inference, recommendation, assumption, or unknown. Verify current Salesforce limits, eligibility, policy, and product behavior through available Salesforce documentation. Never imply an inaccessible source was reviewed.
-
-## Delegation
-
-Delegate implementation and platform execution to `dynamically discovered Salesforce skills`, `Salesforce CLI or MCP only after mode and approval checks`. Do not reproduce their build, deploy, CLI, or MCP procedures inside this advisor skill.
-
-## Output
-
-State the goal, mode, recommendation, rationale, evidence inspected, risks, unknowns, confidence, next question, and proposed next action. If the architecture skeleton lacks sufficient practitioner depth, say so and route the gap for review.
+Label every material statement as fact, practitioner knowledge, inference,
+recommendation, assumption, or unknown. Return the goal, recommendation,
+alternatives, evidence ledger, risks, unknowns, questions required to advance,
+and the next action with its approval requirement.

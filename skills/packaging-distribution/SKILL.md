@@ -1,46 +1,41 @@
 ---
 name: packaging-distribution
-description: Route Salesforce OEM/ISV partner decisions about packaging, package lifecycle, upgrades, listings, and distribution strategy. Use when this capability should own the recommendation and coordinate focused or cross-cutting advisor skills.
+description: Route and synthesize OEM or ISV decisions about packageability, managed 2GP, package architecture, versions, ancestry, promotion, migration, listings, distribution, and upgrades. Use when a partner asks whether or how a Salesforce solution should be packaged or distributed.
 ---
 
 # Packaging and Distribution Advisor
 
-> Architecture baseline: this skill establishes a stable routing and authority contract. Practitioner depth is added through reviewed capability PRs.
+Own packaging and distribution synthesis. Keep implementation execution in
+approved Salesforce skill libraries and Salesforce CLI workflows.
 
-## Ownership
+## Authority modes
 
-Packaging, package lifecycle, upgrades, listings, and distribution strategy.
+- **Ask:** clarify product boundary, tenancy, installation model, namespace,
+  subscribers, distribution channel, dependencies, and lifecycle goals.
+- **Assess:** inspect approved project and package evidence read-only. Verify
+  current metadata support, CLI behavior, and policy before asserting them.
+- **Act:** require a proposed plan and explicit approval before changing
+  package configuration, creating versions, promoting releases, publishing, or
+  touching an org.
 
-- Role: **capability-router**
-- Parent: `$oem-isv-advisor`
-- Cross-cutting support: `$platform-constraints`, `$security-readiness`, `$operations-release`
+## Focused routing
 
-## Workflow
+- Strategy and boundaries: `packaging-strategy`.
+- Repository packageability: `packageability-assessment`.
+- PBO, namespace, package identity: `managed-2gp-foundation`.
+- Build and candidate validation: `package-version-validation`.
+- Ancestry, dependencies, patches, upgrades: `package-ancestry-dependencies`.
+- Irreversible promotion: `package-release-promotion`.
+- Managed 1GP migration or wrong-Dev-Hub transfer:
+  `package-migration-transfer`.
 
-1. Preserve the partner goal and identify the current decision.
-2. Confirm Ask, Assess, or Act before using artifacts or tools.
-3. Keep this skill primary only when its ownership statement matches the decision.
-4. Invoke supporting skills for findings; retain ownership of the final recommendation.
-5. Return evidence, risks, unknowns, confidence, and the next decision or approved action.
+Invoke `platform-constraints`, `security-readiness`, and `operations-release`
+when relevant. This skill owns the final recommendation.
 
-## Authority boundaries
+## Evidence and delegation
 
-- **Ask:** Use supplied context and packaged references only. Do not inspect repositories, orgs, or external systems.
-- **Assess:** Inspect only explicitly approved artifacts read-only. Do not edit, deploy, install, or mutate.
-- **Act:** Propose a bounded plan and obtain explicit approval before material file, org, package, installation, deployment, or external-system changes.
-
-## Evidence and freshness
-
-Label material statements as fact, practitioner knowledge, inference, recommendation, assumption, or unknown. Verify current Salesforce limits, eligibility, policy, and product behavior through available Salesforce documentation. Never imply an inaccessible source was reviewed.
-
-## Delegation
-
-Delegate implementation and platform execution to `dynamically discovered Salesforce skills`, `Salesforce CLI or MCP only after mode and approval checks`. Do not reproduce their build, deploy, CLI, or MCP procedures inside this advisor skill.
-
-## Focused routes
-
-Route to `$packaging-strategy`, `$packageability-assessment`, `$managed-2gp-foundation`, `$package-version-validation`, `$package-ancestry-dependencies`, `$package-release-promotion`, `$package-migration-transfer` when one of those decisions is primary. Keep synthesis here.
-
-## Output
-
-State the goal, mode, recommendation, rationale, evidence inspected, risks, unknowns, confidence, next question, and proposed next action. If the architecture skeleton lacks sufficient practitioner depth, say so and route the gap for review.
+Use practitioner knowledge first, then current Salesforce documentation and
+live evidence to corroborate, qualify, or expose conflict. Label every material
+statement as fact, practitioner knowledge, inference, recommendation,
+assumption, or unknown. Delegate build, deploy, and CLI execution to approved
+Salesforce skills instead of reproducing them.

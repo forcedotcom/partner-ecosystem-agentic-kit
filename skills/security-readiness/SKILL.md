@@ -1,42 +1,35 @@
 ---
 name: security-readiness
-description: Route Salesforce OEM/ISV partner decisions about secure architecture, review preparation, analysis evidence, and remediation readiness. Use when this capability should own the recommendation and coordinate focused or cross-cutting advisor skills.
+description: Assess secure architecture, data protection, Salesforce security-review preparation, static-analysis evidence, compliance considerations, and remediation readiness. Use when an OEM or ISV solution must identify security risk or prepare evidence for review without claiming guaranteed approval.
 ---
 
 # Security and Readiness Advisor
 
-> Architecture baseline: this skill establishes a stable routing and authority contract. Practitioner depth is added through reviewed capability PRs.
+Own secure-design and review-readiness findings. Never certify or guarantee
+Salesforce Security Review approval.
 
-## Ownership
+## Authority modes
 
-Secure architecture, review preparation, analysis evidence, and remediation readiness.
-
-- Role: **capability-router**
-- Parent: `$oem-isv-advisor`
-- Cross-cutting support: `$platform-constraints`, `$packaging-distribution`
+- **Ask:** explain readiness expectations and identify likely risk areas from
+  supplied architecture.
+- **Assess:** inspect approved code and configuration read-only, run approved
+  analyzers, and map findings to current official preparation guidance.
+- **Act:** after a proposed plan and explicit approval, configure analyzers,
+  add rules, remediate findings, and rerun validation.
 
 ## Workflow
 
-1. Preserve the partner goal and identify the current decision.
-2. Confirm Ask, Assess, or Act before using artifacts or tools.
-3. Keep this skill primary only when its ownership statement matches the decision.
-4. Invoke supporting skills for findings; retain ownership of the final recommendation.
-5. Return evidence, risks, unknowns, confidence, and the next decision or approved action.
+1. Identify data, identity, trust boundaries, external services, permissions,
+   secrets, tenancy, and distribution model.
+2. Inspect applicable evidence and record analyzer versions and scope.
+3. Separate code findings, architecture risk, documentation gaps, and policy
+   unknowns.
+4. Recommend prioritized remediation and validation.
 
-## Authority boundaries
+Label every material statement as fact, practitioner knowledge, inference,
+recommendation, assumption, or unknown. Record source identity and freshness
+for current review policy and analyzer behavior.
 
-- **Ask:** Use supplied context and packaged references only. Do not inspect repositories, orgs, or external systems.
-- **Assess:** Inspect only explicitly approved artifacts read-only. Do not edit, deploy, install, or mutate.
-- **Act:** Propose a bounded plan and obtain explicit approval before material file, org, package, installation, deployment, or external-system changes.
-
-## Evidence and freshness
-
-Label material statements as fact, practitioner knowledge, inference, recommendation, assumption, or unknown. Verify current Salesforce limits, eligibility, policy, and product behavior through available Salesforce documentation. Never imply an inaccessible source was reviewed.
-
-## Delegation
-
-Delegate implementation and platform execution to `dynamically discovered Salesforce skills`, `Salesforce CLI or MCP only after mode and approval checks`. Do not reproduce their build, deploy, CLI, or MCP procedures inside this advisor skill.
-
-## Output
-
-State the goal, mode, recommendation, rationale, evidence inspected, risks, unknowns, confidence, next question, and proposed next action. If the architecture skeleton lacks sufficient practitioner depth, say so and route the gap for review.
+Delegate code-analysis execution to approved Salesforce analyzer skills. When
+invoked as a cross-cutting skill, return findings to the primary advisor for
+final synthesis. A clean analyzer run is evidence, not proof of review approval.

@@ -1,46 +1,38 @@
 ---
 name: implementation-best-practices
-description: Route Salesforce OEM/ISV partner decisions about scalable implementation patterns after product and environment decisions are known. Use when this capability should own the recommendation and coordinate focused or cross-cutting advisor skills.
+description: Route and synthesize implementation decisions for Agentforce, Data 360, Slack, Tableau Next, Apex, APIs, prompts, MCP, sub-agents, state, long-running actions, testing, and user experience. Use after product and environment decisions are known and a partner needs a scalable implementation pattern.
 ---
 
 # Implementation Best Practices Advisor
 
-> Architecture baseline: this skill establishes a stable routing and authority contract. Practitioner depth is added through reviewed capability PRs.
+Own implementation-pattern synthesis while delegating product execution to
+dynamically discovered, approved Salesforce skill libraries.
 
-## Ownership
+## Authority modes
 
-Scalable implementation patterns after product and environment decisions are known.
+- **Ask:** compare architecture and implementation patterns from supplied
+  context only.
+- **Assess:** inspect approved designs, repositories, metadata, tests, and
+  read-only org evidence; record what was actually inspected.
+- **Act:** present exact changes, tools, org authority, side effects, rollback,
+  and validation; execute only after explicit approval.
 
-- Role: **capability-router**
-- Parent: `$oem-isv-advisor`
-- Cross-cutting support: `$packaging-distribution`, `$platform-constraints`, `$security-readiness`, `$operations-release`
+## Focused routing
 
-## Workflow
+- Cross-product pattern selection: `implementation-pattern-router`.
+- Agentforce: `agentforce-implementation-advisor`.
+- Data 360: `data-360-implementation-advisor`.
+- Slack: `slack-implementation-advisor`.
+- Tableau Next: `tableau-next-implementation-advisor`.
 
-1. Preserve the partner goal and identify the current decision.
-2. Confirm Ask, Assess, or Act before using artifacts or tools.
-3. Keep this skill primary only when its ownership statement matches the decision.
-4. Invoke supporting skills for findings; retain ownership of the final recommendation.
-5. Return evidence, risks, unknowns, confidence, and the next decision or approved action.
+The product-specific skills are candidate boundaries until specialist depth
+and live tests establish production readiness. State that limitation when it
+matters. Invoke platform constraints, packaging, security, and operations as
+cross-cutting checks; this skill owns the final recommendation.
 
-## Authority boundaries
+## Evidence and delegation
 
-- **Ask:** Use supplied context and packaged references only. Do not inspect repositories, orgs, or external systems.
-- **Assess:** Inspect only explicitly approved artifacts read-only. Do not edit, deploy, install, or mutate.
-- **Act:** Propose a bounded plan and obtain explicit approval before material file, org, package, installation, deployment, or external-system changes.
-
-## Evidence and freshness
-
-Label material statements as fact, practitioner knowledge, inference, recommendation, assumption, or unknown. Verify current Salesforce limits, eligibility, policy, and product behavior through available Salesforce documentation. Never imply an inaccessible source was reviewed.
-
-## Delegation
-
-Delegate implementation and platform execution to `dynamically discovered Salesforce skills`, `Salesforce CLI or MCP only after mode and approval checks`. Do not reproduce their build, deploy, CLI, or MCP procedures inside this advisor skill.
-
-## Focused routes
-
-Route to `$implementation-pattern-router`, `$agentforce-implementation-advisor`, `$data-360-implementation-advisor`, `$slack-implementation-advisor`, `$tableau-next-implementation-advisor` when one of those decisions is primary. Keep synthesis here.
-
-## Output
-
-State the goal, mode, recommendation, rationale, evidence inspected, risks, unknowns, confidence, next question, and proposed next action. If the architecture skeleton lacks sufficient practitioner depth, say so and route the gap for review.
+Prefer practitioner knowledge, then current documentation and approved live
+evidence. Preserve conflicts for review. Label facts, practitioner knowledge,
+inferences, recommendations, assumptions, and unknowns. Never reproduce generic
+Salesforce build, deployment, or CLI skills.

@@ -1,4 +1,4 @@
 interface:
   display_name: "Operations and Release"
-  short_description: "Operations and Release guidance for OEM and ISV partners"
-  default_prompt: "Use $operations-release to guide this OEM/ISV partner decision and clearly separate Ask, Assess, and Act."
+  short_description: "Design reliable releases and operations"
+  default_prompt: "Use $operations-release to assess this product's testing, release, rollback, and operating model."
