@@ -1,42 +1,78 @@
 ---
 name: implementation-pattern-router
-description: Advise Salesforce OEM/ISV partners on cross-product implementation routing and synthesis. Use when this focused decision is the primary subject and the parent capability must synthesize the result.
+description: Use after product and environment decisions to route implementation questions across Agentforce, Data 360, Slack, Tableau Next, Apex, APIs, prompts, MCP, and dynamically discovered Salesforce skill libraries. Owns Routes product-specific implementation questions and composes cross-product findings into one recommendation.
 ---
 
 # Implementation Pattern Router
 
-> Architecture baseline: this skill establishes a stable routing and authority contract. Practitioner depth is added through reviewed capability PRs.
+Own the partner decision described in the frontmatter. Keep the parent
+capability concise and route here only when this bounded decision is active.
 
-## Ownership
+## Operating contract
 
-Cross-product implementation routing and synthesis.
+- Route by the partner's decision, not by document title or keyword alone.
+- Preserve the partner's goal across turns. Ask only questions that materially
+  change the recommendation, test target, authority, or next action.
+- Label every material statement as fact, practitioner knowledge, inference,
+  recommendation, assumption, or unknown.
+- Read `references/practitioner-knowledge.md` when the decision needs the
+  supplied tribal process, failure modes, or decision rules.
+- Read `references/source-refresh.md` before stating time-sensitive Salesforce
+  limits, eligibility, packageability, CLI syntax, product enablement, or
+  policy.
+- Prefer practitioner knowledge first. Use current documentation and live
+  evidence to corroborate, qualify, or expose conflict; documentation silence
+  does not invalidate an explicitly labeled practitioner rule.
 
-- Role: **focused-advisor**
-- Parent: `$implementation-best-practices`
-- Cross-cutting support: `$packaging-distribution`, `$platform-constraints`, `$security-readiness`, `$operations-release`
+## Authority modes
 
-## Workflow
+- **Ask:** answer from supplied context and loaded references. Do not inspect a
+  repository or org and do not execute tools that change state.
+- **Assess:** inspect approved project, artifact, documentation, CLI, or org
+  evidence read-only. Report exact observations, missing evidence, and risks.
+  Do not edit files or mutate an org.
+- **Act:** this skill does not own execution. Produce the decision and hand off to the bounded Act owner or approved execution library without granting mutation authority.
 
-1. Preserve the partner goal and identify the current decision.
-2. Confirm Ask, Assess, or Act before using artifacts or tools.
-3. Keep this skill primary only when its ownership statement matches the decision.
-4. Invoke supporting skills for findings; retain ownership of the final recommendation.
-5. Return evidence, risks, unknowns, confidence, and the next decision or approved action.
+## Decision workflow
 
-## Authority boundaries
+1. Clarify product capability and implementation boundary.
+2. Identify state, duration, data access, packaging, and UX needs.
+3. Choose the owning product specialist.
+4. Discover approved execution skills instead of duplicating them.
+5. Compose cross-product findings into one recommendation.
 
-- **Ask:** Use supplied context and packaged references only. Do not inspect repositories, orgs, or external systems.
-- **Assess:** Inspect only explicitly approved artifacts read-only. Do not edit, deploy, install, or mutate.
-- **Act:** Do not execute from this skill. Return execution requests to $implementation-best-practices for a separately approved plan.
+## Execution delegation
 
-## Evidence and freshness
+Advisory ownership remains here. Delegate implementation to: dynamically discovered Salesforce skill libraries.
+Do not reproduce generic Salesforce build, deploy, or CLI skills. Dynamically
+discover approved skill libraries. Ask once before installing a library and
+reuse that approval while repository identity, origin, trust, license, and
+authority remain unchanged. Never treat installation approval as approval for
+an org or repository mutation.
 
-Label material statements as fact, practitioner knowledge, inference, recommendation, assumption, or unknown. Verify current Salesforce limits, eligibility, policy, and product behavior through available Salesforce documentation. Never imply an inaccessible source was reviewed.
+## Cross-cutting checks
 
-## Delegation
+Invoke Platform Constraints, Security & Readiness, and Operations & Release
+when they materially affect this decision. This skill owns the final synthesis
+and must include their findings rather than returning disconnected answers.
 
-Delegate implementation and platform execution to `dynamically discovered Salesforce skill libraries`. Do not reproduce their build, deploy, CLI, or MCP procedures inside this advisor skill.
+## Required output
 
-## Output
+Return:
 
-State the goal, mode, recommendation, rationale, evidence inspected, risks, unknowns, confidence, next question, and proposed next action. If the architecture skeleton lacks sufficient practitioner depth, say so and route the gap for review.
+1. Partner goal and current decision point.
+2. Recommendation and alternatives considered.
+3. Evidence ledger with explicit labels and source identity.
+4. Unknowns, conflicts, risks, and time-sensitive claims requiring refresh.
+5. Questions still required to reach the goal.
+6. Proposed next action and whether approval is required.
+7. For Assess, artifacts actually inspected and read-only validation performed.
+8. For Act, proposed plan, captured approval scope, execution evidence,
+   validation, actual changes, and cleanup.
+
+## Boundaries
+
+This skill does not own:
+
+- product-specific implementation details
+- deployment execution
