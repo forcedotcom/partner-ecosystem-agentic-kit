@@ -1,4 +1,4 @@
 interface:
-  display_name: "PBO and Dev Hub Foundation"
-  short_description: "PBO and Dev Hub Foundation guidance for OEM and ISV partners"
-  default_prompt: "Use $pbo-dev-hub-foundation to guide this OEM/ISV partner decision and clearly separate Ask, Assess, and Act."
+  display_name: "PBO Dev Hub Foundation"
+  short_description: "Guide pbo dev hub foundation decisions"
+  default_prompt: "Use $pbo-dev-hub-foundation to guide this OEM/ISV partner decision."
