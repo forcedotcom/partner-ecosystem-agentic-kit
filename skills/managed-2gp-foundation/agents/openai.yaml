@@ -1,4 +1,4 @@
 interface:
   display_name: "Managed 2GP Foundation"
-  short_description: "Managed 2GP Foundation guidance for OEM and ISV partners"
-  default_prompt: "Use $managed-2gp-foundation to guide this OEM/ISV partner decision and clearly separate Ask, Assess, and Act."
+  short_description: "Guide managed 2gp foundation decisions"
+  default_prompt: "Use $managed-2gp-foundation to guide this OEM/ISV partner decision."
