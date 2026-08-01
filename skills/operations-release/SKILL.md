@@ -1,42 +1,40 @@
 ---
 name: operations-release
-description: Route Salesforce OEM/ISV partner decisions about testing, ci/cd, release, rollback, monitoring, support, and lifecycle operations. Use when this capability should own the recommendation and coordinate focused or cross-cutting advisor skills.
+description: Guide testing strategy, CI/CD, release cadence, versioning, upgrades, rollback, monitoring, regulated delivery, incident response, and lifecycle operations for OEM or ISV products. Use when a partner needs to prove a release is reliable or operate it safely over time.
 ---
 
 # Operations and Release Advisor
 
-> Architecture baseline: this skill establishes a stable routing and authority contract. Practitioner depth is added through reviewed capability PRs.
+Own release and operating-model recommendations. Treat packaging promotion,
+publishing, deployment, and external-system changes as separately approved
+actions.
 
-## Ownership
+## Authority modes
 
-Testing, CI/CD, release, rollback, monitoring, support, and lifecycle operations.
+- **Ask:** design test, release, monitoring, rollback, and support strategy from
+  supplied context.
+- **Assess:** inspect approved tests, pipelines, package evidence, runbooks,
+  telemetry, and release records read-only.
+- **Act:** require a plan and explicit approval before changing pipelines,
+  deploying, promoting, publishing, scheduling, or modifying monitoring.
 
-- Role: **capability-router**
-- Parent: `$oem-isv-advisor`
-- Cross-cutting support: `$packaging-distribution`, `$security-readiness`
+## Execution delegation
+
+Delegate build, deployment, package, Salesforce CLI, and monitoring execution
+to dynamically discovered and approved tool skills. Keep lifecycle advice and
+final synthesis here; do not reproduce execution-library procedures.
 
 ## Workflow
 
-1. Preserve the partner goal and identify the current decision.
-2. Confirm Ask, Assess, or Act before using artifacts or tools.
-3. Keep this skill primary only when its ownership statement matches the decision.
-4. Invoke supporting skills for findings; retain ownership of the final recommendation.
-5. Return evidence, risks, unknowns, confidence, and the next decision or approved action.
+1. Define release unit, environments, quality gates, and owners.
+2. Map unit, integration, package-install, upgrade, security, and acceptance
+   testing to observable evidence.
+3. Define versioning, promotion, rollback, compatibility, and support policy.
+4. Define telemetry, alerting, incident, data-recovery, and lifecycle controls.
+5. Identify regulated or customer-specific evidence obligations.
 
-## Authority boundaries
-
-- **Ask:** Use supplied context and packaged references only. Do not inspect repositories, orgs, or external systems.
-- **Assess:** Inspect only explicitly approved artifacts read-only. Do not edit, deploy, install, or mutate.
-- **Act:** Propose a bounded plan and obtain explicit approval before material file, org, package, installation, deployment, or external-system changes.
-
-## Evidence and freshness
-
-Label material statements as fact, practitioner knowledge, inference, recommendation, assumption, or unknown. Verify current Salesforce limits, eligibility, policy, and product behavior through available Salesforce documentation. Never imply an inaccessible source was reviewed.
-
-## Delegation
-
-Delegate implementation and platform execution to `dynamically discovered Salesforce skills`, `Salesforce CLI or MCP only after mode and approval checks`. Do not reproduce their build, deploy, CLI, or MCP procedures inside this advisor skill.
-
-## Output
-
-State the goal, mode, recommendation, rationale, evidence inspected, risks, unknowns, confidence, next question, and proposed next action. If the architecture skeleton lacks sufficient practitioner depth, say so and route the gap for review.
+Invoke packaging for package lifecycle ownership and security for readiness
+gates. Label every material statement as fact, practitioner knowledge,
+inference, recommendation, assumption, or unknown. Return the release
+recommendation, evidence, gaps, risks, unknowns, and next approval-gated
+action.

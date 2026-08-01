@@ -1,4 +1,4 @@
 interface:
   display_name: "Platform Constraints"
-  short_description: "Platform Constraints guidance for OEM and ISV partners"
-  default_prompt: "Use $platform-constraints to guide this OEM/ISV partner decision and clearly separate Ask, Assess, and Act."
+  short_description: "Verify platform limits and guardrails"
+  default_prompt: "Use $platform-constraints to verify the limits and unsupported patterns that affect this design."

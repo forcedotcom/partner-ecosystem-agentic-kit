@@ -1,42 +1,38 @@
 ---
 name: platform-constraints
-description: Route Salesforce OEM/ISV partner decisions about platform limits, metadata support, guardrails, capability gaps, and workarounds. Use when this capability should own the recommendation and coordinate focused or cross-cutting advisor skills.
+description: Identify Salesforce runtime, metadata, packaging, file, scale, timeout, performance, volume, immutability, and capability constraints. Use when a design might depend on a current platform limit, unsupported pattern, guardrail, or workaround.
 ---
 
 # Platform Constraints Advisor
 
-> Architecture baseline: this skill establishes a stable routing and authority contract. Practitioner depth is added through reviewed capability PRs.
+Own constraint identification as a standalone or cross-cutting advisor. Do not
+state current Salesforce limits, eligibility, metadata support, or policy from
+memory.
 
-## Ownership
+## Authority modes
 
-Platform limits, metadata support, guardrails, capability gaps, and workarounds.
+- **Ask:** identify likely constraint categories from supplied context and mark
+  unverified current values as unknown.
+- **Assess:** inspect approved architecture, metadata, repository, logs, and
+  current documentation read-only; distinguish observed behavior from platform
+  contract.
+- **Act:** propose a workaround or bounded change and require explicit approval
+  before modifying code, metadata, configuration, or an org.
 
-- Role: **capability-router**
-- Parent: `$oem-isv-advisor`
-- Cross-cutting support: `$packaging-distribution`, `$security-readiness`
+## Constraint workflow
 
-## Workflow
+1. Identify the operation, resource, volume, duration, and failure mode.
+2. Separate documented limits from practitioner observations and assumptions.
+3. Verify volatile claims using available Salesforce Docs MCP, then approved
+   official web fallback when necessary.
+4. Determine whether the design is supported, conditionally supported,
+   unverified, or unsupported.
+5. Recommend redesign, guardrail, measurement, escalation, or workaround.
 
-1. Preserve the partner goal and identify the current decision.
-2. Confirm Ask, Assess, or Act before using artifacts or tools.
-3. Keep this skill primary only when its ownership statement matches the decision.
-4. Invoke supporting skills for findings; retain ownership of the final recommendation.
-5. Return evidence, risks, unknowns, confidence, and the next decision or approved action.
+## Evidence and delegation
 
-## Authority boundaries
-
-- **Ask:** Use supplied context and packaged references only. Do not inspect repositories, orgs, or external systems.
-- **Assess:** Inspect only explicitly approved artifacts read-only. Do not edit, deploy, install, or mutate.
-- **Act:** Propose a bounded plan and obtain explicit approval before material file, org, package, installation, deployment, or external-system changes.
-
-## Evidence and freshness
-
-Label material statements as fact, practitioner knowledge, inference, recommendation, assumption, or unknown. Verify current Salesforce limits, eligibility, policy, and product behavior through available Salesforce documentation. Never imply an inaccessible source was reviewed.
-
-## Delegation
-
-Delegate implementation and platform execution to `dynamically discovered Salesforce skills`, `Salesforce CLI or MCP only after mode and approval checks`. Do not reproduce their build, deploy, CLI, or MCP procedures inside this advisor skill.
-
-## Output
-
-State the goal, mode, recommendation, rationale, evidence inspected, risks, unknowns, confidence, next question, and proposed next action. If the architecture skeleton lacks sufficient practitioner depth, say so and route the gap for review.
+Label every material statement as fact, practitioner knowledge, inference,
+recommendation, assumption, or unknown. Delegate measurements, repository
+inspection, Salesforce CLI, and MCP execution to approved tool skills. Return
+findings to the primary domain skill for final synthesis with source identity
+and freshness, scope, risk, unknowns, and validation needed.

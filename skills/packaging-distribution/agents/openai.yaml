@@ -1,4 +1,4 @@
 interface:
   display_name: "Packaging and Distribution"
-  short_description: "Packaging and Distribution guidance for OEM and ISV partners"
-  default_prompt: "Use $packaging-distribution to guide this OEM/ISV partner decision and clearly separate Ask, Assess, and Act."
+  short_description: "Route packaging and distribution decisions"
+  default_prompt: "Use $packaging-distribution to route and synthesize this OEM/ISV packaging decision."

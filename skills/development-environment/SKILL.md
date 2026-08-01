@@ -1,46 +1,40 @@
 ---
 name: development-environment
-description: Route Salesforce OEM/ISV partner decisions about which org and environment should perform each development, test, demo, trial, and packaging job. Use when this capability should own the recommendation and coordinate focused or cross-cutting advisor skills.
+description: Route and synthesize decisions about PBO Dev Hubs, namespaces, scratch org shape, persistent development orgs, demos, trials, provisioning, developer access, and environment lifecycle. Use when a partner asks which Salesforce org or environment should perform a development, test, demo, packaging, or customer-validation job.
 ---
 
 # Development Environment Advisor
 
-> Architecture baseline: this skill establishes a stable routing and authority contract. Practitioner depth is added through reviewed capability PRs.
+Own the environment portfolio decision. Do not assume one org should serve
+development, package validation, demos, and customer testing.
 
-## Ownership
+## Authority modes
 
-Which org and environment should perform each development, test, demo, trial, and packaging job.
+- **Ask:** recommend an environment from job, users, duration, persistence,
+  data realism, source tracking, namespace, and entitlement needs. Do not call
+  org tools.
+- **Assess:** inspect approved project files, org aliases, definition files,
+  and read-only org evidence. Record the alias and evidence actually used.
+- **Act:** require a plan and explicit approval before provisioning, enabling,
+  deploying, seeding, expiring, or deleting an org.
 
-- Role: **capability-router**
-- Parent: `$oem-isv-advisor`
-- Cross-cutting support: `$packaging-distribution`, `$platform-constraints`, `$operations-release`
+## Focused routing
 
-## Workflow
+- PBO and Dev Hub baseline: `pbo-dev-hub-foundation`.
+- Namespace topology and access: `namespace-access-governance`.
+- Scratch definition and build shape: `scratch-org-shape`.
+- Environment selection by lifecycle job: `environment-portfolio`.
+- Provisioning failures, capacity, health, and cleanup:
+  `org-provisioning-diagnostics`.
 
-1. Preserve the partner goal and identify the current decision.
-2. Confirm Ask, Assess, or Act before using artifacts or tools.
-3. Keep this skill primary only when its ownership statement matches the decision.
-4. Invoke supporting skills for findings; retain ownership of the final recommendation.
-5. Return evidence, risks, unknowns, confidence, and the next decision or approved action.
+Invoke packaging when Dev Hub, namespace, or managed 2GP ownership affects the
+answer. Invoke platform constraints and operations for feature support and
+lifecycle automation. This skill owns the final synthesis.
 
-## Authority boundaries
+## Evidence and output
 
-- **Ask:** Use supplied context and packaged references only. Do not inspect repositories, orgs, or external systems.
-- **Assess:** Inspect only explicitly approved artifacts read-only. Do not edit, deploy, install, or mutate.
-- **Act:** Propose a bounded plan and obtain explicit approval before material file, org, package, installation, deployment, or external-system changes.
-
-## Evidence and freshness
-
-Label material statements as fact, practitioner knowledge, inference, recommendation, assumption, or unknown. Verify current Salesforce limits, eligibility, policy, and product behavior through available Salesforce documentation. Never imply an inaccessible source was reviewed.
-
-## Delegation
-
-Delegate implementation and platform execution to `dynamically discovered Salesforce skills`, `Salesforce CLI or MCP only after mode and approval checks`. Do not reproduce their build, deploy, CLI, or MCP procedures inside this advisor skill.
-
-## Focused routes
-
-Route to `$pbo-dev-hub-foundation`, `$namespace-access-governance`, `$scratch-org-shape`, `$environment-portfolio`, `$org-provisioning-diagnostics` when one of those decisions is primary. Keep synthesis here.
-
-## Output
-
-State the goal, mode, recommendation, rationale, evidence inspected, risks, unknowns, confidence, next question, and proposed next action. If the architecture skeleton lacks sufficient practitioner depth, say so and route the gap for review.
+Use practitioner knowledge first and refresh time-sensitive entitlement,
+feature, settings, and provisioning claims. Label facts, practitioner
+knowledge, inferences, recommendations, assumptions, and unknowns explicitly.
+Return a job-to-environment matrix, separation rationale, risks, unknowns, and
+the next approved action.
