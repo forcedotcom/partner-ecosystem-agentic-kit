@@ -1,0 +1,4 @@
+interface:
+  display_name: "Package Migration and Transfer"
+  short_description: "Package Migration and Transfer guidance for OEM and ISV partners"
+  default_prompt: "Use $package-migration-transfer to guide this OEM/ISV partner decision and clearly separate Ask, Assess, and Act."

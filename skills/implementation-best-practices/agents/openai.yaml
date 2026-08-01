@@ -1,0 +1,4 @@
+interface:
+  display_name: "Implementation Best Practices"
+  short_description: "Implementation Best Practices guidance for OEM and ISV partners"
+  default_prompt: "Use $implementation-best-practices to guide this OEM/ISV partner decision and clearly separate Ask, Assess, and Act."

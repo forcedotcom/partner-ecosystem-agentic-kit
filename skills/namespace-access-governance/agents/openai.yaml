@@ -1,0 +1,4 @@
+interface:
+  display_name: "Namespace Access and Governance"
+  short_description: "Namespace Access and Governance partner guidance"
+  default_prompt: "Use $namespace-access-governance to guide this OEM/ISV partner decision and clearly separate Ask, Assess, and Act."

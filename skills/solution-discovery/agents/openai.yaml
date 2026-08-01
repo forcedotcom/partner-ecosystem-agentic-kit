@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solution Discovery and Product Design"
+  short_description: "Solution Discovery and Product Design partner guidance"
+  default_prompt: "Use $solution-discovery to guide this OEM/ISV partner decision and clearly separate Ask, Assess, and Act."

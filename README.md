@@ -6,11 +6,23 @@ compatible harnesses.
 This repository is the production destination for human-reviewed skills. Skill
 development and evaluation occur locally before a pull request is opened here.
 
-## Current entry points
+## Architecture baseline
 
-- `oem-isv-advisor` preserves the partner goal and routes the decision.
-- `advisor-capability-preflight` checks Salesforce documentation capability,
-  obtains customer consent, and selects an honest fallback.
+The repository contains the complete 26-skill OEM/ISV Advisor skeleton: two
+foundation skills, seven capability routers, and seventeen focused advisors.
+Every folder has a stable ID, ownership boundary, Ask/Assess/Act authority,
+evidence rules, and execution-delegation contract. Capability pull requests
+replace these skeletons with tested practitioner depth; they do not invent new
+top-level architecture independently.
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the capability map, skill inventory,
+and pull-request layering model.
+
+The two foundation entry points are:
+
+- `oem-isv-advisor`, which preserves the partner goal and routes the decision.
+- `advisor-capability-preflight`, which checks Salesforce documentation
+  capability, obtains customer consent, and selects an honest fallback.
 
 The preflight never probes a Salesforce org. A Salesforce org/data MCP server
 is not treated as a documentation MCP server.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Security and Readiness"
+  short_description: "Security and Readiness guidance for OEM and ISV partners"
+  default_prompt: "Use $security-readiness to guide this OEM/ISV partner decision and clearly separate Ask, Assess, and Act."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Environment Portfolio"
+  short_description: "Environment Portfolio guidance for OEM and ISV partners"
+  default_prompt: "Use $environment-portfolio to guide this OEM/ISV partner decision and clearly separate Ask, Assess, and Act."

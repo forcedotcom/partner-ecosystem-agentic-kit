@@ -1,6 +1,11 @@
 {
   "schema_version": 1,
-  "catalog_status": "initial-candidates-for-testing",
+  "catalog_status": "complete-architecture-skeleton",
+  "baseline": {
+    "skill_count": 26,
+    "capability_count": 7,
+    "content_state": "Stable ownership and routing contracts are present for every skill; practitioner depth is added through reviewed capability pull requests."
+  },
   "foundation_skills": [
     {
       "id": "oem-isv-advisor",
