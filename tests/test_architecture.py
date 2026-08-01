@@ -56,6 +56,20 @@ class AdvisorArchitectureTests(unittest.TestCase):
             if (folder / "SKILL.md").is_file():
                 self.assertIn(f"`{folder.name}`", document, folder.name)
 
+    def test_plugin_manifests_present_one_isv_oem_advisor_product(self):
+        codex = json.loads((ROOT / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
+        claude = json.loads((ROOT / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))
+        marketplace = json.loads(
+            (ROOT / ".claude-plugin/marketplace.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual("oem-isv-advisor", codex["name"])
+        self.assertEqual("ISV/OEM Advisor", codex["interface"]["displayName"])
+        self.assertEqual("ISV/OEM Advisor", claude["displayName"])
+        self.assertEqual("oem-isv-advisor", marketplace["plugins"][0]["name"])
+        self.assertEqual("./skills/", codex["skills"])
+        self.assertEqual("./skills/", claude["skills"])
+        self.assertNotIn("PEAK", (ROOT / "ARCHITECTURE.md").read_text(encoding="utf-8"))
+
 
 if __name__ == "__main__":
     unittest.main()

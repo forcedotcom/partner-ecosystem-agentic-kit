@@ -1,8 +1,33 @@
 # OEM/ISV Advisor architecture
 
-This repository is the partner-facing skill library. Its baseline defines the
-whole advisor before individual skills gain practitioner depth, so every skill
-pull request has a stable place, owner, and routing relationship.
+This repository delivers one installable **ISV/OEM Advisor** for Salesforce
+partners that resell, extend, embed, or distribute Salesforce solutions. The
+advisor meets the partner wherever they are in the journey and routes each
+decision through a stable operating system and capability library.
+
+![ISV/OEM Advisor seven-capability partner journey](docs/assets/isv-oem-advisor-capability-architecture.jpg)
+
+## Product architecture
+
+The installed advisor contains five layers:
+
+1. **Partner entrance:** `$oem-isv-advisor` preserves the partner's goal and
+   identifies the next decision regardless of lifecycle stage.
+2. **Operating system:** understand the objective, select Ask/Assess/Act,
+   gather evidence, route skills, apply policy, synthesize findings, recommend
+   next steps, execute only when approved, and validate outcomes.
+3. **Evidence and guardrails:** practitioner knowledge, partner context,
+   repositories, Salesforce metadata, documentation, prior decisions, explicit
+   evidence labels, least privilege, and an audit trail.
+4. **Seven partner capabilities:** the complete journey from idea to operate.
+5. **Execution adapters:** thin Codex, Claude Code, and Cursor integration that
+   delegates approved Salesforce build, deploy, CLI, MCP, and external-system
+   actions to the appropriate tool libraries.
+
+The advisor is the product. Capability routers and focused skills are its
+internal library; partners do not install or compose them separately.
+
+![ISV/OEM Advisor operating system](docs/assets/isv-oem-advisor-operating-system.jpg)
 
 ## Baseline contract
 
@@ -14,8 +39,23 @@ The baseline contains **26 skill folders**:
 
 A skeleton is not a production-readiness claim. It establishes the stable skill
 ID, triggering boundary, capability ownership, supported modes, evidence rules,
-and execution delegation. Detailed references and tested procedures arrive in
-focused draft pull requests.
+and execution delegation. This allows the whole advisor to ship coherently
+while each capability gains deeper practitioner knowledge and validated
+procedures over time.
+
+## Ask, Assess, and Act
+
+- **Ask — knowledge:** answer and guide from supplied context and packaged
+  expertise without inspecting repositories or systems.
+- **Assess — investigation:** inspect explicitly approved artifacts and
+  environments read-only and return evidence-backed findings.
+- **Act — execution:** propose a bounded plan and require explicit approval
+  before material file, org, package, deployment, installation, or external
+  system changes.
+
+All three modes return a consistent partner readout: recommendation, rationale,
+evidence, assumptions, risks, unknowns, confidence, next questions, and the next
+approved action.
 
 ## Capability map
 
@@ -85,19 +125,17 @@ The machine-readable ownership, modes, dependencies, maturity, and primary or
 supporting relationships live in
 `skills/oem-isv-advisor/references/capability-catalog.json`.
 
-## Pull-request layering
+## Capability maturity
 
-1. The architecture-baseline PR owns the complete skeleton and foundation.
-2. Capability-router PRs deepen the seven parent routers against that baseline.
-3. Focused-skill PRs deepen one coherent capability without redefining other
-   capabilities.
-4. Testing evidence remains attached to the exact skill snapshot used by the
-   harness.
-5. A draft PR may iterate, but only normal human review can merge it.
+The complete architecture remains present in every release even when skill
+depth differs. Capability 2 and Capability 3 are the current active maturation
+areas. Other capabilities retain honest baseline behavior and explicitly label
+knowledge gaps rather than disappearing from the partner experience.
 
-Adding a skill outside this map requires an architecture change first. Improving
-an existing skill should modify its stable folder and update its catalog entry
-only when ownership, dependencies, modes, or maturity changed.
+Maturing a skill adds reviewed practitioner knowledge, scenarios, references,
+and validated behavior inside its stable folder. Adding a capability outside
+this map requires an architecture decision; improving depth does not restructure
+the partner product.
 
 ## Runtime rules
 

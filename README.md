@@ -1,19 +1,24 @@
 # Salesforce Partner Ecosystem Agentic Kit
 
-Portable Salesforce OEM/ISV advisory skills for Codex, Claude Code, and other
-compatible harnesses.
+The **ISV/OEM Advisor** is one portable Salesforce partner advisory system for
+Codex, Claude Code, Cursor, and other compatible harnesses. ISV and OEM
+partners install the advisor to accelerate their partnership at any stage—from
+an initial product idea through architecture, packaging, implementation,
+distribution, security review, release, and long-term operation.
 
-This repository is the production destination for human-reviewed skills. Skill
-development and evaluation occur locally before a pull request is opened here.
+The plugin is the product. Its skills are the advisor's internal capability
+library, not separate products that a partner must assemble. The technical
+plugin identifier is `oem-isv-advisor`; its user-facing name is **ISV/OEM
+Advisor**.
 
 ## Architecture baseline
 
-The repository contains the complete 26-skill OEM/ISV Advisor skeleton: two
+The repository contains the complete 26-skill ISV/OEM Advisor skeleton: two
 foundation skills, seven capability routers, and seventeen focused advisors.
 Every folder has a stable ID, ownership boundary, Ask/Assess/Act authority,
-evidence rules, and execution-delegation contract. Capability pull requests
-replace these skeletons with tested practitioner depth; they do not invent new
-top-level architecture independently.
+evidence rules, and execution-delegation contract. Some skills begin with
+baseline guidance and mature through partner scenarios, practitioner input,
+and evidence-backed updates without changing the overall product architecture.
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the capability map, skill inventory,
 and pull-request layering model.
@@ -27,12 +32,12 @@ The two foundation entry points are:
 The preflight never probes a Salesforce org. A Salesforce org/data MCP server
 is not treated as a documentation MCP server.
 
-## Install for local testing
+## Install the advisor
 
 ### Codex
 
-Install this repository as a local plugin or copy the skill folders into a
-Codex-supported skills location. Then start a new session and invoke:
+Install this repository as a plugin. The plugin appears as **ISV/OEM Advisor**.
+Then start a new session and invoke its entry skill:
 
 ```text
 $oem-isv-advisor
@@ -40,7 +45,8 @@ $oem-isv-advisor
 
 ### Claude Code
 
-Add this repository as a marketplace and install its plugin:
+Add this repository as a marketplace and install the **ISV/OEM Advisor**
+plugin using its technical identifier:
 
 ```text
 /plugin marketplace add forcedotcom/partner-ecosystem-agentic-kit

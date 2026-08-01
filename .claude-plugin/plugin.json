@@ -1,8 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "oem-isv-advisor",
-  "displayName": "Salesforce OEM/ISV Advisor",
-  "description": "Decision-led Salesforce partner advisory skills with trusted documentation onboarding.",
+  "displayName": "ISV/OEM Advisor",
+  "description": "A complete Salesforce partner advisor spanning product discovery, packaging, architecture, development, implementation, distribution, security, release, and operations.",
   "version": "0.1.0",
   "author": {
     "name": "Salesforce"
@@ -12,8 +12,8 @@
   "skills": "./skills/",
   "keywords": [
     "salesforce",
-    "oem",
     "isv",
+    "oem",
     "partners",
     "advisor"
   ]

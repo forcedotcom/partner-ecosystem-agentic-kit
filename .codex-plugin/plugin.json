@@ -1,7 +1,39 @@
 {
   "name": "oem-isv-advisor",
   "version": "0.1.0",
-  "description": "Salesforce OEM/ISV advisory entry, routing, and trusted documentation preflight.",
+  "description": "A complete Salesforce ISV/OEM partner advisor spanning the journey from product idea through packaging, architecture, development, distribution, security, and operations.",
+  "author": {
+    "name": "Salesforce",
+    "url": "https://github.com/forcedotcom"
+  },
+  "repository": "https://github.com/forcedotcom/partner-ecosystem-agentic-kit",
+  "license": "Apache-2.0",
+  "keywords": [
+    "salesforce",
+    "isv",
+    "oem",
+    "partners",
+    "advisor"
+  ],
   "skills": "./skills/",
-  "mcpServers": "./.mcp.json"
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "ISV/OEM Advisor",
+    "shortDescription": "Accelerate every stage of a Salesforce partnership",
+    "longDescription": "Guides Salesforce ISV and OEM partners from idea validation through packaging, architecture, development environments, implementation, distribution, security readiness, release, and operations. Uses Ask, Assess, and approval-gated Act modes with explicit evidence and uncertainty.",
+    "developerName": "Salesforce",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/forcedotcom/partner-ecosystem-agentic-kit",
+    "defaultPrompt": [
+      "Help me validate a Salesforce partner product idea.",
+      "Assess how this solution should be packaged and built.",
+      "Guide this product from development through release."
+    ],
+    "brandColor": "#0B5CAB"
+  }
 }
