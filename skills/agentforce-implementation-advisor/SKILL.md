@@ -17,6 +17,10 @@ capability concise and route here only when this bounded decision is active.
   recommendation, assumption, or unknown.
 - Read `references/practitioner-knowledge.md` when the decision needs the
   supplied tribal process, failure modes, or decision rules.
+- Read `references/agent-script-packaging-pattern.md` whenever the partner is
+  packaging, distributing, installing, or upgrading an Agent Script agent.
+  This focused practitioner pattern is required even when public documentation
+  describes only the natively packageable Agentforce metadata types.
 - Read `references/source-refresh.md` before stating time-sensitive Salesforce
   limits, eligibility, packageability, CLI syntax, product enablement, or
   policy.
@@ -38,16 +42,19 @@ capability concise and route here only when this bounded decision is active.
 1. Choose agent, sub-agent, Apex, API, prompt, or MCP boundary.
 2. Model state, duration, retries, and long-running work.
 3. Verify exact metadata packageability.
-4. Confirm Agentforce scratch features and settings.
-5. Delegate execution to approved Agentforce skills or ADLC after approval.
+4. If Agent Script is involved, separate the authored script from packageable
+   dependencies and choose its carrier, customer-install, and upgrade pattern.
+5. Confirm Agentforce scratch features and settings.
+6. Delegate execution to approved Agentforce skills or ADLC after approval.
 
 ## Candidate maturity boundary
 
-The supplied packet establishes routing, prerequisites, and selected platform
-facts but does not yet contain enough validated specialist implementation depth
-to treat this skill as production-ready. State this limitation in evaluations.
-Use dynamically discovered official product skills and current documentation
-for detailed implementation, and preserve disagreements for human review.
+The Agent Script packaging reference is reviewed practitioner depth and must be
+used for that bounded decision. Other Agentforce implementation areas remain
+candidate depth until separately validated. State the applicable limitation,
+not a blanket claim that the packaging pattern is unknown. Use dynamically
+discovered official product skills and current documentation for detailed
+execution, and preserve disagreements for human review.
 
 ## Execution delegation
 

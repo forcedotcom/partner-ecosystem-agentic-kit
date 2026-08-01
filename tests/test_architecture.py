@@ -70,6 +70,23 @@ class AdvisorArchitectureTests(unittest.TestCase):
         self.assertEqual("./skills/", claude["skills"])
         self.assertNotIn("PEAK", (ROOT / "ARCHITECTURE.md").read_text(encoding="utf-8"))
 
+    def test_agent_script_packaging_pattern_is_productized(self):
+        skill = ROOT / "skills/agentforce-implementation-advisor"
+        skill_text = (skill / "SKILL.md").read_text(encoding="utf-8")
+        reference = skill / "references/agent-script-packaging-pattern.md"
+        self.assertTrue(reference.is_file())
+        self.assertIn("Read `references/agent-script-packaging-pattern.md`", skill_text)
+        pattern = reference.read_text(encoding="utf-8")
+        for phrase in (
+            "two-layer pattern",
+            "LWC data module",
+            "Static resource",
+            "Custom metadata",
+            "customer-owned agent",
+            "Do not stop at \"Agent Script is not packageable.\"",
+        ):
+            self.assertIn(phrase, pattern)
+
 
 if __name__ == "__main__":
     unittest.main()
