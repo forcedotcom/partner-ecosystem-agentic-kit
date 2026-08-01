@@ -12,6 +12,7 @@ SKILL = ROOT / "skills" / "advisor-capability-preflight"
 CHECK = SKILL / "scripts" / "check_preflight.py"
 RECORD = SKILL / "scripts" / "record_preference.py"
 POLICY = SKILL / "references" / "documentation-policy.json"
+CATALOG = ROOT / "skills" / "oem-isv-advisor" / "references" / "capability-catalog.json"
 
 
 def load_check_module():
@@ -140,6 +141,27 @@ class PreflightTests(unittest.TestCase):
         self.assertIn("$advisor-capability-preflight", entry)
         self.assertIn("references/routing.md", entry)
         self.assertLess(len(entry.splitlines()), 90)
+
+    def test_capability_catalog_has_26_stable_unique_skill_ids(self):
+        catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
+        ids = [item["id"] for item in catalog["foundation_skills"]]
+        ids.extend(capability["id"] for capability in catalog["capabilities"])
+        ids.extend(
+            skill["id"]
+            for capability in catalog["capabilities"]
+            for skill in capability["focused_skills"]
+        )
+        self.assertEqual(26, len(ids))
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertEqual(list(range(1, 8)), [item["number"] for item in catalog["capabilities"]])
+        self.assertEqual(
+            4,
+            sum(
+                skill["maturity"] == "candidate-needs-specialist-depth"
+                for capability in catalog["capabilities"]
+                for skill in capability["focused_skills"]
+            ),
+        )
 
 
 if __name__ == "__main__":

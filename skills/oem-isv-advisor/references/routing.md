@@ -12,3 +12,8 @@
 
 Select one primary decision owner. Do not combine every capability into one
 undifferentiated prompt.
+
+Read `capability-catalog.json` when routing requires a focused skill, authority
+mode, maturity boundary, execution dependency, or stable skill identifier.
+The primary capability owns the partner-facing synthesis and must include the
+material findings returned by supporting capabilities.
