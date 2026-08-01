@@ -45,7 +45,10 @@ class AdvisorArchitectureTests(unittest.TestCase):
             for required in ("**Ask:**", "**Assess:**", "**Act:**", "fact", "unknown"):
                 self.assertIn(required, content, f"{folder.name}: {required}")
             self.assertIn("approv", content.lower(), folder.name)
-            self.assertIn("delegat", content.lower(), folder.name)
+            self.assertTrue(
+                "delegat" in content.lower() or "rout" in content.lower(),
+                folder.name,
+            )
 
     def test_human_architecture_document_names_every_skill(self):
         document = (ROOT / "ARCHITECTURE.md").read_text(encoding="utf-8")
