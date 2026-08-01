@@ -1,4 +1,4 @@
 interface:
   display_name: "Scratch Org Shape"
-  short_description: "Scratch Org Shape guidance for OEM and ISV partners"
-  default_prompt: "Use $scratch-org-shape to guide this OEM/ISV partner decision and clearly separate Ask, Assess, and Act."
+  short_description: "Guide scratch org shape decisions"
+  default_prompt: "Use $scratch-org-shape to guide this OEM/ISV partner decision."
