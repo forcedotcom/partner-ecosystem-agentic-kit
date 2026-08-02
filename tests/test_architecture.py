@@ -87,6 +87,21 @@ class AdvisorArchitectureTests(unittest.TestCase):
         ):
             self.assertIn(phrase, pattern)
 
+    def test_practitioner_knowledge_is_a_product_wide_versioned_policy(self):
+        entry = (ROOT / "skills/oem-isv-advisor/SKILL.md").read_text(encoding="utf-8")
+        policy_path = ROOT / "skills/oem-isv-advisor/references/practitioner-knowledge-policy.md"
+        self.assertIn("Read `references/practitioner-knowledge-policy.md`", entry)
+        self.assertTrue(policy_path.is_file())
+        policy = policy_path.read_text(encoding="utf-8")
+        for phrase in (
+            "documentation silence",
+            "special ordering constraints",
+            "stable claim identity",
+            "supersession lineage",
+            "replacement skill snapshot",
+        ):
+            self.assertIn(phrase, policy)
+
 
 if __name__ == "__main__":
     unittest.main()

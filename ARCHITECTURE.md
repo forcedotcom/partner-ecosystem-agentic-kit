@@ -137,6 +137,15 @@ and validated behavior inside its stable folder. Adding a capability outside
 this map requires an architecture decision; improving depth does not restructure
 the partner product.
 
+Practitioner knowledge changes are product changes even when no skill is added.
+Workaround, order-of-operations, factual, product-evolution, documentation-
+alignment, and deprecation updates retain provenance and supersession lineage,
+identify affected skills and partner decisions, and rerun affected scenarios.
+Public documentation corroborates, qualifies, scopes, or conflicts with the
+field pattern; documentation silence does not erase reviewed practitioner
+guidance. See
+`skills/oem-isv-advisor/references/practitioner-knowledge-policy.md`.
+
 ## Runtime rules
 
 - Route by the partner decision, not by document title or product keyword.

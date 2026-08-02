@@ -35,6 +35,11 @@ harness, and authority scope.
 Label material statements as fact, practitioner knowledge, inference,
 recommendation, assumption, or unknown. Never imply that an unavailable source
 was reviewed. Do not state current limits, eligibility, or policy from memory.
+Read `references/practitioner-knowledge-policy.md` whenever a decision depends
+on a workaround, field-proven pattern, failure mode, special sequence, or a
+claim that public documentation does not fully explain. Applicable reviewed
+practitioner knowledge leads the recommendation; documentation and live
+evidence corroborate, qualify, scope, or expose a conflict with it.
 
 ## Response
 
