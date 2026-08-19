@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "partner-ecosystem-agentic-kit",
+  "owner": {
+    "name": "Salesforce",
+    "url": "https://github.com/forcedotcom"
+  },
+  "description": "Installable Salesforce partner advisory operating systems and skills",
+  "plugins": [
+    {
+      "name": "oem-isv-advisor",
+      "source": "./",
+      "description": "ISV/OEM Advisor for the complete Salesforce partner journey from idea through operations.",
+      "version": "0.1.0",
+      "category": "salesforce"
+    }
+  ]
+}
