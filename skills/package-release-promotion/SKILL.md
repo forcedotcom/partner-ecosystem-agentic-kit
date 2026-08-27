@@ -36,7 +36,9 @@ capability concise and route here only when this bounded decision is active.
 ## Decision workflow
 
 1. Identify the exact tested 04t.
-2. Verify terminal successful validation and promotability.
+2. Verify the version-create request reached terminal `Success`, then verify
+   successful validation and promotability. A submitted request or returned
+   artifact without terminal request evidence is not promotion evidence.
 3. Apply the partner's release policy separately from Salesforce technical gates.
 4. Require explicit approval for irreversible promotion.
 5. Verify Released state after execution and treat recommended version separately.

@@ -23,6 +23,12 @@ capability concise and route here only when this bounded decision is active.
 - Prefer practitioner knowledge first. Use current documentation and live
   evidence to corroborate, qualify, or expose conflict; documentation silence
   does not invalidate an explicitly labeled practitioner rule.
+- When Named Credentials or External Credentials are detected, assess the
+  package definition separately from subscriber-owned principals,
+  authentication, and secret values. Refresh the current Named Credentials
+  packaging, population, target-org testing, OAuth, and upgrade documentation;
+  do not infer that a detected credential file is safe for external
+  distribution.
 
 ## Authority modes
 
@@ -31,6 +37,12 @@ capability concise and route here only when this bounded decision is active.
 - **Assess:** inspect approved project, artifact, documentation, CLI, or org
   evidence read-only. Report exact observations, missing evidence, and risks.
   Do not edit files or mutate an org.
+- For an unlocked package that needs unpackaged metadata or Apex access during
+  Apex tests, direct the partner to Salesforce's [Specify Unpackaged Metadata
+  or Apex Access for Apex
+  Tests](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_unlocked_pkg_unpackaged_md.htm)
+  documentation. Do not infer current configuration behavior from a folder
+  name or apply an unlocked-package setting as a universal package rule.
 - **Act:** this skill does not own execution. Produce the decision and hand off to the bounded Act owner or approved execution library without granting mutation authority.
 
 ## Decision workflow

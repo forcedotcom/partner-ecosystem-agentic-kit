@@ -36,7 +36,9 @@ capability concise and route here only when this bounded decision is active.
 ## Decision workflow
 
 1. Separate ancestry from dependencies.
-2. Use released ancestry for normal upgrade lines.
+2. When the intended version iterates on a parent, select and verify
+   `ancestorVersion` before package-version creation; use released ancestry for
+   normal upgrade lines.
 3. Detect CLI-only version drift and reused build numbers.
 4. Validate dependency selectors and install order.
 5. Confirm patch eligibility and restrictions before recommending a patch.

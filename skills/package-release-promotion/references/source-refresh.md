@@ -9,4 +9,12 @@ source was reviewed when it was inaccessible.
 Refresh before stating current limits, eligibility, packageability, CLI flags,
 Security Review policy, program tier, or product enablement.
 
-## URLs retained from the selected source extracts
+## Required official sources
+
+- [Release a Second-Generation Managed Package](https://developer.salesforce.com/docs/atlas.en-us.pkg2_dev.meta/pkg2_dev/sfdx_dev_dev2gp_create_pkg_ver_promote.htm): verify current promotion prerequisites and irreversible effects.
+- [Salesforce CLI Package Version Promote Reference](https://developer.salesforce.com/docs/platform/salesforce-cli-reference/guide/cli_reference_package_version_promote.html): verify the exact promotion command and flags before execution.
+- [Recommend a Specific Package Version](https://developer.salesforce.com/docs/atlas.en-us.pkg2_dev.meta/pkg2_dev/sfdx_dev_dev2gp_recommended_version.htm): keep recommendation state separate from promotion.
+
+Record the exact `04t`, terminal validation evidence, approved release policy,
+promotion result, and access date. Do not substitute a generic package name or
+a successful command submission for post-promotion proof.

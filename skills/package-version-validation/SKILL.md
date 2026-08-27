@@ -35,9 +35,16 @@ capability concise and route here only when this bounded decision is active.
 
 ## Decision workflow
 
-1. Resolve effective project and CLI configuration.
-2. Validate build-org edition, features, settings, and entitlements.
-3. Choose standard, async, or skipped validation deliberately.
+1. Resolve effective project and CLI configuration. When the version is meant
+   to iterate on a parent, hand off ancestry selection to
+   `package-ancestry-dependencies` and verify `ancestorVersion` before package
+   version creation.
+2. Validate the effective build-org edition, features, settings, and
+   entitlements. A locally working org does not prove that the internal build
+   org has the required shape; block creation when the effective definition is
+   missing a required feature or setting.
+3. Choose standard, async, or skipped validation deliberately. Treat a
+   skip-validation candidate as unpromotable evidence.
 4. Choose installation-key policy without exposing secrets.
 5. Track the create request to terminal state and preserve the exact 04t.
 
