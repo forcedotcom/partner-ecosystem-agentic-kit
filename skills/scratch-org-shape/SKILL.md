@@ -26,6 +26,11 @@ capability concise and route here only when this bounded decision is active.
 - Prefer practitioner knowledge first. Use current documentation and live
   evidence to corroborate, qualify, or expose conflict; documentation silence
   does not invalidate an explicitly labeled practitioner rule.
+- Use `references/approved-scratch-org-templates.md` for the canonical baseline
+  and approved capability additions. Read the baseline and selected capability
+  heading only. For a broad or unmatched request, use the documentation path
+  in `references/source-refresh.md`; inspect the selected setting reference and
+  field documentation before generating nested fields or values.
 
 ## Authority modes
 
@@ -50,9 +55,14 @@ capability concise and route here only when this bounded decision is active.
 2. Treat shape as versioned code. For Assess, identify every candidate
    definition file and the effective package-build definition, including
    `packageDirectories[].definitionFile` and any `--definition-file` override.
-3. Separate features, settings, and object settings. Map the approved source
-   and package metadata to a capability-to-feature/setting mapping; check
-   current catalogs and PBO entitlement before presenting current values.
+3. Separate features, settings, and object settings. Start with the canonical
+   baseline and apply an approved capability addition when it fits. For a broad
+   or unmatched request, use the current feature or settings catalog to provide
+   up to three verified candidate settings groups and their documentation
+   links. Map the approved source and package metadata to a
+   capability-to-feature/setting mapping; inspect each selected setting's field
+   documentation and check current catalogs and PBO entitlement before
+   presenting current values or nested JSON fields.
 4. Produce a minimal proposed JSON definition or patch. Explain which values
    satisfy the development and package-build job, and keep unrelated features
    out so they do not hide accidental dependencies.

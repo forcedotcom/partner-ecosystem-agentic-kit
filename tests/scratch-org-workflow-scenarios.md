@@ -44,6 +44,20 @@ evidence and unknowns. If approved evidence instead shows a provisioning,
 entitlement, capacity, expiration, or cleanup failure, it hands off to
 `org-provisioning-diagnostics`.
 
+## Scenario 4 — Broad capability request
+
+**Partner context:** A partner asks which settings to include for Financial
+Services Cloud but hasn't identified a specific business capability.
+
+**Expected outcome:** `scratch-org-shape` starts with the approved Financial
+Services Cloud template and canonical defaults. It recommends review of
+[IndustriesSettings](https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_industriessettings.htm),
+and [ClaimFinancialSettings](https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_claimfinancialsettings.htm)
+only if the work involves claims, but does not invent nested fields or values.
+It directs the partner to the current Scratch Org Features catalog and Metadata
+API Settings catalog, then requires the specific setting reference and field
+documentation before proposing JSON.
+
 ## Approval-gated manual smoke test
 
 After a partner approves a bounded Act plan, run this only against a

@@ -442,15 +442,9 @@ Retrieved title: **Settings**
 
 ### Scratch definition integration
 
-Package Visualizer's embedded product cards apply a template to `scratchDefFileBuildCard`. The template:
-
-- starts with the shared default `EnableSetPasswordInApi` feature;
-- sets an edition;
-- adds product features;
-- adds companion settings;
-- auto-confirms the settings editor.
-
-Because templates add to rather than replace the initial builder state, every embedded product preset also carries `EnableSetPasswordInApi`. The future skill should include that capability only when the development or automation workflow actually requires API password setting.
+**Practitioner rule (this interview):** treat `EnableSetPasswordInApi` as part
+of this skill's canonical default baseline. Approved capability templates are
+additive guidance; they are not UI implementation dependencies.
 
 The advisor must not treat UI confirmation as runtime validation. A scratch definition is complete only after:
 

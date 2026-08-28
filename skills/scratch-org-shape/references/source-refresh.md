@@ -1,14 +1,25 @@
 # Source refresh guide
 
-Use this file when a recommendation depends on current Salesforce behavior.
-Salesforce Docs MCP is the first read-only source and needs no per-call
-approval. If a relevant page is not machine-readable through MCP, use the
-approved rendered-document fallback and record that fallback. Never claim a
-source was reviewed when it was inaccessible.
+Read this reference before stating a Salesforce feature, setting, allocation,
+edition, entitlement, API-version, or CLI claim as current.
 
-Refresh before stating current limits, eligibility, packageability, CLI flags,
-Security Review policy, program tier, or product enablement.
+## Current-source path
 
-## URLs retained from the selected source extracts
+1. Run `$advisor-capability-preflight`.
+2. Prefer Salesforce Docs MCP when connected; otherwise use approved official
+   Salesforce documentation read-only.
+3. Verify the exact value against the relevant source:
+   - [Scratch Org Features catalog](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_scratch_orgs_def_file_config_values.htm)
+   - [Metadata API Settings catalog](https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_settings.htm)
+   - [Supported Scratch Org Editions and Allocations](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_scratch_orgs_editions_and_allocations.htm)
+4. For a setting, open the selected setting's specific setting reference and
+   its field documentation before naming nested JSON fields or values.
+5. Check the partner's selected edition, PBO/Dev Hub entitlement, and relevant
+   API/release context before presenting a current recommendation.
 
-- https://developer.
+## Evidence rule
+
+Record the source identity and label the result as fact, practitioner
+knowledge, inference, recommendation, assumption, or unknown. If the required
+source is unavailable, label the exact value as **unknown** rather than
+inferring it from a template or prior release.
