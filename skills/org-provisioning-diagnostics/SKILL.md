@@ -41,6 +41,14 @@ capability concise and route here only when this bounded decision is active.
 4. Check limits, expiration, template status, and entitlement.
 5. Record cleanup and route product-specific failures.
 
+## Scratch-definition handoff
+
+When `scratch-org-shape` has approved read-only evidence of a creation,
+entitlement, capacity, expiration, or cleanup problem, own the diagnosis.
+Report the observed cause, missing evidence, and next approval-gated action.
+Do not replace the definition recommendation or assume the definition is wrong
+without evidence.
+
 ## Execution delegation
 
 Advisory ownership remains here. Delegate implementation to: forcedotcom/sf-skills, Salesforce CLI, Salesforce Platform MCP.

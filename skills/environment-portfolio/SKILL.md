@@ -41,6 +41,14 @@ capability concise and route here only when this bounded decision is active.
 4. Model TSO and template lifecycle without inventing ID governance.
 5. Track expiration, sharing restrictions, and rebuild triggers.
 
+## Scratch-definition handoff
+
+When `scratch-org-shape` needs to know whether a development environment must
+be persistent or longer-lived than a disposable scratch-org lifecycle, own that
+environment decision. Return that lifecycle constraint to `scratch-org-shape`;
+do not prescribe the scratch definition or compete with its build-shape
+recommendation.
+
 ## Execution delegation
 
 Advisory ownership remains here. Delegate implementation to: Salesforce Docs MCP, Salesforce Platform MCP.
