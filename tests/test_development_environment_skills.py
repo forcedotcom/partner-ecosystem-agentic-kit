@@ -34,6 +34,12 @@ class DevelopmentEnvironmentSkillTests(unittest.TestCase):
             self.assertIn("final partner-facing synthesis", content)
             self.assertNotIn("This skill owns the final synthesis", content)
 
+    def test_environment_portfolio_includes_an_evidence_bound_access_path(self):
+        content = skill_text("environment-portfolio")
+        self.assertIn("access or provisioning path", content)
+        self.assertIn("Do not assume entitlement, administrator access", content)
+        self.assertIn("authority or entitlement evidence", content)
+
     def test_scratch_org_shape_owns_definition_guidance(self):
         content = skill_text("scratch-org-shape")
         for phrase in (
