@@ -21,6 +21,19 @@ def normalized(text):
 
 
 class DevelopmentEnvironmentSkillTests(unittest.TestCase):
+    def test_development_environment_owns_final_synthesis_for_bounded_routes(self):
+        primary = skill_text("development-environment")
+        self.assertIn("This skill owns the final synthesis.", primary)
+        for skill_name in (
+            "scratch-org-shape",
+            "environment-portfolio",
+            "org-provisioning-diagnostics",
+        ):
+            content = skill_text(skill_name)
+            self.assertIn("`development-environment`", content)
+            self.assertIn("final partner-facing synthesis", content)
+            self.assertNotIn("This skill owns the final synthesis", content)
+
     def test_scratch_org_shape_owns_definition_guidance(self):
         content = skill_text("scratch-org-shape")
         for phrase in (

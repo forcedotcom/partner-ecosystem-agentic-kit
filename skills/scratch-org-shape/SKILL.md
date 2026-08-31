@@ -87,8 +87,9 @@ an org or repository mutation.
 ## Cross-cutting checks
 
 Invoke Platform Constraints, Security & Readiness, and Operations & Release
-when they materially affect this decision. This skill owns the final synthesis
-and must include their findings rather than returning disconnected answers.
+when they materially affect this decision. When `development-environment` is
+the active primary capability, return bounded findings to it; the primary owns
+the final partner-facing synthesis.
 
 ## Required output
 
