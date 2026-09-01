@@ -16,6 +16,28 @@ activation.
 
 - **Practitioner knowledge:** Do not claim authored Agent Script is natively
   packageable unless a current source and an exact package-version test prove it.
+- **Practitioner knowledge:** Separate type-level 2GP coverage from the
+  decision to package an artifact. A technically supported metadata type can
+  still be the wrong delivery boundary for tenant-owned agent behavior.
+- **SME practitioner knowledge — Legacy Builder:** `GenAiFunction`,
+  `GenAiPlannerBundle`, and `GenAiPlugin` are Legacy Builder artifacts. Treat
+  them as package candidates only when they represent portable,
+  product-owned behavior. A plugin with simple natural-language instructions
+  can fit that boundary; do not use it to carry Next-Gen Agent Script-only
+  blocks or language semantics.
+- **SME practitioner knowledge — Next-Gen Builder:** `AiAuthoringBundle`
+  carries Agent Script authoring intent. Its subagents are the conceptual
+  successor to Legacy Builder plugins, but authored Agent Script and
+  `AiAuthoringBundle` remain a customer-owned, non-2GP package payload when
+  their value depends on Next-Gen blocks or language features.
+- **Recommendation:** Package an eligible underlying Apex, Flow, Prompt
+  Template, or similar action implementation, then let customer Agent Script
+  reference it through its action-type target. Prefer this over creating a
+  packaged or global Agent Action when it preserves the customer's Next-Gen
+  orchestration.
+- **SME practitioner knowledge:** Treat a created Agent Action's input/output
+  contract as stable. Version the underlying capability rather than assuming a
+  breaking signature change is upgrade-safe.
 - **Practitioner knowledge:** An unsupported script artifact does not make the
   whole solution undistributable. Package the supported application foundation
   and carry the script separately for post-install ingestion.
