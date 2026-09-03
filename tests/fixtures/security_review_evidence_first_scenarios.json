@@ -1,0 +1,37 @@
+[
+  {
+    "name": "approved_source_and_metadata",
+    "read_only_authorized": true,
+    "available_evidence": [
+      "sfdx-project",
+      "package-metadata",
+      "apex-source",
+      "agentforce-metadata"
+    ],
+    "expected_route": "inspect",
+    "expected_direct_checks": [
+      "package-candidate",
+      "action-inventory",
+      "prompt-inventory",
+      "callout-paths",
+      "authorization-markers",
+      "action-input-and-confirmation-markers",
+      "prompt-injection-and-output-handling-markers",
+      "packaged-access-boundaries"
+    ],
+    "expected_owner_questions": [
+      "data-classification",
+      "runtime-confirmation-behavior",
+      "effective-post-install-access",
+      "reviewer-setup"
+    ]
+  },
+  {
+    "name": "no_read_only_authority",
+    "read_only_authorized": false,
+    "available_evidence": ["sfdx-project", "apex-source"],
+    "expected_route": "ask",
+    "expected_direct_checks": [],
+    "expected_owner_questions": ["read-only-approval"]
+  }
+]
