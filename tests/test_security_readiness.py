@@ -385,9 +385,16 @@ class SecurityReadinessContractTests(unittest.TestCase):
 
     def test_assess_mode_inspects_approved_evidence_before_interview_questions(self):
         self.assertIn("approved evidence before asking questions", self.skill)
+        self.assertIn("offer a bounded\nread-only Assess pass", self.skill)
         self.assertIn("Inspect before asking", self.evidence_first)
+        self.assertIn("Offer Assess before requesting confirmation", self.evidence_first)
         self.assertIn("Do not ask whether an action, prompt, callout", self.evidence_first)
         self.assertIn("partner-supplied candidate alignment", self.evidence_first)
+
+    def test_org_assessment_uses_narrow_non_sensitive_evidence(self):
+        self.assertIn("narrow queries for non-sensitive Organization fields", self.evidence_first)
+        self.assertIn("installed-package inventory", self.evidence_first)
+        self.assertIn("can expose session credentials", self.evidence_first)
 
     def test_evidence_first_scenarios_preserve_authority_and_question_boundaries(self):
         scenario_path = ROOT / "tests" / "fixtures" / "security_review_evidence_first_scenarios.json"
@@ -410,10 +417,16 @@ class SecurityReadinessContractTests(unittest.TestCase):
 
         for scenario in scenarios:
             if not scenario["read_only_authorized"]:
-                self.assertEqual(scenario["expected_route"], "ask", scenario["name"])
+                self.assertEqual(scenario["expected_route"], "offer-assess", scenario["name"])
                 self.assertEqual(scenario["expected_direct_checks"], [], scenario["name"])
                 self.assertEqual(
                     scenario["expected_owner_questions"], ["read-only-approval"], scenario["name"]
+                )
+                offered_checks = set()
+                for evidence in scenario["available_evidence"]:
+                    offered_checks.update(direct_checks[evidence])
+                self.assertSetEqual(
+                    offered_checks, set(scenario["expected_assess_offer"]), scenario["name"]
                 )
                 continue
 

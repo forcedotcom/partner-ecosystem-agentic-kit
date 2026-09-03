@@ -30,8 +30,9 @@
     "name": "no_read_only_authority",
     "read_only_authorized": false,
     "available_evidence": ["sfdx-project", "apex-source"],
-    "expected_route": "ask",
+    "expected_route": "offer-assess",
     "expected_direct_checks": [],
-    "expected_owner_questions": ["read-only-approval"]
+    "expected_owner_questions": ["read-only-approval"],
+    "expected_assess_offer": ["package-candidate", "callout-paths", "authorization-markers"]
   }
 ]

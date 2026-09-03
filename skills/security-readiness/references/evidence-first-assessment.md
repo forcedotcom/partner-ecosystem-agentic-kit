@@ -27,12 +27,26 @@ Use approved evidence to establish facts that it can show directly:
 | SFDX project and package metadata | package identity, declared version/dependencies, package-boundary metadata, prompts, Agentforce actions, permission sets, and configuration inventory |
 | Source | action entry points, callout paths, data reads/writes, authorization checks, input/output validation, prompt invocation, and configured credentials or endpoints without exposing their values |
 | Approved scan report | analyzer/version, selected scope, engine completion, candidate alignment, and finding identity/classification |
-| Approved read-only org evidence | installed candidate set, configuration inventory, PBO/package state, and test-environment facts available to that access |
+| Approved read-only org evidence | installed candidate set, configuration inventory, PBO/package state, and test-environment facts available to that access. Use narrow queries for non-sensitive Organization fields and installed-package inventory; do not use a command whose normal output can expose session credentials. |
 
 When an observation conflicts with a verbal summary, record the observation and
 ask the partner to clarify the intended scope. Do not silently prefer either
 source. A static observation is a finding candidate or evidence fact, not a
 conclusion that the implementation is vulnerable or approved.
+
+## Offer Assess before requesting confirmation
+
+When a partner identifies an evidence location, report, org alias, or project
+that could resolve the next decision, explain the bounded read-only assessment
+that is available: exact target, proposed checks, evidence that will be
+inspected, and confirmation that no changes or side-effecting tests will occur.
+Do this before asking the partner to manually confirm inspectable facts.
+
+An explicit request to “check,” “assess,” or inspect the named evidence
+authorizes only the read-only checks necessary for that stated decision. Record
+that scope. A bare path or alias does not authorize inspection: invite the
+partner to authorize the proposed bounded pass instead. After inspection, ask
+only for the owner-resolved facts that remain.
 
 ## Ask only for owner-resolved facts
 

@@ -53,6 +53,12 @@ can answer. Read `references/evidence-first-assessment.md`; retain only
 questions about intent, ownership, access, or other facts the evidence cannot
 establish.
 
+In Ask, when a partner identifies source, a report, an org alias, or another
+evidence location that could answer the next question, offer a bounded
+read-only Assess pass. State the proposed checks and that no changes will be
+made. Do not ask the partner to manually confirm facts the offered assessment
+could establish.
+
 ## Interview lifecycle
 
 1. Establish documentation capability and create the dossier.
