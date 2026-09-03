@@ -56,6 +56,25 @@ Invoke Platform Constraints, Security & Readiness, and Operations & Release
 when they materially affect this decision. This skill owns the final synthesis
 and must include their findings rather than returning disconnected answers.
 
+## Security Review handoff
+
+For a review interview, provide the source/package alignment, metadata scope,
+Code Analyzer and Checkmarx report identities and scope, DAST evidence for
+external endpoints when applicable, findings that affect the package boundary,
+and each false-positive explanation. Security & Readiness owns finding
+disposition and submission readiness; this skill does not treat a clean or
+generic security scan as satisfying the full evidence contract.
+
+Classify each reported result as first-party, vendor/dependency, or another
+accountable component; provide the component version, package-boundary impact,
+and any known scan-coverage gap. Do not silently exclude minified or vendor
+content from the Security Review handoff.
+
+For each false-positive explanation, include the reported location, the source
+revision inspected, the technical rationale, and any supporting test evidence.
+Keep report excerpts and sensitive exploit evidence in their approved source
+location rather than this handoff.
+
 ## Required output
 
 Return:

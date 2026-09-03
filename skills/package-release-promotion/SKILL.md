@@ -56,6 +56,20 @@ Invoke Platform Constraints, Security & Readiness, and Operations & Release
 when they materially affect this decision. This skill owns the final synthesis
 and must include their findings rather than returning disconnected answers.
 
+## Security Review handoff
+
+Provide the exact candidate, release or promotion state, approved release
+decision, managed-released versus beta or unmanaged state, and evidence checked
+for that state. Security & Readiness owns the separate review-readiness and
+listing-readiness decisions and must refresh any current requirement about
+candidate state before relying on it.
+
+For a remediation successor candidate, provide a new approved release or
+promotion decision and its exact candidate identity. Do not reuse the failed
+candidate's release evidence as proof that the successor is ready. Hand off
+the release decision only after Security & Readiness can link it to the
+successor's required retest/rescan evidence and any remaining coverage gap.
+
 ## Required output
 
 Return:

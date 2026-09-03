@@ -36,3 +36,10 @@ recommendation, assumption, or unknown. Delegate measurements, repository
 inspection, Salesforce CLI, and MCP execution to approved tool skills. Return
 findings to the primary domain skill for final synthesis with source identity
 and freshness, scope, risk, unknowns, and validation needed.
+
+## Security Review handoff
+
+Provide supportability constraints, documented guardrails, and unverified
+current claims that affect the package or an API/integration trust boundary.
+Security & Readiness records them as evidence, blockers, or `unknown`; this
+skill does not decide submission readiness.

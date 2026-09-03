@@ -32,6 +32,15 @@ approved Salesforce skill libraries and Salesforce CLI workflows.
 Invoke `platform-constraints`, `security-readiness`, and `operations-release`
 when relevant. This skill owns the final recommendation.
 
+## Security Review handoff
+
+When Security & Readiness owns an AppExchange review interview, provide the
+managed package scope, intended distribution path, exact candidate, and the
+package decision evidence already inspected, including current listing
+readiness. Route inheritance questions to `package-ancestry-dependencies`.
+Receive the dossier's blockers and next action; do not present packaging
+progress or inherited readiness as a new Security Review approval.
+
 ## Evidence and delegation
 
 Use practitioner knowledge first, then current Salesforce documentation and
