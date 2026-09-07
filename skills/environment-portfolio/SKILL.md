@@ -40,6 +40,17 @@ capability concise and route here only when this bounded decision is active.
 3. Choose PDE versus scratch deliberately.
 4. Model TSO and template lifecycle without inventing ID governance.
 5. Track expiration, sharing restrictions, and rebuild triggers.
+6. State the evidence-bound access or provisioning path for the recommended
+   environment. Do not assume entitlement, administrator access, or authority
+   to create an environment.
+
+## Scratch-definition handoff
+
+When `scratch-org-shape` needs to know whether a development environment must
+be persistent or longer-lived than a disposable scratch-org lifecycle, own that
+environment decision. Return that lifecycle constraint to `scratch-org-shape`;
+do not prescribe the scratch definition or compete with its build-shape
+recommendation.
 
 ## Execution delegation
 
@@ -53,8 +64,9 @@ an org or repository mutation.
 ## Cross-cutting checks
 
 Invoke Platform Constraints, Security & Readiness, and Operations & Release
-when they materially affect this decision. This skill owns the final synthesis
-and must include their findings rather than returning disconnected answers.
+when they materially affect this decision. When `development-environment` is
+the active primary capability, return bounded findings to it; the primary owns
+the final partner-facing synthesis.
 
 ## Required output
 
@@ -65,9 +77,11 @@ Return:
 3. Evidence ledger with explicit labels and source identity.
 4. Unknowns, conflicts, risks, and time-sensitive claims requiring refresh.
 5. Questions still required to reach the goal.
-6. Proposed next action and whether approval is required.
-7. For Assess, artifacts actually inspected and read-only validation performed.
-8. For Act, proposed plan, captured approval scope, execution evidence,
+6. Recommended environment access or provisioning path, including any missing
+   authority or entitlement evidence.
+7. Proposed next action and whether approval is required.
+8. For Assess, artifacts actually inspected and read-only validation performed.
+9. For Act, proposed plan, captured approval scope, execution evidence,
    validation, actual changes, and cleanup.
 
 ## Boundaries

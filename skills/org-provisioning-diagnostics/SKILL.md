@@ -41,6 +41,14 @@ capability concise and route here only when this bounded decision is active.
 4. Check limits, expiration, template status, and entitlement.
 5. Record cleanup and route product-specific failures.
 
+## Scratch-definition handoff
+
+When `scratch-org-shape` has approved read-only evidence of a creation,
+entitlement, capacity, expiration, or cleanup problem, own the diagnosis.
+Report the observed cause, missing evidence, and next approval-gated action.
+Do not replace the definition recommendation or assume the definition is wrong
+without evidence.
+
 ## Execution delegation
 
 Advisory ownership remains here. Delegate implementation to: forcedotcom/sf-skills, Salesforce CLI, Salesforce Platform MCP.
@@ -53,8 +61,9 @@ an org or repository mutation.
 ## Cross-cutting checks
 
 Invoke Platform Constraints, Security & Readiness, and Operations & Release
-when they materially affect this decision. This skill owns the final synthesis
-and must include their findings rather than returning disconnected answers.
+when they materially affect this decision. When `development-environment` is
+the active primary capability, return bounded findings to it; the primary owns
+the final partner-facing synthesis.
 
 ## Required output
 
