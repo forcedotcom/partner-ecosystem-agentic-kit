@@ -56,6 +56,13 @@ Invoke Platform Constraints, Security & Readiness, and Operations & Release
 when they materially affect this decision. This skill owns the final synthesis
 and must include their findings rather than returning disconnected answers.
 
+## Security Review handoff
+
+Provide the namespace and environment topology, operation-specific privilege
+model, and approved evidence for connected-org access. Never include
+credentials, secrets, or recovery material. Security & Readiness records the
+access boundary, accountable owner, and unresolved review risk.
+
 ## Required output
 
 Return:

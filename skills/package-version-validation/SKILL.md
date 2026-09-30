@@ -56,6 +56,21 @@ Invoke Platform Constraints, Security & Readiness, and Operations & Release
 when they materially affect this decision. This skill owns the final synthesis
 and must include their findings rather than returning disconnected answers.
 
+## Security Review handoff
+
+Provide the exact candidate identity, effective build configuration, terminal
+validation result, source revision that matches the candidate, managed-release
+state, installation/test evidence, and evidence date. Security & Readiness
+decides whether the dossier has sufficient review evidence and never
+substitutes a successful package build for approval.
+
+When Security Review remediation changes managed-package source, identify the
+successor candidate separately from the failed candidate. Hand off its source
+revision, version identity, validation, managed-release state, and test/install
+evidence; prior-candidate scan or test evidence does not prove successor
+readiness. Identify which required retests or rescans ran against that
+successor and any coverage still partial or unavailable.
+
 ## Required output
 
 Return:

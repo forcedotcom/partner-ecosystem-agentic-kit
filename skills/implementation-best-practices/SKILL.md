@@ -30,6 +30,19 @@ and live tests establish production readiness. State that limitation when it
 matters. Invoke platform constraints, packaging, security, and operations as
 cross-cutting checks; this skill owns the final recommendation.
 
+## Security Review handoff
+
+When Security & Readiness owns the interview, provide the implementation's
+required and optional data flows, identities, permissions, secrets boundary,
+tenancy, external services, APIs, integrations, clients, and unresolved design
+risks. For Agentforce, add action audience and public/private classification,
+action execution identity and authorization evidence, prompt data sources and
+injection mitigations, and any Connected App/ECA OAuth boundary. Follow the
+customer and their data: authentication or Salesforce data exchange makes an
+external endpoint part of the candidate review scope. Product specialists
+remain unchanged in this release; route their supplied evidence through this
+contract rather than inventing product-specific review rules.
+
 ## Evidence and delegation
 
 Prefer practitioner knowledge, then current documentation and approved live

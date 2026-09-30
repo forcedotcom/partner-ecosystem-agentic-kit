@@ -56,6 +56,16 @@ Invoke Platform Constraints, Security & Readiness, and Operations & Release
 when they materially affect this decision. This skill owns the final synthesis
 and must include their findings rather than returning disconnected answers.
 
+## Security Review handoff
+
+Provide the verified PBO and Dev Hub ownership, actual lifecycle status,
+including whether it is `Active`, and package-history evidence that affects the
+selected review candidate. For a managed 2GP submission, a `Trial` or `Hold`
+PBO is a Security Review handoff blocker under the reviewed practitioner rule;
+an activation case or extension does not substitute for verified Active status.
+Refresh current eligibility claims before stating them; Security & Readiness
+records the submission gate and any missing owner evidence.
+
 ## Required output
 
 Return:

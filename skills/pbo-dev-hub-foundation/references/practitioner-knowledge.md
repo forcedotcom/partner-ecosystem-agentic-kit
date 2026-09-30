@@ -68,7 +68,13 @@ Detailed LMA, FMA, and SignupRequest workflows may ultimately belong to Packagin
 - Determine which org currently has Dev Hub enabled.
 - Confirm that the PBO—not a generic DE org—is the Dev Hub used for scratch orgs and 2GP operations.
 - Confirm that both Dev Hub and second-generation packaging are enabled before diagnosing package operations.
-- Inspect the PBO's `Status` and `TrialExpirationDate` in Setup → Company Information or through an authorized query.
+- Inspect the PBO's actual `Status` in Setup → Company Information or from
+  partner-supplied Partner Console evidence. The standard `Organization` query
+  can corroborate `OrganizationType`, `TrialExpirationDate`, and `IsSandbox`,
+  but does not expose an Active/Trial status field and cannot prove `Active`.
+- For a Security Review gate, pair the query result with the partner's explicit
+  confirmation of the Company Information or Partner Console status. Label that
+  confirmation as partner-provided evidence, not as an API-derived fact.
 - Distinguish `Trial`, `Active`, and `Hold` states; do not infer permanence merely because the org is currently accessible.
 - Before Security Review submission, confirm that the PBO Dev Hub that owns the managed 2GP package has Active status and that the exact package version selected for submission is promoted.
 - Determine whether the PADA and other current Active-PBO eligibility requirements are complete and whether the activation case has been opened.
@@ -293,7 +299,7 @@ The Partner Community join topic recommends using a separate partner username ev
 3. Actual org lifecycle status and expiration evidence.
 4. PBO org ID and the authenticated Dev Hub alias used by the team.
 
-Do not infer that the org is Active merely because `TrialExpirationDate` is null. Package Visualizer makes that inference in its display; the advisor must inspect the actual status.
+Do not infer that the org is Active merely because `TrialExpirationDate` is null. Package Visualizer makes that inference in its display; the advisor must inspect the actual status from Company Information or partner-supplied Partner Console evidence.
 
 ## Step 2 — Enable Dev Hub and Managed 2GP
 

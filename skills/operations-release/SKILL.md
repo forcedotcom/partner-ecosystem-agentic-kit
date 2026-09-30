@@ -38,3 +38,14 @@ gates. Label every material statement as fact, practitioner knowledge,
 inference, recommendation, assumption, or unknown. Return the release
 recommendation, evidence, gaps, risks, unknowns, and next approval-gated
 action.
+
+## Security Review handoff
+
+Provide retest evidence, release impact, monitoring or support implications,
+and the owner for submission verification, reviewer-response, rescan, and
+resubmission follow-through. A not-approved report provides representative
+issue types; require remediation across all instances and a new validated
+candidate before release. Include unresolved coverage gaps and the current
+finding disposition when they affect release timing. Security & Readiness owns
+the review dossier; this skill owns the operating recommendation after an
+approved change or outcome.

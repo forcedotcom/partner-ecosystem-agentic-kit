@@ -56,6 +56,14 @@ Invoke Platform Constraints, Security & Readiness, and Operations & Release
 when they materially affect this decision. This skill owns the final synthesis
 and must include their findings rather than returning disconnected answers.
 
+## Security Review handoff
+
+Provide the managed-released version, 1GP branch or 2GP direct ancestor,
+dependency set, review outcome, and current Partner Console listing-readiness
+evidence. Distinguish listing-readiness inheritance from a version that passed
+review directly. Refresh patch-version guidance and warn when a proposed patch
+would limit inheritance; Security & Readiness owns the review decision.
+
 ## Required output
 
 Return:
