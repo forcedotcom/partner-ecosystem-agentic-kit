@@ -114,6 +114,58 @@ made correctly:
 These are not cleanup tasks after `sf package create`. Package ownership,
 package type, and namespace are foundational decisions.
 
+## Strategy failure gates
+
+**Practitioner rule — no default package model:** A new Salesforce DX project,
+the presence of a `force-app` directory, or a metadata inventory does not by
+itself establish managed 2GP, unlocked, or unpackaged delivery. Ask for the
+subscriber model, namespace and PBO ownership, upgrade control, and intended
+distribution route before selecting a package model. Keep the model unknown
+when those inputs are missing.
+
+**Derived skill implication — boundary evidence:** Use the declared
+`packageDirectories` and supported metadata evidence to frame the package
+boundary. Direct metadata outside those directories is not automatically part
+of the package or automatically excluded from it; establish the owner's intent
+and choose a hybrid or separate delivery path when appropriate.
+
+## SME validation: ownership, distribution, and unpackaged metadata
+
+**Practitioner rule — interview validated 2026-08-26:** A partner builds the
+package and the customer installs it. Managed 2GP is generally for external,
+multi-customer distribution; unlocked packages are generally for internal
+business applications or system-integrator/customer deployments that are not
+distributed to multiple customers. If subscriber model, distribution, PBO or
+namespace ownership, or upgrade control is unknown, ask for those decisions
+before choosing a package model.
+
+**Practitioner rule — ownership follows namespace:** In a managed package, the
+partner controls namespaced metadata. Non-namespaced metadata is customer-owned
+after installation. For a particular component's upgrade behavior, refresh the
+current packageable-components and manageability documentation; do not infer
+that every packageable component is upgradeable in the same way.
+
+**Practitioner rule — explicit unpackaged directory:** In the partner's stated
+project convention, metadata under the declared `force-app` package directory
+is package content. A `my-unpackaged-directory` explicitly identified by the
+partner is partner-maintained metadata that is intentionally not distributed in
+the package. It can contain nonpackageable metadata or test-only metadata. This
+known intent overrides the generic rule that an otherwise unexplained direct
+directory outside `packageDirectories` remains unresolved.
+
+**Practitioner rule — configured build-test metadata:** If the partner configures
+`my-unpackaged-directory` as `unpackagedMetadata` for package-version creation,
+confirm that its contents are intentionally installed into the build scratch
+org for testing. If any of that metadata is needed in a customer production
+org, the partner chooses and performs a separate deployment or configuration
+path; the advisor must not default the work to the customer.
+
+**Practitioner rule — managed 2GP foundation:** Before package creation, the
+partner/developer authorizes the intended Salesforce org as the Dev Hub,
+registers and links the namespace there, and places that namespace in
+`sfdx-project.json`. Treat the Dev Hub and namespace as approval-gated
+foundational decisions and hand execution to the managed-2GP foundation owner.
+
 ## Step 1: Create the package identity once
 
 The documented command is `sf package create`.

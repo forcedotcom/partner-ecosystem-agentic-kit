@@ -54,6 +54,10 @@ Promotion decision model for the future skill:
   confirm that its version-create request reached terminal `Success`, that it
   wasn't created with skipped validation, and that applicable platform
   requirements such as packaged-Apex code coverage are satisfied.
+- **Terminal-state gate:** a submitted asynchronous request, a command that
+  returned an artifact identifier, or a non-terminal status is not proof that
+  the build succeeded. Retrieve the matching create request and preserve its
+  terminal `Success` result before considering promotion.
 - **Partner-owned release acceptance:** the ISV's DevOps and development
   lifecycle determines the exact tests, evidence, approvers, and sign-off
   needed before promotion. The advisor must discover and apply that policy

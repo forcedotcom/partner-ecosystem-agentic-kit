@@ -1,6 +1,6 @@
 ---
 name: package-migration-transfer
-description: Use for managed 1GP-to-2GP migration or recovery from a managed 2GP package created under the wrong Dev Hub. Owns Managed 1GP-to-2GP migration and wrong-Dev-Hub transfer decision trees, eligibility, preservation, and recovery.
+description: Use for managed 1GP-to-2GP migration, managed 2GP recovery from the wrong Dev Hub, or unlocked-package transfer. Owns package-model transfer decision trees, eligibility, subscriber preservation, and recovery.
 ---
 
 # Package Migration Transfer
@@ -35,8 +35,12 @@ capability concise and route here only when this bounded decision is active.
 
 ## Decision workflow
 
-1. Branch on 1GP conversion history and Security Review status.
-2. Preserve subscriber identity and upgrade paths.
+1. Branch on package model. For managed packages, evaluate 1GP conversion
+   history and, for managed 2GP, Security Review status. Unlocked-package
+   transfer, managed 2GP transfer, and 1GP conversion have separate
+   eligibility paths.
+2. Preserve subscriber identity and upgrade paths, or explicitly verify that a
+   clean package re-creation will not strand an installed subscriber.
 3. Validate transfer or conversion eligibility.
 4. Plan subscriber and dependency migration order.
 5. Require approval at irreversible cutover and Support-assisted steps.

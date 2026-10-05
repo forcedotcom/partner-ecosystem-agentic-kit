@@ -31,6 +31,11 @@ capability concise and route here only when this bounded decision is active.
 - **Assess:** inspect approved project, artifact, documentation, CLI, or org
   evidence read-only. Report exact observations, missing evidence, and risks.
   Do not edit files or mutate an org.
+- Keep unlocked-package Apex-test configuration separate from managed 2GP
+  foundation decisions. When that configuration is in scope, route the partner
+  to Salesforce's [Specify Unpackaged Metadata or Apex Access for Apex
+  Tests](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_unlocked_pkg_unpackaged_md.htm)
+  documentation and confirm the package type before recommending a setting.
 - **Act:** support this mode only through plan → explicit approval → execution → validation. Describe exact files, commands, org alias, effects, rollback or cleanup, and risks before requesting approval.
 
 ## Decision workflow

@@ -247,16 +247,30 @@ For an ISV, the correct destination is the PBO Dev Hub:
 
 - Before Security Review, rebuild the package identity and packaging
   configuration in the correct PBO. The additional setup is preferable to
-  preserving the wrong ownership foundation.
+  preserving the wrong ownership foundation when subscriber/install-base
+  evidence does not show a continuity requirement. The absence of Security
+  Review makes clean re-creation the likely path, but the advisor must still
+  verify subscriber impact rather than assume that no customers exist.
 - After Security Review, use the supported transfer path. This becomes
   especially important when customers already use the package because the
   stable `033` and `04t` identities, ancestry, and customer upgrade paths must
   be preserved.
 - Never recommend a transfer for a package converted from 1GP.
 
-Security Review is the documented eligibility boundary. Having customers isn't
-a separate eligibility requirement; it increases the operational importance of
-preserving the existing package lifecycle.
+The unlocked-package transfer path is a separate documented branch. Do not
+apply managed-2GP Security Review eligibility or managed package identity
+continuity assumptions to an unlocked package; first identify the package
+model and then refresh the matching transfer guide.
+
+**Practitioner rule — unlocked review model:** Unlocked packages are never
+submitted for AppExchange Security Review. Their transfer assessment must not
+request or infer a Security Review status; use the unlocked-package transfer
+guide and its own current prerequisites.
+
+For managed 2GP transfer, Security Review is the documented eligibility
+boundary. Having customers isn't a separate eligibility requirement; it
+increases the operational importance of preserving the existing package
+lifecycle. This boundary does not apply to unlocked-package transfer.
 
 ### Derived skill implications
 

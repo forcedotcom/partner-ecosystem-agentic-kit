@@ -58,6 +58,11 @@ A developer org that was enabled manually or provisioned with a richer shape
 can hide this dependency and allow local development to succeed while
 package-version creation fails.
 
+**Practitioner rule — build-org mismatch:** Local development success is not
+evidence that the internal package build org has the same feature and setting
+shape. Resolve the effective definition and validate the required shape in a
+clean scratch org before treating a version-create plan as ready.
+
 Practitioner guidance scopes the canonical `config/project-scratch-def.json` to
 daily development and package-version creation. Installation tests and
 customer-edition compatibility use separate environment and testing decisions,

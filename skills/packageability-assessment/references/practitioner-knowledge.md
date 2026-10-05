@@ -397,7 +397,7 @@ verify through the supported package-version report.
 
 ## 22. Package Visualizer Practitioner Implementation
 
-Source: Read-only review of `/Users/rnuguru/Desktop/POCs/Package Visualizer Master /Package-Visualizer/`
+Source: Read-only review of the user-supplied Package Visualizer project.
 
 Source type: User-supplied Salesforce application and practitioner implementation
 
@@ -577,5 +577,17 @@ This is primarily an implementation pattern rather than Development Environment 
 - Never expose secrets.
 - Surface unavoidable manual steps and approval points.
 - Verify connectivity with a read-only call before enabling state-changing actions.
+
+### Named Credentials packaging boundary
+
+**Derived skill implication — refresh before recommending:** When the repository
+contains Named Credential or External Credential metadata, inventory the
+reusable package definition separately from subscriber-owned External Credential
+principals, authorization, and secret values. Consult the linked Named
+Credentials packaging, population, target-org testing, OAuth, and managed
+upgrade sources before labeling any part packageable or distributable. Never
+print, copy, or request a secret in an assessment; report the credential
+material as sensitive and keep target-org population/testing as a separate
+validation concern.
 
 ### Failure modes contributed by the project

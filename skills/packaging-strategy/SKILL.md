@@ -23,6 +23,8 @@ capability concise and route here only when this bounded decision is active.
 - Prefer practitioner knowledge first. Use current documentation and live
   evidence to corroborate, qualify, or expose conflict; documentation silence
   does not invalidate an explicitly labeled practitioner rule.
+- Read `references/agent-script-package-boundary.md` when an Agent Script
+  artifact affects the package boundary.
 
 ## Authority modes
 
@@ -35,11 +37,47 @@ capability concise and route here only when this bounded decision is active.
 
 ## Decision workflow
 
-1. Clarify product and subscriber model.
-2. Choose package versus unpackaged delivery.
-3. Define package boundaries and dependencies.
+1. Establish the product, subscriber model, namespace/ownership, upgrade
+   control, and distribution evidence; keep any missing decision inputs
+   explicit.
+2. Choose package versus unpackaged delivery only after those inputs are
+   sufficient; a new DX project or source directory does not select a package
+   model.
+3. Define package boundaries and dependencies from declared configuration and
+   supported metadata. Treat direct metadata outside `packageDirectories` as a
+   separate, unresolved boundary until its intent is established, except where
+   the partner has explicitly identified its purpose.
 4. Compare managed 2GP, unlocked, migration, and hybrid choices.
 5. Identify distribution, upgrade, and off-platform implications.
+
+## Interview-validated package-boundary rules
+
+Apply these **Practitioner rules** when the partner has supplied the described
+intent; otherwise retain the boundary and ownership as unknown.
+
+- In the partner's stated project convention, metadata under the declared
+  `force-app` package directory is package content. For managed 2GP, the
+  namespaced package surface is partner-controlled; non-namespaced metadata is
+  customer-owned.
+- A `my-unpackaged-directory` explicitly identified by the partner is
+  partner-maintained, non-distribution metadata. Its contents can be
+  nonpackageable or test-only; do not add it to the package merely because it
+  is present in the repository.
+- If that directory is configured as `unpackagedMetadata` for package-version
+  creation, confirm that every included item is intentionally installed in the
+  build scratch org for testing. Refresh the current documented behavior before
+  describing its exact platform effect.
+- When the solution uses Named Credentials, separate the package's reusable
+  definition from subscriber-specific principals, authentication, and secret
+  values. Consult the Named Credentials packaging, population, target-org
+  testing, OAuth, and managed-upgrade documentation before recommending what
+  belongs in the package or in post-install setup.
+- When non-distributed metadata is needed in a customer production org, the
+  partner must choose and perform a separate deployment or configuration path.
+  Do not default that work to the customer.
+- Before a managed 2GP handoff, verify that the intended partner Salesforce
+  org is the Dev Hub, the namespace is registered and linked there, and the
+  same namespace is recorded in `sfdx-project.json`.
 
 ## Execution delegation
 

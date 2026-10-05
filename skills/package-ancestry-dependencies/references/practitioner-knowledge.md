@@ -134,6 +134,15 @@ For a normal upgrade path:
 - A specific version or `04t` can be used when the team needs an explicit
   ancestor.
 
+**Practitioner rule — intended parent lineage:** When a team intends a new 2GP
+package version to iterate on an existing parent version, set and verify
+`packageDirectories[].ancestorVersion` before running package-version creation.
+Record the selected ancestor and intended lineage with the create request. This
+is a blocking decision gap when parent lineage is intended; it does not mean
+that every package-version creation requires an ancestor. Treat a value supplied
+only on the CLI and absent from `sfdx-project.json` as configuration drift until
+the project record and create evidence are reconciled.
+
 `ancestorVersion: "NONE"` and `--skip-ancestor-check` are exception paths. They
 can break the normal upgrade lineage and therefore require an explicit
 architecture and release approval. They must not be advisor defaults.
