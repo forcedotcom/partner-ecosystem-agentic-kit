@@ -5,6 +5,12 @@ supported channels. Each channel still needs its own connection, user identity,
 permissions, supported server choice, and rendering check. Refresh product
 availability and Setup steps before giving a customer instructions.
 
+The Slack sources below are on domains outside the Salesforce documentation
+preflight allowlist. Use them for current Slack eligibility and Setup claims
+only when those exact official Slack sources are approved for this project;
+otherwise route to `slack-implementation-advisor` and mark unverified details
+unknown. Approval for Salesforce documentation does not approve Slack domains.
+
 ## Slackbot
 
 1. For a development environment, check eligibility for the [Slack Developer Program](https://api.slack.com/developer-program)

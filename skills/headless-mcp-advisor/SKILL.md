@@ -6,11 +6,14 @@ description: Advise Salesforce partners on Headless Toolkit and MCP client/serve
 # Headless MCP Advisor
 
 Enter through `oem-isv-advisor` → `implementation-best-practices`. Own the
-Headless and MCP architecture decision; coordinate with `agentforce-implementation-advisor`
-for Agentforce behavior, `slack-implementation-advisor` for Slack integration,
-and Packaging & Distribution, Platform Constraints, and Security & Readiness
-for their respective boundaries. Read `references/decision-guide.md` for the
-partner interview, `references/sfdx-assessment.md` when assessing a partner
+Headless and MCP architecture decision; coordinate with
+`agentforce-implementation-advisor` for Agentforce runtime behavior and
+`slack-implementation-advisor` for Slack integration. Route 2GP composition
+and package-version claims to `packageability-assessment` and
+`package-version-validation` under `packaging-distribution`; platform support
+limits to `platform-constraints`; and identity, permission, or data-exposure
+reviews to `security-readiness`. Read `references/decision-guide.md` for the
+partner interview and `references/sfdx-assessment.md` when assessing a partner
 Salesforce DX project, `references/channel-rollout.md` for Slackbot, Claude,
 or ChatGPT delivery, and `references/source-refresh.md` before current platform
 or packageability claims. Run `advisor-capability-preflight` first.
@@ -35,7 +38,10 @@ or packageability claims. Run `advisor-capability-preflight` first.
    from `references/decision-guide.md`; also name the actual client and server
    to avoid ambiguity. Do not assume every headless integration needs MCP.
 2. Distinguish a builder workflow from a runtime integration. Identify the
-   engagement layer: Agentforce, Slackbot, Claude, ChatGPT, or another client.
+   engagement layer: an Agentforce agent, Slackbot, Claude, ChatGPT, or another
+   runtime client. Distinguish an Agentforce agent from a developer harness
+   such as Agentforce Vibes; a coding harness is not by itself proof of a
+   runtime MCP client or delivery channel.
    Check that the specific client, authentication method, and desired output
    format are supported for the chosen server.
 3. In Assess, locate `sfdx-project.json`, inspect its package directories, and

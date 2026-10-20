@@ -24,6 +24,12 @@ ordinary application needs Salesforce functionality without an AI MCP client,
 assess a direct API. Reserve a hosted or external MCP server for an actual MCP
 client and tool workflow.
 
+Keep the builder harness separate from the runtime client. Claude Code,
+Agentforce Vibes, and Builder Central are development environments; an
+Agentforce agent, Slackbot, Claude, or ChatGPT can be the runtime engagement
+layer. Ask which Agentforce surface the partner means before assigning an MCP
+direction or client-connection path.
+
 Ask only for information that changes the choice:
 
 1. What is the user trying to do, and in which client: Agentforce, Slackbot,
