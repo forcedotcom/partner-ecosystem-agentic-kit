@@ -38,6 +38,8 @@ capability concise and route here only when this bounded decision is active.
 1. Clarify product capability and implementation boundary.
 2. Identify state, duration, data access, packaging, and UX needs.
 3. Choose the owning product specialist.
+   Route Headless Toolkit, hosted or external MCP server, and HXL widget
+   decisions to `headless-mcp-advisor` while retaining cross-product synthesis.
 4. Discover approved execution skills instead of duplicating them.
 5. Compose cross-product findings into one recommendation.
 

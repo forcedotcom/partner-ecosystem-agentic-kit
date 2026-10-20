@@ -11,16 +11,16 @@ class AdvisorArchitectureTests(unittest.TestCase):
     def setUp(self):
         self.catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
 
-    def test_catalog_and_filesystem_contain_the_same_26_skills(self):
+    def test_catalog_and_filesystem_contain_the_same_27_skills(self):
         expected = {item["id"] for item in self.catalog["foundation_skills"]}
         for capability in self.catalog["capabilities"]:
             expected.add(capability["id"])
             expected.update(item["id"] for item in capability.get("focused_skills", []))
         actual = {path.name for path in (ROOT / "skills").iterdir() if (path / "SKILL.md").is_file()}
-        self.assertEqual(26, len(expected))
+        self.assertEqual(27, len(expected))
         self.assertEqual(expected, actual)
         self.assertEqual(7, len(self.catalog["capabilities"]))
-        self.assertEqual(26, self.catalog["baseline"]["skill_count"])
+        self.assertEqual(27, self.catalog["baseline"]["skill_count"])
 
     def test_every_skill_has_minimal_frontmatter_and_agent_metadata(self):
         for folder in sorted((ROOT / "skills").iterdir()):

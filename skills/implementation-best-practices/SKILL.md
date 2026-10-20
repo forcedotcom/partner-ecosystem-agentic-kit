@@ -20,6 +20,8 @@ dynamically discovered, approved Salesforce skill libraries.
 ## Focused routing
 
 - Cross-product pattern selection: `implementation-pattern-router`.
+- Headless Toolkit, MCP client/server direction, Salesforce hosted MCP tools,
+  and HXL: `headless-mcp-advisor`.
 - Agentforce: `agentforce-implementation-advisor`.
 - Data 360: `data-360-implementation-advisor`.
 - Slack: `slack-implementation-advisor`.

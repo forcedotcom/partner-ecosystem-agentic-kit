@@ -2,7 +2,7 @@
   "schema_version": 1,
   "catalog_status": "complete-architecture-skeleton",
   "baseline": {
-    "skill_count": 26,
+    "skill_count": 27,
     "capability_count": 7,
     "content_state": "Stable ownership and routing contracts are present for every skill; practitioner depth is added through reviewed capability pull requests."
   },
@@ -156,6 +156,13 @@
           "maturity": "candidate-ready-for-testing",
           "owns": "Cross-product implementation routing and synthesis.",
           "delegates_execution_to": ["dynamically discovered Salesforce skill libraries"]
+        },
+        {
+          "id": "headless-mcp-advisor",
+          "modes": ["ask", "assess", "act"],
+          "maturity": "candidate-ready-for-testing",
+          "owns": "Headless Toolkit and MCP direction, hosted and external server selection, client surfaces, packaged tool assets, and HXL rendering decisions.",
+          "delegates_execution_to": ["forcedotcom/sf-skills"]
         },
         {
           "id": "agentforce-implementation-advisor",

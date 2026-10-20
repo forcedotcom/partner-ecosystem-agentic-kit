@@ -31,11 +31,11 @@ internal library; partners do not install or compose them separately.
 
 ## Baseline contract
 
-The baseline contains **26 skill folders**:
+The baseline contains **27 skill folders**:
 
 - 2 foundation skills: entry routing and documentation/tool preflight.
 - 7 capability routers: one for each stage of the partner journey.
-- 17 focused advisors currently assigned to Capabilities 2, 3, and 4.
+- 18 focused advisors currently assigned to Capabilities 2, 3, and 4.
 
 A skeleton is not a production-readiness claim. It establishes the stable skill
 ID, triggering boundary, capability ownership, supported modes, evidence rules,
@@ -64,7 +64,7 @@ approved action.
 | 1 | `solution-discovery` | Product fit, target user, product boundary, Salesforce fit, and viable direction | 0 |
 | 2 | `packaging-distribution` | Packaging, package lifecycle, upgrades, listings, and distribution | 7 |
 | 3 | `development-environment` | Development, test, demo, trial, customer-test, and packaging environments | 5 |
-| 4 | `implementation-best-practices` | Scalable implementation patterns after product and environment decisions | 5 |
+| 4 | `implementation-best-practices` | Scalable implementation patterns after product and environment decisions | 6 |
 | 5 | `platform-constraints` | Limits, metadata support, guardrails, capability gaps, and workarounds | 0 |
 | 6 | `security-readiness` | Secure architecture, review preparation, evidence, and remediation readiness | 0 |
 | 7 | `operations-release` | Testing, CI/CD, release, rollback, monitoring, support, and lifecycle operations | 0 |
@@ -104,6 +104,7 @@ approved action.
 
 - `implementation-best-practices` — capability router.
 - `implementation-pattern-router`
+- `headless-mcp-advisor`
 - `agentforce-implementation-advisor`
 - `data-360-implementation-advisor`
 - `slack-implementation-advisor`
@@ -129,8 +130,9 @@ supporting relationships live in
 
 The complete architecture remains present in every release even when skill
 depth differs. Capability 2 and Capability 3 are the current active maturation
-areas. Other capabilities retain honest baseline behavior and explicitly label
-knowledge gaps rather than disappearing from the partner experience.
+areas; Capability 4 now has a Headless MCP specialist. Other capabilities retain
+honest baseline behavior and explicitly label knowledge gaps rather than
+disappearing from the partner experience.
 
 Maturing a skill adds reviewed practitioner knowledge, scenarios, references,
 and validated behavior inside its stable folder. Adding a capability outside

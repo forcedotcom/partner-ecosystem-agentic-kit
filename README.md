@@ -13,8 +13,8 @@ Advisor**.
 
 ## Architecture baseline
 
-The repository contains the complete 26-skill ISV/OEM Advisor skeleton: two
-foundation skills, seven capability routers, and seventeen focused advisors.
+The repository contains the 27-skill ISV/OEM Advisor: two foundation skills,
+seven capability routers, and eighteen focused advisors.
 Every folder has a stable ID, ownership boundary, Ask/Assess/Act authority,
 evidence rules, and execution-delegation contract. Some skills begin with
 baseline guidance and mature through partner scenarios, practitioner input,
