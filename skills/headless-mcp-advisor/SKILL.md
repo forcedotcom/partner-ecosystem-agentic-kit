@@ -45,9 +45,13 @@ or packageability claims. Run `advisor-capability-preflight` first.
    Check that the specific client, authentication method, and desired output
    format are supported for the chosen server.
 3. In Assess, locate `sfdx-project.json`, inspect its package directories, and
-   inventory Apex classes, Lightning types, HXL widgets, and MCP server
-   definitions. Check `unpackagedMetadata`, `.forceignore`, and source-control
-   state. Trace action output through its renderer, widget, and server tool.
+   inventory the assets for the selected direction. For a Salesforce hosted
+   server, inspect Apex, Lightning types, HXL widgets, and server definitions.
+   For Agentforce using an external server, trace its external credential,
+   named credential, service registration, permission set, and agent tool
+   references. Check `unpackagedMetadata`, `.forceignore`, and source-control
+   state. Trace hosted action output through its renderer, widget, and server
+   tool.
    Separate 2GP package candidates from customer-owned setup and source-only
    examples; do not infer deployment from local files.
 4. For Salesforce hosted delivery, compare a standard server's existing tools
