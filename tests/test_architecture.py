@@ -56,6 +56,13 @@ class AdvisorArchitectureTests(unittest.TestCase):
             if (folder / "SKILL.md").is_file():
                 self.assertIn(f"`{folder.name}`", document, folder.name)
 
+    def test_shared_partner_output_schema_exists(self):
+        schema = ROOT / "advisor" / "output-schema.md"
+        self.assertTrue(schema.is_file())
+        content = schema.read_text(encoding="utf-8")
+        for field in ("partner_response", "primary_skill", "evidence", "approval_required"):
+            self.assertIn(field, content)
+
     def test_plugin_manifests_present_one_isv_oem_advisor_product(self):
         codex = json.loads((ROOT / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         claude = json.loads((ROOT / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))
