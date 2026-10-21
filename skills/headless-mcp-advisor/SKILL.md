@@ -10,7 +10,8 @@ Headless and MCP architecture decision; coordinate with
 `agentforce-implementation-advisor` for Agentforce runtime behavior and
 `slack-implementation-advisor` for Slack integration. Route 2GP composition
 and package-version claims to `packageability-assessment` and
-`package-version-validation` under `packaging-distribution`; platform support
+`package-version-validation` and listing decisions under
+`packaging-distribution`; platform support
 limits to `platform-constraints`; and identity, permission, or data-exposure
 reviews to `security-readiness`. Read `references/decision-guide.md` for the
 partner interview and `references/sfdx-assessment.md` when assessing a partner
@@ -44,31 +45,35 @@ or packageability claims. Run `advisor-capability-preflight` first.
    runtime MCP client or delivery channel.
    Check that the specific client, authentication method, and desired output
    format are supported for the chosen server.
-3. In Assess, locate `sfdx-project.json`, inspect its package directories, and
+3. When Agentforce is the client for an external partner server, verify the
+   server URL, transport, authentication, advertised tools, and data sent to
+   the provider. Plan Agentforce Registry registration, selective tool
+   activation, and subscriber setup using `references/decision-guide.md`.
+4. In Assess, locate `sfdx-project.json`, inspect its package directories, and
    inventory Apex classes, Lightning types, HXL widgets, and MCP server
    definitions. Check `unpackagedMetadata`, `.forceignore`, and source-control
    state. Trace action output through its renderer, widget, and server tool.
    Separate 2GP package candidates from customer-owned setup and source-only
    examples; do not infer deployment from local files.
-4. For Salesforce hosted delivery, compare a standard server's existing tools
+5. For Salesforce hosted delivery, compare a standard server's existing tools
    with a focused custom server. Choose the smallest tool set that meets the
    persona's job. Inspect existing Apex, Agentforce agents, Flows, Prompt
    Templates, Apex REST, `@AuraEnabled` methods, and API Catalog endpoints
    before proposing new Apex. Treat Apex Actions as a strong option for
    deterministic, multi-step business logic, not a universal default.
-5. For a packaged Apex Action, inspect the invocable method's visibility,
+6. For a packaged Apex Action, inspect the invocable method's visibility,
    input/output contract, namespace, permissions, and managed-package boundary.
    Do not apply `@JsonAccess` indiscriminately: check the selected Lightning
    type or serialization path and its current requirements. Distinguish the
    packageable action from subscriber-owned server configuration.
-6. If rich output is required, select the HXL path for the actual surface and
+7. If rich output is required, select the HXL path for the actual surface and
    tool output. Confirm widget bundle, schema, Lightning type, and MCP server
    resource wiring before proposing deployment. HXL is optional and currently
    documented as Beta; a working tool can return ordinary structured output.
-7. Plan each supported engagement layer's connection, permissions, and test
+8. Plan each supported engagement layer's connection, permissions, and test
    separately. Reuse the same eligible server-side logic and widget where the
    channel supports them; never equate one build with automatic client access.
-8. Return a recommendation, alternatives, the client/server data-flow map,
+9. Return a recommendation, alternatives, the client/server data-flow map,
    SFDX inventory and package boundary when assessed, customer setup
    ownership, evidence ledger, unknowns, and the exact global skill handoff.
 
