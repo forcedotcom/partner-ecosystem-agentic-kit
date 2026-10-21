@@ -46,34 +46,7 @@ Ask only for information that changes the choice:
 6. Is a rich widget needed, or is structured text/JSON sufficient? If rich,
    which output schema and target channels must be rendered?
 
-## Choose the external or Salesforce hosted tool source
-
-For an existing external MCP server used by an Agentforce agent, start with
-its documented endpoint and transport, then verify that Salesforce can list
-and call its tools. Register the server in Agentforce Registry with the
-authentication method the server actually supports; do not assume OAuth is
-required when the provider documents no authentication. Review discovered
-tool names, descriptions, and data scope before activating only the tools the
-agent needs. Then add the resulting MCP tool actions to the intended agent and
-test a real request. For managed distribution, the external server registration
-can be packaged through `ExternalCredential`, `ExternalServiceRegistration`,
-`NamedCredential`, and `PermissionSet` metadata, subject to current platform
-and package-version validation. MCP tool actions and Agentforce Gateway
-policies remain subscriber setup. Record the endpoint owner, data sent in tool
-arguments, and the effect of remote tool-output changes; route security review
-to `security-readiness`. See the [Agentforce external MCP registration packaging
-guide](https://developer.salesforce.com/docs/platform/pkg2-dev/guide/dev2gp-package-mcp-agentforce.html)
-and [external server management example](https://developer.salesforce.com/docs/platform/api-catalog-connectapi/guide/manage-external-mcp-servers.html).
-Ask whether the partner needs one customer-org connection or an AgentExchange
-distribution. For a listing, route package and listing decisions to
-`packaging-distribution`: Salesforce's [Partner Console guidance](https://help.salesforce.com/s/articleView?id=release-notes.rn_list_and_publish_mcp_servers_in_agentforce_extension_packages.htm&language=en_US&release=262&type=5)
-describes listing MCP servers and their tools with an Agentforce extension
-package. Route review readiness to `security-readiness` and verify current
-publishing requirements before recommending release.
-
-If the external server already supplies the required tools, assess a
-Salesforce hosted custom server, Apex Action, or HXL widget only for a separate
-Salesforce-side capability or supported rich-output need.
+## Choose the Salesforce hosted tool source
 
 - Check the [standard server reference](https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/servers-reference.html)
   and [Headless MCP solutions](https://developer.salesforce.com/docs/platform/headless-get-started/guide/headless-mcp.html)
