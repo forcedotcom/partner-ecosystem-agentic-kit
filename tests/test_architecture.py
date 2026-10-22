@@ -63,6 +63,25 @@ class AdvisorArchitectureTests(unittest.TestCase):
         for field in ("partner_response", "primary_skill", "evidence", "approval_required"):
             self.assertIn(field, content)
 
+    def test_headless_local_reference_links_resolve(self):
+        import re
+
+        folder = ROOT / "skills" / "headless-mcp-advisor"
+        documents = [folder / "SKILL.md", *sorted((folder / "references").glob("*.md"))]
+        links = []
+        for document in documents:
+            content = document.read_text(encoding="utf-8")
+            targets = re.findall(r"\]\(([^)]+\.md)(?:#[^)]*)?\)", content)
+            targets += re.findall(r"`(references/[^`]+\.md)`", content)
+            for target in targets:
+                if "://" in target or target.startswith("/"):
+                    continue
+                resolved = (document.parent / target).resolve()
+                self.assertTrue(resolved.is_relative_to(folder.resolve()), target)
+                self.assertTrue(resolved.is_file(), f"{document}: {target}")
+                links.append(resolved)
+        self.assertIn((folder / "references" / "partner-journey.md").resolve(), links)
+
     def test_plugin_manifests_present_one_isv_oem_advisor_product(self):
         codex = json.loads((ROOT / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         claude = json.loads((ROOT / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))
