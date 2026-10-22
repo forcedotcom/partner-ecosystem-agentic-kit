@@ -6,6 +6,10 @@ terms. Always describe the roles and direction explicitly.
 
 ## Start with the client/server map
 
+First establish the user task and viable alternatives with
+[the partner journey](partner-journey.md). Use the map below when MCP fits;
+do not make an ISV invent a server architecture before explaining its goal.
+
 | Partner label | MCP client and engagement layer | MCP server and tool owner | Direction of the protocol call | Primary choice |
 |---|---|---|---|---|
 | MCP In | Agentforce agent in Salesforce | Partner's externally hosted MCP server | Agentforce → external server | Register external server in Agentforce Registry; activate selected tools |
@@ -72,11 +76,10 @@ Ask only for information that changes the choice:
   tool contract. Preserve list-oriented invocable signatures and bulk behavior;
   refresh the Apex annotation rules before authoring. Existing admin-owned
   declarative logic may fit an autolaunched Flow better.
-- For managed delivery, package the supported Apex/Flow assets and let the
-  subscriber admin configure the Salesforce hosted custom server. The current
-  [custom server guide](https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/custom-servers.html)
-  says the hosted MCP server configuration itself cannot yet be included in an
-  ISV managed package. This is distinct from a packageable *external server
+- For managed delivery, package the supported backing assets and let the
+  subscriber admin configure the Salesforce hosted custom server. The reviewed
+  [Metadata Coverage Report](https://developer.salesforce.com/docs/success/metadata-coverage-report/references/coverage-report/metadata-coverage-report.html)
+  does not mark `McpServerDefinition` for 2GP. This is distinct from a packageable *external server
   registration* for Agentforce MCP In.
 - For an external Claude or ChatGPT client connecting to a Salesforce hosted
   server, check the [client connection guide](https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/client-connection-overview.html)
@@ -137,6 +140,7 @@ State the partner goal; MCP In/Out label plus concrete client → server → too
 path; standard versus custom/external server choice; reused versus new backing
 logic; identity and permissions; package versus subscriber setup ownership;
 observed SFDX paths and package boundary when assessed; whether HXL is needed
-and its channel-specific path; evidence labels and
-sources; unknowns; and the approved global skill handoff. Preserve a conflict
+and its channel-specific path; a measurable pilot or next diagnostic check;
+evidence labels and sources; unknowns; and the bounded global skill handoff
+with its actual approval scope. Preserve a conflict
 when live org evidence differs from this source snapshot.

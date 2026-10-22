@@ -5,6 +5,13 @@ supported channels. Each channel still needs its own connection, user identity,
 permissions, supported server choice, and rendering check. Refresh product
 availability and Setup steps before giving a customer instructions.
 
+Use [the partner journey](partner-journey.md) to define the first client's
+pilot and acceptance condition. Record connection, discovery, direct tool
+invocation, model selection, business result, and optional rendering separately
+for each client. Diagnose the failing layer before changing working backing
+logic. Return actual results or missing evidence to the advisor for the next
+iteration; a successful connection alone does not complete the pilot.
+
 The Slack sources below are on domains outside the Salesforce documentation
 preflight allowlist. Use them for current Slack eligibility and Setup claims
 only when those exact official Slack sources are approved for this project;

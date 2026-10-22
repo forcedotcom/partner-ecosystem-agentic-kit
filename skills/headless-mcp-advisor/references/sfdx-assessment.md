@@ -17,6 +17,15 @@ manifests when relevant, but do not treat `package.xml` as proof of managed 2GP
 contents. Use read-only source search and, when approved, read-only target org
 metadata to distinguish local source from deployed capability.
 
+Keep distinct evidence levels: documentation establishes type eligibility;
+local files establish source presence; retrieved target-org metadata establishes
+deployment; package-version contents establish inclusion; subscriber installation
+establishes installed assets; and observed calls establish runtime behavior.
+Record the source identity, observation date when known, and release/API scope
+for each material claim. Do not infer a rolling documentation page's version
+from the project's API version. A conflict needs its own scoped evidence,
+not promotion of a weaker observation into a stronger one.
+
 ## Inventory and trace
 
 | Metadata | Source-format location under a package/source directory | Assess |
@@ -72,9 +81,9 @@ describe these distinct reference rules.
 
 The current [Salesforce Metadata Coverage Report](https://developer.salesforce.com/docs/success/metadata-coverage-report/references/coverage-report/metadata-coverage-report.html)
 marks `ApexClass`, `LightningTypeBundle`, and `UiWidgetBundle` for 2GP. It marks
-`McpServerDefinition` for Metadata API/source tracking but **not** 2GP; the
-[custom-server guide](https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/custom-servers.html)
-also says ISV managed packages cannot yet include hosted server configurations.
+`McpServerDefinition` for Metadata API/source tracking but **not** 2GP.
+The [custom-server guide](https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/custom-servers.html)
+describes Metadata API deployment; that is not evidence of managed-package support.
 Check the target org's release, package version, and feature availability
 before treating an eligible type as successfully packaged.
 
@@ -106,3 +115,8 @@ dependency, proposed package/customer-setup owner, and evidence status
 checks, registration-to-agent gaps for external servers, non-packageable server
 definitions in package roots, and client setup still required. Do not expose
 credentials or call tools just to discover their output schema.
+
+On a return assessment, add what changed, which validation was attempted,
+its observed result, what remains unknown, and the next bounded check from
+[the partner journey](partner-journey.md). A not-run check or a missing
+prerequisite is not a failed runtime test.

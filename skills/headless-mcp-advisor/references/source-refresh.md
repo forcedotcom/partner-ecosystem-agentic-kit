@@ -1,5 +1,32 @@
 # Source refresh guide
 
+## Focused refresh: 2026-10-22
+
+Retrieved the official Metadata Coverage Report, custom-server guide,
+external MCP registration packaging guide, and HXL rich UI guide through the
+approved public-web fallback. Salesforce Docs MCP was not exposed by the
+active harness. The rolling coverage page did not identify a target release
+in the retrieved content; these observations must not be assigned the
+partner project's API version.
+
+- The coverage report marks `ApexClass`, `LightningTypeBundle`, and
+  `UiWidgetBundle` for 2GP; it does not mark `McpServerDefinition` for 2GP.
+  This establishes type eligibility, not a successful package build or install.
+- The external-registration packaging guide lists `ExternalCredential`,
+  `ExternalServiceRegistration`, `NamedCredential`, and `PermissionSet`;
+  it excludes MCP tool actions and Agentforce Gateway policies.
+- The HXL guide establishes widget structure and Metadata API/CLI deployment.
+  Its `package.xml` example does not establish managed 2GP inclusion.
+- The retrieved custom-server guide describes Metadata API deployment but
+  does not explicitly state the ISV managed-package exclusion. Attribute the
+  2GP boundary to the coverage report, not that guide.
+
+Source identities are linked below under Packaging and Apex, Salesforce
+hosted server choices, and HXL. Keep documentation eligibility, source,
+deployed org, package-version, installation, and runtime evidence separate.
+
+## Earlier review and remaining limitations
+
 Reviewed 2026-10-20 through approved public, rendered Salesforce developer
 documentation and the official Slack pages supplied for this review. The
 static preflight allowlist does not include Slack hosts; for later runs, use
