@@ -14,6 +14,7 @@ do not make an ISV invent a server architecture before explaining its goal.
 |---|---|---|---|---|
 | MCP In | Agentforce agent in Salesforce | Partner's externally hosted MCP server | Agentforce → external server | Register external server in Agentforce Registry; activate selected tools |
 | MCP Out | Slackbot, Claude, or ChatGPT outside the Salesforce UI | Salesforce hosted standard or custom MCP server | External client → Salesforce server | Enable standard server or configure custom server and connect client |
+| Neither: external integration | An external client such as Claude or ChatGPT | Partner-hosted MCP server that calls Salesforce APIs | External client → partner server → Salesforce API | Assess the partner's API and credential design; do not introduce Agentforce registration or a Salesforce hosted server merely because Salesforce data is involved |
 
 An Agentforce agent can also be *exposed* as a tool on a Salesforce hosted
 custom server. In that case the external assistant is the MCP client and the
@@ -21,6 +22,12 @@ Agentforce agent is the Salesforce-side backing capability: classify it as MCP
 Out under the partner vocabulary. Do not infer direction from where Apex code
 or data is stored. If a partner uses the labels differently, use their terms
 but retain the concrete map.
+
+The third row has no Salesforce MCP boundary. Its partner-hosted MCP server
+may be a sensible product architecture, but its Salesforce call is a normal
+API integration. Do not apply the Agentforce external-registration packaging
+guidance or Salesforce hosted custom-server setup to it unless the architecture
+also adds one of those Salesforce MCP boundaries.
 
 Headless Toolkit also includes APIs, Salesforce CLI, plugins, and skills. If
 the partner wants a builder workflow, assess those development tools. If an
@@ -46,7 +53,9 @@ Ask only for information that changes the choice:
 4. Does the use case need a read, write, delete, multi-step transaction, or
    reasoning? Which identity, data scope, and permissions govern the call?
 5. Is this a managed product? Who installs the package, registers or enables
-   the server, connects the client, and maintains the tool descriptions?
+   a Salesforce MCP server when one exists, connects the client, and maintains
+   the tool descriptions? For an external integration, establish separately
+   what distributes and configures the partner's API credentials.
 6. Is a rich widget needed, or is structured text/JSON sufficient? If rich,
    which output schema and target channels must be rendered?
 
@@ -136,9 +145,10 @@ must configure after installing the package. Salesforce currently marks
 
 ## Partner readout
 
-State the partner goal; MCP In/Out label plus concrete client → server → tool
-path; standard versus custom/external server choice; reused versus new backing
-logic; identity and permissions; package versus subscriber setup ownership;
+State the partner goal; topology classification (MCP In, MCP Out, external
+integration, or no MCP) plus concrete client → server → tool path; standard
+versus custom/external server choice; reused versus new backing logic; identity
+and permissions; package versus subscriber setup ownership;
 observed SFDX paths and package boundary when assessed; whether HXL is needed
 and its channel-specific path; a measurable pilot or next diagnostic check;
 evidence labels and sources; unknowns; and the bounded global skill handoff

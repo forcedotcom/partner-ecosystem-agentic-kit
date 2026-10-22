@@ -25,6 +25,7 @@ Evaluate only paths that can meet the task and documented client support:
 | Standard Salesforce hosted MCP | An actual MCP client needs an existing platform capability | Whether a narrow standard tool set meets the job and permissions |
 | Custom Salesforce hosted MCP | The client needs curated or differentiated Salesforce capabilities | Which Apex, Flow, agent, or API assets can be reused and are supported |
 | Externally hosted MCP | A partner service already supplies tools or logic belongs externally | Supported client/authentication, data leaving Salesforce, and registration ownership |
+| External integration | An external client calls a partner-hosted MCP server that uses Salesforce APIs | Whether the API and credential integration meets the task without adding a Salesforce MCP boundary |
 
 Use [the decision guide](decision-guide.md) for the concrete client → server →
 tool map. Existing Apex can reduce integration work without making a custom
@@ -32,11 +33,33 @@ MCP server the automatic answer. Existing Flow/API assets may remove the need
 for new Apex. If no MCP client or tool-selection need exists, a direct API may
 be the simpler fit. Refresh platform support before asserting eligibility.
 
+Classify MCP In or MCP Out only when Salesforce participates in the MCP
+protocol boundary. An external client → partner-hosted MCP server → Salesforce
+API path is an external integration, neither label. It needs API and credential
+assessment, and it does not inherit Agentforce registration or Salesforce
+hosted-server setup requirements.
+
 Explain the recommended path and one materially different viable alternative:
 fit, reused assets, required new work, customer setup, and the fact that would
 change the choice. If there is no viable alternative, state the constraint
 rather than inventing one. Label facts, recommendations, assumptions, and
 unknowns; a supplied asset is not proof of its availability in a customer org.
+
+## Give a consistent partner readout
+
+Keep the final recommendation compact and complete:
+
+1. Recommended path and one meaningful alternative, with the deciding fact.
+2. Topology classification and the concrete client → server → tool or API map.
+3. Reused and new assets, then package-owned and subscriber-owned setup.
+4. A smallest useful pilot with its measurable acceptance condition.
+5. Evidence labels, source identities, and material unknowns.
+6. The bounded global execution-skill handoff, including approval scope and
+   what results must return for the next iteration.
+
+For an external integration, name the partner API/credential owner explicitly.
+Do not present Salesforce MCP packaging or customer setup as applicable unless
+the selected architecture includes that Salesforce MCP boundary.
 
 ## Define the smallest useful pilot
 

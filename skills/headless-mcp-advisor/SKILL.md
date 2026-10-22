@@ -40,10 +40,14 @@ or packageability claims. Run `advisor-capability-preflight` first.
    Compare viable native actions, direct APIs, standard/custom hosted MCP, and
    external MCP paths; do not require MCP or new Apex merely because either
    is available. Route unresolved product fit to `solution-discovery`.
-2. For an MCP path, ask where the server runs, who the client is, where the user works,
-   and which side initiates each tool call. Use the partner's MCP In/Out labels
-   from `references/decision-guide.md`; also name the actual client and server
-   to avoid ambiguity. Do not assume every headless integration needs MCP.
+2. For an MCP path, map the actual client, server, backing capability, and
+   direction of each call before applying the partner's MCP In/Out labels from
+   `references/decision-guide.md`. Use MCP In or MCP Out only when Salesforce
+   is on that MCP boundary. An external client calling a partner-hosted MCP
+   server that then calls Salesforce APIs is an external integration, neither
+   label; assess its API and credential design without proposing Agentforce
+   registration or a Salesforce hosted server by default. Do not assume every
+   headless integration needs MCP.
 3. Distinguish a builder workflow from a runtime integration. Identify the
    engagement layer: an Agentforce agent, Slackbot, Claude, ChatGPT, or another
    runtime client. Distinguish an Agentforce agent from a developer harness
@@ -89,7 +93,8 @@ or packageability claims. Run `advisor-capability-preflight` first.
    architecture when evidence changes its assumptions. A named route is not
    proof that its skill was loaded or execution occurred.
 10. Return a recommendation and meaningful alternative, a concrete pilot and
-   next iteration, the client/server data-flow map when MCP applies,
+   next iteration, the topology classification and client/server data-flow map
+   when MCP applies,
    SFDX inventory and package boundary when assessed, customer setup
    ownership, evidence ledger, unknowns, and the exact global skill handoff.
 
