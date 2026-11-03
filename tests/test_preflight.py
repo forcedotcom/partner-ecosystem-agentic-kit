@@ -142,7 +142,7 @@ class PreflightTests(unittest.TestCase):
         self.assertIn("references/routing.md", entry)
         self.assertLess(len(entry.splitlines()), 90)
 
-    def test_capability_catalog_has_26_stable_unique_skill_ids(self):
+    def test_capability_catalog_has_27_stable_unique_skill_ids(self):
         catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
         ids = [item["id"] for item in catalog["foundation_skills"]]
         ids.extend(capability["id"] for capability in catalog["capabilities"])
@@ -151,7 +151,7 @@ class PreflightTests(unittest.TestCase):
             for capability in catalog["capabilities"]
             for skill in capability["focused_skills"]
         )
-        self.assertEqual(26, len(ids))
+        self.assertEqual(27, len(ids))
         self.assertEqual(len(ids), len(set(ids)))
         self.assertEqual(list(range(1, 8)), [item["number"] for item in catalog["capabilities"]])
         self.assertEqual(

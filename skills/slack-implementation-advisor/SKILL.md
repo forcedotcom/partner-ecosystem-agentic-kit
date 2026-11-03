@@ -37,6 +37,8 @@ capability concise and route here only when this bounded decision is active.
 
 1. Separate Slack and Salesforce execution environments.
 2. Clarify authentication and data-flow boundaries.
+   Route Slackbot as an MCP client of a Salesforce hosted server, and any HXL
+   output decision, to `headless-mcp-advisor`.
 3. Verify current program eligibility and sandbox limits.
 4. Choose package versus external integration responsibilities.
 5. Delegate build work to approved Salesforce and Slack skills.

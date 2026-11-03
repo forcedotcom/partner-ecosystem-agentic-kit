@@ -40,6 +40,8 @@ capability concise and route here only when this bounded decision is active.
 ## Decision workflow
 
 1. Choose agent, sub-agent, Apex, API, prompt, or MCP boundary.
+   Route hosted/external MCP direction and HXL tool rendering to
+   `headless-mcp-advisor`; retain Agentforce action and agent design here.
 2. Model state, duration, retries, and long-running work.
 3. Verify exact metadata packageability.
 4. If Agent Script is involved, separate the authored script from packageable
