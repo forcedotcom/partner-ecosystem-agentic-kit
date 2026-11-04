@@ -22,7 +22,8 @@ checker is `skills/oem-isv-advisor/scripts/check_skill_contracts.py`.
 
 The generated catalog is an index, not a second author-maintained contract.
 The checker reports malformed metadata, unsafe paths, missing required internal
-advisors, inconsistent authority, nonexistent routes, and index drift. It does
+advisors, inconsistent authority, nonexistent routes, routing-section drift,
+and index drift. It does
 not execute candidate scripts or connect tools to discover dependencies.
 
 ## Interpret relationships and authority
@@ -31,11 +32,21 @@ The home capability is structural. Being primary or supporting depends on the
 active decision. A consultation and return is not by itself an invocation loop.
 The primary retains synthesis unless the decision is explicitly handed off.
 
-Required internal dependencies must be available. Conditional advisors need not
+Required internal dependencies must be available for complete library validation,
+not as an unconditional Ask gate. Ask dependencies are conditional/optional;
+required dependencies are scoped to Assess/Act. Conditional advisors need not
 be invoked in every scenario. External tools/libraries are discovered only when
 the selected operation needs them; absence preserves an honest fallback or a
 not-run result. Documentation providers are not execution libraries. No blanket
 CLI, org, or API-version prerequisite is imposed on Ask.
+
+Catalog entries use stable IDs only, never cross-skill contract paths. The
+router reads owns/modes/maturity in the catalog, invokes the selected skill
+through the host catalog (with namespace when needed), then that skill reads
+its own local references. Contract reads are targeted, not every-turn overhead.
+Explicit IDs in introductions/routing/workflow are checked against relationships
+or internal dependencies; exclusions and examples are not inferred as handoffs.
+Every declared `routes_to` target must also be explicitly documented in the body.
 
 Ask advises without project/org inspection. Assess inspects only approved
 evidence. Act orchestration requires a bounded plan and explicit approval;

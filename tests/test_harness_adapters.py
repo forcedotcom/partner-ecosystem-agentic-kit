@@ -22,12 +22,12 @@ class HarnessAdapterTests(unittest.TestCase):
 
     def test_all_targets_preserve_identical_skill_content(self):
         hashes = set()
-        for target in ("codex-local", "claude-code", "cursor-local", "claude-app", "generic-files"):
+        for target in ("codex-local", "claude-code", "claude-plugin", "cursor-local", "claude-app", "generic-files"):
             path = self.output / f"{target}.zip"
             manifest = ADAPTER.build(ROOT, target, path)
             hashes.add(manifest["payload_sha256"])
-            self.assertEqual(26, len(manifest["skill_versions"]))
-            self.assertIsNone(manifest["library_release"])
+            self.assertEqual(27, len(manifest["skill_versions"]))
+            self.assertIn(manifest["library_release"], (None, "v" + (ROOT / "VERSION").read_text().strip()))
             with zipfile.ZipFile(path) as bundle:
                 record = json.loads(bundle.read("session-record.json"))
                 self.assertEqual("review_required", ADAPTER.inspect_record(record, manifest)["status"])
@@ -35,7 +35,7 @@ class HarnessAdapterTests(unittest.TestCase):
                 self.assertFalse(any("tests/" in name or "transcript" in name for name in bundle.namelist()))
                 restored = {}
                 if target == "claude-app":
-                    self.assertEqual(26, len([p for p in bundle.namelist() if p.endswith(".zip")]))
+                    self.assertEqual(27, len([p for p in bundle.namelist() if p.endswith(".zip")]))
                     for name in manifest["skill_versions"]:
                         with zipfile.ZipFile(io.BytesIO(bundle.read(f"skill-zips/{name}.zip"))) as skill_zip:
                             for member in skill_zip.namelist():
@@ -56,6 +56,9 @@ class HarnessAdapterTests(unittest.TestCase):
         record.update(surface="terminal", app_version="test-fixture", model="test-fixture", tested_at="2026-11-04T12:00:00Z", installation_method="disposable-test-fixture", reviewer="unit-test", tool_catalog_status="unavailable", documentation_mcp="unavailable")
         for check in record["checks"].values():
             check.update(status="pass", evidence="Unit-test fixture only; not actual harness evidence.")
+        record["loaded_skills"] = [{"id": "oem-isv-advisor", "base_directory": "/unit-test/skills/oem-isv-advisor", "version": manifest["skill_versions"]["oem-isv-advisor"], "skill_md_sha256": manifest["file_sha256"]["skills/oem-isv-advisor/SKILL.md"]}]
+        record["visible_skill_sources"] = ["unit-test-fixture-only"]
+        record["upgrade"] = {"from_version": "0.1.0", "to_version": "0.2.0-rc.1", "delivery_path": "unit-test", "evidence": "Fixture only, not real host evidence."}
         return record, manifest
 
     def test_complete_record_is_self_reported_not_certified(self):

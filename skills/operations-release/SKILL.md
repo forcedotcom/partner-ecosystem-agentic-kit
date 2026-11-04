@@ -9,9 +9,9 @@ metadata:
   contract: "references/skill-contract.json"
 ---
 
-Read [the skill contract](references/skill-contract.json) when determining ownership,
-authority, conditional dependencies, or handoff boundaries. It declares limits,
-not permission to execute. Preserve the active primary's final synthesis.
+Follow the instructions below. Read [this skill's contract](references/skill-contract.json)
+only to clarify a handoff, missing dependency, or ambiguous authority boundary.
+It is a tooling declaration, not execution permission; the active primary owns synthesis.
 
 # Operations and Release Advisor
 

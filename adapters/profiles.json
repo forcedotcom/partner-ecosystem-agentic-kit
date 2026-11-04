@@ -2,6 +2,15 @@
   "schema_version": 1,
   "profiles": [
     {
+      "id": "claude-plugin",
+      "surfaces": ["terminal", "desktop-code"],
+      "layout": "plugin",
+      "skills_prefix": "skills",
+      "invocation": "Load the extracted plugin root with claude --plugin-dir <root> in an isolated context, then invoke /oem-isv-advisor:oem-isv-advisor. This is session loading, not a marketplace upgrade test.",
+      "notes": "Preserves plugin identity and namespace. Includes unchanged optional MCP configuration; the builder does not connect it. Check user/project/plugin/synced copies and managed settings. Record every invoked skill's actual base directory and version/hash. A separate config directory and project do not alone prove isolation.",
+      "source": "https://code.claude.com/docs/en/plugins/create"
+    },
+    {
       "id": "codex-local",
       "surfaces": ["desktop-local", "cli", "ide"],
       "layout": "project",

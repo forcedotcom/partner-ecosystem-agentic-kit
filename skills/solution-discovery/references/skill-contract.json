@@ -58,6 +58,26 @@
       "target": "security-readiness",
       "kind": "consults",
       "when": "Identity, data exposure, trust boundaries, or Security Review readiness materially changes this decision."
+    },
+    {
+      "target": "packaging-distribution",
+      "kind": "routes_to",
+      "when": "The next bounded decision is packaging or distribution."
+    },
+    {
+      "target": "development-environment",
+      "kind": "routes_to",
+      "when": "The next decision is org selection or development lifecycle."
+    },
+    {
+      "target": "implementation-best-practices",
+      "kind": "routes_to",
+      "when": "The next decision is implementation design."
+    },
+    {
+      "target": "operations-release",
+      "kind": "consults",
+      "when": "Operating or lifecycle assumptions affect product viability."
     }
   ],
   "dependencies": [
@@ -65,12 +85,21 @@
       "id": "advisor-capability-preflight",
       "kind": "internal_skill",
       "modes": [
-        "ask",
+        "ask"
+      ],
+      "requirement": "conditional",
+      "when": "This Ask decision needs the named advisor's expertise or documentation policy.",
+      "missing_behavior": "Continue bounded Ask guidance from supplied facts and available references; label missing expertise and do not claim it was consulted."
+    },
+    {
+      "id": "advisor-capability-preflight",
+      "kind": "internal_skill",
+      "modes": [
         "assess",
         "act"
       ],
       "requirement": "required",
-      "when": "The installed advisor library must include its routing and authority foundations.",
+      "when": "Complete advisor context is required to claim this inspected or execution path was validated.",
       "missing_behavior": "Report incomplete advisor context; prepare a complete library before claiming this path was validated."
     },
     {

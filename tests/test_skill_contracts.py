@@ -14,7 +14,7 @@ class SkillContractTests(unittest.TestCase):
     def test_entire_library_declares_consistent_contracts(self):
         skills = sorted(p for p in (ROOT / "skills").iterdir() if (p / "SKILL.md").is_file())
         report = CONTRACTS.inspect_contracts(skills)
-        self.assertEqual(26, len(report["skills"]))
+        self.assertEqual(27, len(report["skills"]))
         self.assertTrue(all(r["status"] == "ready" for r in report["skills"]), report["findings"])
 
     def test_catalog_is_reproducible_from_contracts(self):
@@ -27,7 +27,7 @@ class SkillContractTests(unittest.TestCase):
         for capability in catalog["capabilities"]:
             entries.append(capability)
             entries.extend(capability["focused_skills"])
-        self.assertEqual(26, len(entries))
+        self.assertEqual(27, len(entries))
         for entry in entries:
             report = CONTRACTS.inspect_contract(ROOT / "skills" / entry["id"])
             self.assertEqual("1.0.0", report["skill_version"])
@@ -48,7 +48,7 @@ class SkillContractTests(unittest.TestCase):
     def test_no_external_provider_is_a_blanket_ask_prerequisite(self):
         for folder in (ROOT / "skills").iterdir():
             for dep in CONTRACTS.inspect_contract(folder)["contract"]["dependencies"]:
-                self.assertFalse(dep["kind"] != "internal_skill" and "ask" in dep["modes"] and dep["requirement"] == "required")
+                self.assertFalse("ask" in dep["modes"] and dep["requirement"] == "required")
 
 
 if __name__ == "__main__":

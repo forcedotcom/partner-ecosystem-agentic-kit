@@ -62,6 +62,16 @@ plugin using its technical identifier:
 
 Start a new session after installation.
 
+### Versions and prerelease upgrades
+
+The library/plugin version is in `VERSION` and the distribution manifests;
+individual skill versions are tracked independently in their metadata headers.
+See [GitHub Releases](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/releases),
+[release policy](docs/releasing.md), and [upgrade testing](docs/upgrade-testing.md).
+The current candidate is `0.2.0-rc.1`; it is not yet an accepted stable upgrade.
+An ordinary marketplace update tracking `main` will not switch to a candidate
+tag merely because a GitHub prerelease exists.
+
 ### Other harnesses and isolated compatibility testing
 
 Use the [harness compatibility guide](docs/harness-compatibility.md) for Cursor,

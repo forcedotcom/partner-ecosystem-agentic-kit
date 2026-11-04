@@ -19,7 +19,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 CHECKS = ("discovery", "contract_read", "related_skill_resolution", "routing_and_synthesis",
           "missing_tool_fallback", "assess_boundary", "act_approval_boundary", "context_recovery",
-          "candidate_isolation")
+          "candidate_isolation", "duplicate_name_resolution", "installed_version_upgrade")
 IGNORED_DIRS = {"__pycache__", ".git"}
 ALLOWED_DIRS = {"references", "scripts", "assets", "agents"}
 
@@ -91,6 +91,16 @@ def git_head(root: Path) -> str | None:
     return result.stdout.strip() if result.returncode == 0 else None
 
 
+def exact_release(root: Path) -> str | None:
+    """A manifest label alone is not proof the packaged content is released."""
+    tag = subprocess.run(["git", "-C", str(root), "describe", "--tags", "--exact-match", "HEAD"], capture_output=True, text=True)
+    version = (root / "VERSION").read_text().strip() if (root / "VERSION").is_file() else ""
+    if tag.returncode or tag.stdout.strip() != f"v{version}":
+        return None
+    state = subprocess.run(["git", "-C", str(root), "status", "--porcelain", "--", "skills", "adapters", ".claude-plugin", ".codex-plugin", ".mcp.json", "VERSION"], capture_output=True, text=True)
+    return tag.stdout.strip() if state.returncode == 0 and not state.stdout.strip() else None
+
+
 def build(root: Path, target: str, output: Path) -> dict:
     root, output = root.resolve(), output.expanduser().absolute()
     if output.suffix != ".zip":
@@ -102,15 +112,16 @@ def build(root: Path, target: str, output: Path) -> dict:
     profile = profile_for(root, target)
     files, versions = payload(root)
     hashes = {name: digest(data) for name, data in sorted(files.items())}
+    release = exact_release(root)
     manifest = {"schema_version": 1, "target": target, "profile": profile,
-                "library_head_sha": git_head(root), "library_release": None,
-                "source_state": "local-content-not-a-release", "skill_versions": versions,
+                "library_head_sha": git_head(root), "library_release": release,
+                "source_state": "exact-tagged-content" if release else "local-content-not-a-release", "skill_versions": versions,
                 "file_sha256": hashes, "payload_sha256": digest(canonical(hashes)),
                 "profile_sha256": digest(canonical(profile)), "behavioral_status": "not_tested"}
     record = {"schema_version": 1, "target": target, "surface": None, "app_version": None,
               "model": None, "tested_at": None, "payload_sha256": manifest["payload_sha256"],
               "profile_sha256": manifest["profile_sha256"], "library_head_sha": manifest["library_head_sha"],
-              "library_release": None, "requested_mode": "ask", "installation_method": None,
+              "library_release": release, "requested_mode": "ask", "installation_method": None,
               "tool_catalog_status": "unknown", "exposed_tools": [], "documentation_mcp": "unknown",
               "checks": {key: {"status": "not_run", "evidence": None} for key in CHECKS},
               "limitations": [], "reviewer": None}
@@ -121,6 +132,16 @@ def build(root: Path, target: str, output: Path) -> dict:
             exported[f"skill-zips/{name}.zip"] = archive(nested)
     else:
         exported.update({f"{profile['skills_prefix']}/{p.removeprefix('skills/')}": data for p, data in files.items()})
+    if profile["layout"] == "plugin":
+        for path in (".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".codex-plugin/plugin.json", ".mcp.json"):
+            exported[path] = (root / path).read_bytes()
+    manifest["distribution_file_sha256"] = {name: digest(data) for name, data in sorted(exported.items())}
+    manifest["distribution_sha256"] = digest(canonical(manifest["distribution_file_sha256"]))
+    record["distribution_sha256"] = manifest["distribution_sha256"]
+    record["loaded_skills"] = []
+    record["visible_skill_sources"] = []
+    record["duplicate_names"] = []
+    record["upgrade"] = {"from_version": None, "to_version": None, "delivery_path": None, "evidence": None}
     exported["bundle-manifest.json"] = json.dumps(manifest, indent=2).encode()
     exported["session-record.json"] = json.dumps(record, indent=2).encode()
     exported["START-HERE.md"] = (
@@ -152,7 +173,9 @@ def inspect_record(record: dict, manifest: dict) -> dict:
         findings.append("Manifest payload hash does not match its file inventory.")
     if digest(canonical(manifest["profile"])) != manifest.get("profile_sha256"):
         findings.append("Manifest profile hash does not match its profile.")
-    for key in ("payload_sha256", "profile_sha256", "target", "library_head_sha"):
+    if digest(canonical(manifest["distribution_file_sha256"])) != manifest.get("distribution_sha256"):
+        findings.append("Manifest distribution hash does not match its packaged files.")
+    for key in ("payload_sha256", "profile_sha256", "distribution_sha256", "target", "library_head_sha"):
         if record.get(key) != manifest.get(key):
             findings.append(f"Record does not match bundle {key}.")
     if record.get("schema_version") != 1:
@@ -184,6 +207,18 @@ def inspect_record(record: dict, manifest: dict) -> dict:
         check = record.get("checks", {}).get(key, {})
         if check.get("status") != "pass" or not isinstance(check.get("evidence"), str) or not check["evidence"].strip():
             findings.append(f"{key}: supply observed passing evidence or keep compatibility incomplete.")
+    loaded = record.get("loaded_skills")
+    if not isinstance(loaded, list) or not loaded:
+        findings.append("Record actual loaded skill IDs, base directories, and matching versions/content hashes.")
+    else:
+        for item in loaded:
+            if not isinstance(item, dict) or item.get("id") not in manifest["skill_versions"] or item.get("version") != manifest["skill_versions"].get(item.get("id")) or not item.get("base_directory") or item.get("skill_md_sha256") != manifest["file_sha256"].get(f"skills/{item.get('id')}/SKILL.md"):
+                findings.append("A loaded skill does not identify the exact candidate copy.")
+    if not record.get("visible_skill_sources") or not isinstance(record.get("duplicate_names"), list):
+        findings.append("Record visible skill sources and duplicate bare names, including an explicit empty duplicate list.")
+    upgrade = record.get("upgrade", {})
+    if not all(isinstance(upgrade.get(k), str) and upgrade[k].strip() for k in ("from_version", "to_version", "delivery_path", "evidence")):
+        findings.append("Record the previous/new plugin version, actual delivery path, and upgrade evidence.")
     return {"status": "review_required" if findings else "reported_pass",
             "verification": "self-reported; not independent harness certification",
             "findings": findings, "payload_sha256": manifest["payload_sha256"]}

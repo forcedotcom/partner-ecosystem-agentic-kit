@@ -21,6 +21,20 @@ KINDS = {"internal_skill", "external_skill", "execution_library", "tool", "docum
 TOP_FIELDS = {"schema_version", "id", "title", "role", "capability", "maintainer", "decision", "authority", "relationships", "dependencies", "evidence", "output", "maturity"}
 
 
+def body_routing_targets(text: str, available: set[str]) -> set[str]:
+    """Inspect explicit IDs in introduction/routing/workflow, not exclusions/examples."""
+    body = text.split("---", 2)[-1]
+    active = True
+    selected = []
+    for line in body.splitlines():
+        if line.startswith("## "):
+            heading = line[3:].strip().lower()
+            active = heading in {"routing", "focused routing", "workflow", "decision workflow", "handoffs"}
+        if active:
+            selected.append(line)
+    return set(re.findall(r"`\$?([a-z][a-z0-9-]+)`", "\n".join(selected))) & available
+
+
 def _scalar(raw: str) -> str:
     raw = raw.strip()
     if raw.startswith('"'):
@@ -240,8 +254,15 @@ def inspect_contract(skill: Path, available: set[str] | None = None) -> dict[str
                 raise ValueError("Every dependency needs an identity, applicability condition, and fallback.")
             if dep["kind"] == "internal_skill" and available is not None and dep["id"] not in available:
                 issue("missing_internal_dependency", f"Internal dependency {dep['id']} is absent.", "dependencies", "blocker" if dep["requirement"] == "required" else "review")
-            if dep["kind"] != "internal_skill" and "ask" in dep["modes"] and dep["requirement"] == "required":
-                issue("unconditional_ask_prerequisite", "Ask must retain an honest fallback without a mandatory external tool or environment.", "dependencies")
+            if "ask" in dep["modes"] and dep["requirement"] == "required":
+                issue("unconditional_ask_prerequisite", "Ask dependencies must be conditional or optional; installation completeness is not permission to block bounded advice.", "dependencies")
+        if available is not None:
+            declared = {r["target"] for r in contract["relationships"]} | {d["id"] for d in contract["dependencies"] if d["kind"] == "internal_skill"}
+            for target in sorted(body_routing_targets(text, available) - declared - {skill.name}):
+                issue("undeclared_body_handoff", f"Routing/workflow names {target}, but the contract omits it.", "relationships", "review")
+            for relation in contract["relationships"]:
+                if relation["kind"] == "routes_to" and f"`{relation['target']}`" not in text.split("---", 2)[-1]:
+                    issue("undocumented_handoff", f"Declared route to {relation['target']} needs an explicit backticked ID in the body.", "relationships", "review")
         evidence = contract["evidence"]
         if not isinstance(evidence, dict) or set(evidence) != {"policy_skill", "practitioner_knowledge", "source_refresh"} or evidence["policy_skill"] != "oem-isv-advisor":
             raise ValueError("Evidence must reference the shared policy and scoped optional evidence files.")
@@ -307,7 +328,6 @@ def generate_catalog(root: Path) -> dict[str, Any]:
     def entry(c: dict) -> dict:
         return {"id": c["id"], "version": versions[c["id"]], "role": c["role"], "modes": c["authority"]["supported_modes"],
                 "maturity": c["maturity"]["declared_state"], "owns": " ".join(c["decision"]["owns"]),
-                "contract": f"skills/{c['id']}/references/skill-contract.json",
                 "delegates_execution_to": [d["id"] for d in c["dependencies"] if d["kind"] in {"execution_library", "external_skill", "tool", "service_workflow"}]}
     capabilities = []
     for number, name in enumerate(CAPABILITIES, 1):

@@ -4,10 +4,11 @@ Use this reference at entry when installation, file access, or tools differ
 from an ordinary local skill session. Do not load the entire library eagerly.
 
 - Resolve `references/...` relative to the skill that declares it, not the
-  conversation working directory. Read the contract when deciding authority,
-  ownership, dependencies, or outputs; custom metadata is not executable policy.
+  conversation working directory. Read this skill's own contract only to clarify
+  a handoff, missing dependency, or ambiguous boundary; custom metadata is not
+  executable policy. Use the catalog for routing, not other skills' contracts.
 - Resolve a related skill through the current host's exposed skill catalog or
-  approved installed files. If it is unavailable, identify the missing advisor
+  approved installed files after invoking that skill. If it is unavailable, identify the missing advisor
   and offer a bounded handoff. Do not fetch/install a repository or scan unrelated
   projects automatically. A skill ID is not a universal slash-command syntax.
 - Keep the partner goal, active primary, current mode, material supplied facts,

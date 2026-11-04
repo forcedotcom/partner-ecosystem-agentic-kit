@@ -4,15 +4,12 @@ Read only the section for the active harness.
 
 ## Codex
 
-- Use the declared `salesforce-docs` dependency in `agents/openai.yaml`.
+- Inspect exposed documentation tools. This library does not declare Docs MCP
+  as a mandatory dependency in `agents/openai.yaml`.
 - If Codex offers a missing-dependency installation prompt, show the identity
   and ask the customer before accepting it.
-- For a direct project-scoped setup, the reviewed command is:
-
-  ```bash
-  codex mcp add salesforce-docs --url https://salesforce-docs-76258744c9d7.herokuapp.com/api/mcp
-  ```
-
+- Use the host's supported project-scoped configuration flow. Do not describe a
+  CLI command as project-scoped without checking what that installed version writes.
 - Store project-scoped MCP configuration in `.codex/config.toml` only in a
   trusted project. Do not edit user-global configuration without separate
   approval.
@@ -26,7 +23,7 @@ Read only the section for the active harness.
 - The Salesforce-published direct command is:
 
   ```bash
-  claude mcp add --transport http salesforce-docs https://salesforce-docs-76258744c9d7.herokuapp.com/api/mcp
+  claude mcp add --scope project --transport http salesforce-docs https://salesforce-docs-76258744c9d7.herokuapp.com/api/mcp
   ```
 
 - Restart Claude Code after adding the server.
@@ -41,7 +38,7 @@ Read only the section for the active harness.
 - If durable approval is unsupported, keep prompting at the host boundary or
   use MCP only. Do not claim that advisor consent changed host policy.
 
-## Verified-installation requirement
+## Installation source provenance
 
 A Salesforce Docs MCP installation candidate must include:
 
@@ -51,8 +48,9 @@ A Salesforce Docs MCP installation candidate must include:
 - authentication requirements;
 - expected read-only documentation tools.
 
-The verified metadata is published at
-`https://labs.agentforce.com/docs/salesforce-docs-mcp`. Re-verify that source
+The maintainer-listed metadata references
+`https://labs.agentforce.com/docs/salesforce-docs-mcp` (source review date in the
+policy). This is not a claim of current endpoint health. Recheck that source
 before changing the endpoint, transport, authentication statement, or expected
 tools. Salesforce Hosted MCP org/data servers are not documentation MCP
 substitutes.

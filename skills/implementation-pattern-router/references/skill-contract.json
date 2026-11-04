@@ -61,6 +61,11 @@
       "target": "implementation-best-practices",
       "kind": "returns_to",
       "when": "A capability owner is active; return bounded findings for its final synthesis."
+    },
+    {
+      "target": "headless-mcp-advisor",
+      "kind": "routes_to",
+      "when": "The chosen pattern needs Headless Toolkit or MCP architecture advice."
     }
   ],
   "dependencies": [
@@ -68,22 +73,40 @@
       "id": "advisor-capability-preflight",
       "kind": "internal_skill",
       "modes": [
-        "ask",
+        "ask"
+      ],
+      "requirement": "conditional",
+      "when": "This Ask decision needs the named advisor's expertise or documentation policy.",
+      "missing_behavior": "Continue bounded Ask guidance from supplied facts and available references; label missing expertise and do not claim it was consulted."
+    },
+    {
+      "id": "advisor-capability-preflight",
+      "kind": "internal_skill",
+      "modes": [
         "assess"
       ],
       "requirement": "required",
-      "when": "The installed advisor library must include its routing and authority foundations.",
+      "when": "Complete advisor context is required to claim this inspected or execution path was validated.",
       "missing_behavior": "Report incomplete advisor context; prepare a complete library before claiming this path was validated."
     },
     {
       "id": "implementation-best-practices",
       "kind": "internal_skill",
       "modes": [
-        "ask",
+        "ask"
+      ],
+      "requirement": "conditional",
+      "when": "This Ask decision needs the named advisor's expertise or documentation policy.",
+      "missing_behavior": "Continue bounded Ask guidance from supplied facts and available references; label missing expertise and do not claim it was consulted."
+    },
+    {
+      "id": "implementation-best-practices",
+      "kind": "internal_skill",
+      "modes": [
         "assess"
       ],
       "requirement": "required",
-      "when": "The installed advisor library must include its routing and authority foundations.",
+      "when": "Complete advisor context is required to claim this inspected or execution path was validated.",
       "missing_behavior": "Report incomplete advisor context; prepare a complete library before claiming this path was validated."
     },
     {
