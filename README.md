@@ -1,234 +1,146 @@
 # Salesforce Partner Ecosystem Agentic Kit
 
-The **ISV/OEM Advisor** is one portable Salesforce partner advisory system for
-Codex, Claude Code, Cursor, and other compatible harnesses. ISV and OEM
-partners install the advisor to accelerate their partnership at any stage—from
-an initial product idea through architecture, packaging, implementation,
-distribution, security review, release, and long-term operation.
+The **ISV/OEM Advisor** helps Salesforce partners turn an idea into a product,
+choose its architecture and packaging, prepare for security review, and guide
+it through release and operation. Start wherever you are in that journey.
 
-The plugin is the product. Its skills are the advisor's internal capability
-library, not separate products that a partner must assemble. The technical
-plugin identifier is `oem-isv-advisor`; its user-facing name is **ISV/OEM
-Advisor**.
+One advisor, with a portable library of 27 supporting skills. You do not need
+to select or assemble the individual advisors yourself. The plugin's technical
+identifier is `oem-isv-advisor`.
 
-**[Install the Advisor](#install-the-advisor)** ·
+[Install the Advisor](INSTALL.md) ·
 [Latest release](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/releases/latest) ·
-[Installation and update guide](INSTALL.md)
+[Architecture](ARCHITECTURE.md) · [Contributing](CONTRIBUTING.md)
 
-## Architecture baseline
+> **Beta:** The current release is **0.2.0 — Beta**. Individual skills retain
+> their declared maturity. See the [validation summary](docs/releases/0.2.0-validation.md)
+> for observed behavior and checks not run; portability is not certification
+> of every app, model, or tool configuration.
 
-The repository contains the 27-skill ISV/OEM Advisor: two foundation skills,
-seven capability routers, and eighteen focused advisors.
-Every folder has a stable ID, ownership boundary, Ask/Assess/Act authority,
-evidence rules, and execution-delegation contract. Some skills begin with
-baseline guidance and mature through partner scenarios, practitioner input,
-and evidence-backed updates without changing the overall product architecture.
+## Usage
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for the capability map, skill inventory,
-and pull-request layering model.
+Choose your app and install the complete advisor library.
 
-Every skill declares portable metadata in its header and a versioned
-`references/skill-contract.json` for ownership, mode boundaries, conditional
-dependencies, evidence, and declared maturity. The capability catalog is
-generated from these contracts. See [skill contract maintenance](docs/skill-contracts.md)
-for authoring and validation commands. Declarations do not grant permissions or
-replace commit-bound validation evidence.
+| App | Install | Start using the advisor |
+| --- | --- | --- |
+| Claude Code | [GitHub marketplace plugin](INSTALL.md#claude-code) | `/oem-isv-advisor:oem-isv-advisor` |
+| Codex | [Plugin or project-local skills](INSTALL.md#codex) | Select the entry skill or use `$oem-isv-advisor` where supported |
+| Cursor | [Project-local skills](INSTALL.md#cursor-and-opencode) | Select `/oem-isv-advisor` in Agent |
+| OpenCode | [Project-local skills](INSTALL.md#cursor-and-opencode) | Ask it to load `oem-isv-advisor` |
+| ChatGPT and other chat apps | [Check app/workspace capabilities](INSTALL.md#chatgpt-and-other-chat-apps) | Native installation and supporting-skill access must be verified first |
 
-The two foundation entry points are:
-
-- `oem-isv-advisor`, which preserves the partner goal and routes the decision.
-- `advisor-capability-preflight`, which checks Salesforce documentation
-  capability, obtains customer consent, and selects an honest fallback.
-
-The preflight never probes a Salesforce org. A Salesforce org/data MCP server
-is not treated as a documentation MCP server.
+Claude Code installation/upgrade and scoped behavior were maintainer-tested.
+Other routes have packaging or documented discovery support, not equivalent
+live-host validation. [Compatibility details](docs/harness-compatibility.md).
 
 ## Install the advisor
 
-Choose your app below. Install the **whole advisor library**, not just the entry
-skill: its supporting advisors and references are needed for routing.
+### Claude Code quick start
 
-| App | Installation route | Validation status |
-| --- | --- | --- |
-| Claude Code | GitHub marketplace plugin | Maintainer-tested install/upgrade and scoped behavior |
-| Codex | Plugin, or project-local skill folders | Packaging checked; separate live host test still needed |
-| Cursor | Project-local skill folders | Documented discovery route; live test still needed |
-| OpenCode | Project-local skill folders | Documented discovery route; live test still needed |
-| ChatGPT | Depends on app/workspace installation capabilities | Not certified by the Claude Code test |
-
-<details open>
-<summary><strong>Claude Code — install commands</strong></summary>
-
-Open Claude Code in the project where you want to use the advisor. Enter these
-commands **inside Claude Code**, one at a time:
+Open Claude Code in the intended project and enter these commands one at a time:
 
 ```text
 /plugin marketplace add forcedotcom/partner-ecosystem-agentic-kit
 /plugin install oem-isv-advisor@partner-ecosystem-agentic-kit
 ```
 
-Choose **project** scope when asked if you only want it in that project.
-Start a new session, then invoke:
+Choose **project** scope for a repository-shared configuration, or **local**
+scope for just you in that repository. Review the scope and components before
+confirming. Start a fresh session, then invoke:
 
 ```text
 /oem-isv-advisor:oem-isv-advisor
 ```
 
-Verify **ISV/OEM Advisor** is enabled under `/plugin` → **Installed**.
-The marketplace is a GitHub source registration, not a requirement to join a
-public app store. [Shell alternative and updates](INSTALL.md#claude-code).
+For other apps, terminal commands, copyable setup prompts, and verification,
+use the **[installation guide](INSTALL.md)**. Do not install a second copied
+library beside an existing plugin without checking for duplicates.
 
-</details>
-
-<details>
-<summary><strong>Codex — installation prompt</strong></summary>
-
-Copy this into Codex in the intended project:
+### Try your first question
 
 ```text
-Help me install the complete ISV/OEM Advisor from
-https://github.com/forcedotcom/partner-ecosystem-agentic-kit.
-Use its INSTALL.md Codex instructions. Prefer the native plugin route if this
-host supports it; otherwise propose a project-local installation of all skill
-folders, including references. Inspect existing copies first and ask before
-overwriting files or changing shared settings. Do not connect MCPs or access
-a Salesforce org as part of installation. Report the source revision and scope.
+Use the ISV/OEM Advisor. I am considering a Salesforce partner app, but have
+no implementation yet. Help me choose a sensible first build. Stay in Ask
+mode, use only the context I provide and available documentation, and ask
+the questions that would materially change your recommendation.
 ```
 
-After installation, start a fresh session and select **ISV/OEM Advisor**, or
-invoke `$oem-isv-advisor` where supported. [Codex setup details](INSTALL.md#codex).
+The advisor routes by your decision, not by the title of a document. It can
+also start with an existing product, packaging question, or approved evidence.
 
-</details>
+## How the advisor works
 
-<details>
-<summary><strong>Cursor — installation prompt</strong></summary>
+| Capability | Decisions it helps with |
+| --- | --- |
+| Solution discovery | Product fit, target users, scope, and first build |
+| Packaging and distribution | Package strategy, versions, dependencies, upgrades, and distribution |
+| Development environments | Partner foundations, scratch orgs, testing, demos, and trials |
+| Implementation best practices | Agentforce, APIs, MCP, and cross-product implementation patterns |
+| Platform constraints | Limits, metadata support, gaps, and workarounds |
+| Security readiness | Secure design, review preparation, evidence, and remediation |
+| Operations and release | Testing, release, rollback, monitoring, and support |
 
-Copy this into Cursor Agent in the intended project:
+**Ask** guides from supplied context without inspecting your projects or orgs.
+**Assess** inspects explicitly approved evidence read-only. **Act** proposes a
+bounded plan and requires explicit approval before material changes. Evidence
+and uncertainty are labeled; skill metadata does not grant tool permissions.
+
+The advisor checks exposed documentation tools without probing a Salesforce
+org. Salesforce Docs MCP is optional and preferred when available. If it is
+missing, the advisor offers setup or an approved official-documentation fallback;
+declining does not block advice from packaged knowledge. Host and enterprise
+permissions always apply. [Documentation setup](INSTALL.md#documentation-access).
+
+## Repository structure
 
 ```text
-Help me install the complete ISV/OEM Advisor from
-https://github.com/forcedotcom/partner-ecosystem-agentic-kit.
-Follow INSTALL.md for Cursor. Propose copying all released skill folders,
-including references and scripts, into this project's .cursor/skills/.
-Check for duplicate or locally modified skills first. Ask before making changes,
-do not overwrite unrelated skills, and do not change global settings or connect
-MCPs. Report the installed source revision and how to select the entry skill.
+partner-ecosystem-agentic-kit/
+├── .claude-plugin/       # Claude plugin and marketplace manifests
+├── .codex-plugin/        # Codex plugin manifest
+├── skills/               # Complete 27-skill advisor library
+│   ├── oem-isv-advisor/
+│   ├── advisor-capability-preflight/
+│   └── .../
+├── adapters/             # Thin host-specific packaging profiles
+├── docs/                 # Compatibility, contracts, releases, and testing
+├── scripts/              # Maintainer validation and review-bundle utilities
+├── tests/                # Library and packaging regression checks
+└── INSTALL.md            # App-specific installation and updates
 ```
 
-[Cursor setup and verification](INSTALL.md#cursor-and-opencode).
+The library contains two foundation skills, seven capability routers, and
+eighteen focused advisors. Every skill has a portable metadata header and
+versioned `references/skill-contract.json` for ownership, modes, dependencies,
+evidence, and maturity. [Architecture and inventory](ARCHITECTURE.md) ·
+[Contract maintenance](docs/skill-contracts.md).
 
-</details>
+## Plugins, standalone skills, and updates
 
-<details>
-<summary><strong>OpenCode — installation prompt</strong></summary>
+Plugins distribute the advisor with client-specific configuration; copied skill
+folders carry instructions and supporting files, not automatic MCP setup or
+plugin updates. The same skill library is shared across supported layouts,
+while each host controls discovery, tools, and permissions.
 
-Copy this into OpenCode in the intended project:
+For Claude Code, use `/plugin` → **Marketplaces** →
+**partner-ecosystem-agentic-kit** → **Update marketplace**, then **Installed** →
+**ISV/OEM Advisor** → **Update now** if pending. Start a fresh session and verify
+the version. Auto-update is optional.
 
-```text
-Help me install the complete ISV/OEM Advisor from
-https://github.com/forcedotcom/partner-ecosystem-agentic-kit.
-Follow INSTALL.md for OpenCode. Propose copying all released skill folders,
-including references and scripts, into this project's .opencode/skills/.
-Check for duplicate or locally modified skills first. Ask before making changes,
-do not overwrite unrelated skills, and do not change global settings or connect
-MCPs. Report the installed source revision and verify oem-isv-advisor is available.
-```
+Copied skills must be updated through their original installer/copy mapping,
+preserving local changes. Branch- or tag-pinned installs follow that source,
+not automatically the latest release. [Update instructions](INSTALL.md#updates) ·
+[Release policy](docs/releasing.md).
 
-[OpenCode setup and verification](INSTALL.md#cursor-and-opencode).
+## Contributing and feedback
 
-</details>
+Open an [issue](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/issues)
+for problems or suggestions, or propose a reviewed pull request. See
+[CONTRIBUTING.md](CONTRIBUTING.md) for the process.
 
-<details>
-<summary><strong>ChatGPT — check your installation options first</strong></summary>
-
-ChatGPT surfaces and workspace policies differ. This repository does not yet
-claim a verified one-click ChatGPT installation or a public directory listing.
-Do not upload `advisor-plugin.zip` or `advisor-source-review.zip` as if either
-were a single native skill.
-
-Copy this into the intended ChatGPT surface:
-
-```text
-I want to use the complete ISV/OEM Advisor from
-https://github.com/forcedotcom/partner-ecosystem-agentic-kit.
-Read its INSTALL.md ChatGPT section if you can access it. Tell me which native
-plugin or skill-installation options are actually available in this surface.
-Do not claim it is installed by merely reading files. If installation or access
-to all supporting advisors cannot be verified, explain that limitation.
-```
-
-[ChatGPT limitations and next steps](INSTALL.md#chatgpt-and-other-chat-apps).
-
-</details>
-
-**More options:** [terminal commands and manual installation](INSTALL.md) ·
-[view release downloads](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/releases/latest).
-Review downloaded source before running scripts. Installation does not authorize
-Salesforce access, deployment, or connecting an MCP server.
-
-### Beta release and updates
-
-The library/plugin version is in `VERSION` and the distribution manifests;
-individual skill versions are tracked independently in their metadata headers.
-See [GitHub Releases](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/releases),
-[release policy](docs/releasing.md), and [upgrade testing](docs/upgrade-testing.md).
-The current release is **0.2.0 — Beta**, promoting the tested `0.2.0-rc.1`
-candidate. Beta describes product maturity; individual skills retain their
-declared maturity. See the [validation summary](docs/releases/0.2.0-validation.md)
-for observed behavior, installation evidence, and checks not run.
-
-Existing main-tracking Claude Code plugin users can update without shell
-commands: open `/plugin`, select **Marketplaces**, select
-**partner-ecosystem-agentic-kit**, and choose **Update marketplace**. If an
-update remains pending, open **Installed**, select **ISV/OEM Advisor**, and choose
-**Update now**. Start a fresh session and confirm the version. Auto-update is
-optional and can be enabled in the marketplace's settings; this repository does
-not silently enable it.
-
-An ordinary marketplace update follows the configured source branch or tag.
-Publishing a GitHub Release alone does not move an installation to a different
-source. Testers pinned to the candidate branch must explicitly return their
-marketplace source to `main` to follow normal releases.
-
-Project-local copies in `.agents/skills/` or another skill folder are a different
-installation method, even if they originally came from GitHub. Update them
-using their original installer/copy mapping and source lock, preserving local
-changes and other libraries. A plugin update does not update copied files.
-
-### Other harnesses and isolated compatibility testing
-
-Use the [harness compatibility guide](docs/harness-compatibility.md) for Cursor,
-app-based skill uploads, and explicit file-based fallback. The review-bundle
-tool packages the same versioned skills with thin host-specific guidance; it
-does not install skills or certify app behavior. Draft candidates must stay out
-of ordinary discovery folders and shared app libraries.
-
-## Documentation setup behavior
-
-On first use, the advisor checks the tools exposed by the harness:
-
-1. If Salesforce Docs MCP is connected, it is preferred.
-2. The plugin offers Salesforce's published `salesforce-docs` MCP as an
-   optional, highly recommended integration. The advisor asks before installing
-   or connecting it; declining never blocks the advisor.
-3. If no verified installation source is available, the advisor offers exact,
-   read-only Salesforce documentation domains as fallback.
-4. If the customer declines or enterprise policy blocks access, the advisor
-   continues with packaged knowledge and labels unsupported current claims as
-   unknown.
-
-Customer consent never bypasses host or enterprise security policy. The
-Salesforce Docs MCP identity, endpoint, tools, and Claude Code command are
-verified against
-`https://labs.agentforce.com/docs/salesforce-docs-mcp`. Changes to that source
-must be reviewed before updating the packaged dependency.
-
-## Validate
+Run the library checks from a reviewed checkout:
 
 ```bash
 python3 -m unittest discover -s tests -v
-python3 /path/to/skill-creator/scripts/quick_validate.py skills/oem-isv-advisor
-python3 /path/to/skill-creator/scripts/quick_validate.py skills/advisor-capability-preflight
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the normal human review process.
+[License](LICENSE.txt) · [Code of conduct](CODE_OF_CONDUCT.md) · [Security](SECURITY.md)

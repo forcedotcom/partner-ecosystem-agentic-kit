@@ -19,6 +19,26 @@ you do not need to assemble the individual advisors yourself.
 - Installation is not approval to run included scripts, connect MCPs, inspect
   an org, or deploy anything. Honor host and organization permission prompts.
 
+## Copyable setup prompt
+
+If your app has an assistant that can inspect GitHub and manage approved local
+files, paste this into the intended project. Review its proposed route and
+scope before approving changes; this is a request for setup, not an installer
+or a guarantee that the app supports native skills.
+
+```text
+Help me install the complete ISV/OEM Advisor from
+https://github.com/forcedotcom/partner-ecosystem-agentic-kit.
+Read INSTALL.md and use the route for this app. Prefer its supported native
+plugin route; otherwise propose the documented project-local skill layout.
+Inspect existing copies first, preserve all supporting references, and ask
+before making changes. Do not overwrite modified or unrelated skills, change
+global settings, connect MCPs, or inspect a Salesforce org. Report the installed
+source revision and scope, and verify that the entry and supporting advisors
+are available. If this app cannot install them, explain that limitation rather
+than claiming file reading is an installation.
+```
+
 ## Claude Code
 
 In a Claude Code session opened in your intended project:
@@ -28,7 +48,8 @@ In a Claude Code session opened in your intended project:
 /plugin install oem-isv-advisor@partner-ecosystem-agentic-kit
 ```
 
-Choose **project** scope when prompted for a project-only installation. In
+Choose **project** scope for repository-shared settings, or **local** scope for
+just you in that repository. In
 `/plugin` → **Installed**, check the scope, version, and enabled status.
 Start a fresh session, then invoke:
 
@@ -130,6 +151,21 @@ single-skill upload for a chat app. Do not relabel them as such.
 
 Source: [OpenAI skills and plugin distribution](https://learn.chatgpt.com/docs/build-skills).
 For other app-specific packaging, see the [compatibility guide](docs/harness-compatibility.md).
+
+## Documentation access
+
+On first use, the advisor checks tools exposed by the host. Salesforce Docs MCP
+is optional and preferred when available; an org/data MCP is not a substitute.
+The advisor asks before installing or connecting the documentation integration.
+If unavailable, it offers approved official-documentation domains as fallback.
+If access is declined or blocked, it continues with packaged knowledge and
+labels unsupported current claims as unknown. Host security prompts still apply.
+
+The published Salesforce Docs MCP identity and setup source is
+[Salesforce Docs MCP](https://labs.agentforce.com/docs/salesforce-docs-mcp).
+The library's [documentation policy](skills/advisor-capability-preflight/references/documentation-policy.json)
+records its approved source and fallback rules. Installation alone does not
+prove documentation connectivity or authorize access to a Salesforce org.
 
 ## Verify installation
 
