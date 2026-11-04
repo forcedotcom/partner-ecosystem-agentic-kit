@@ -1,7 +1,17 @@
 ---
 name: environment-portfolio
 description: Use when choosing scratch, PDE, Test/Demo, Trialforce Source, template-backed, customer-trial, sandbox, or other partner environments for a lifecycle job. Owns Choosing scratch, PDE, test/demo, Trialforce source, template, customer trial, and other partner environments by job.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "focused-advisor"
+  primary-capability: "development-environment"
+  contract: "references/skill-contract.json"
 ---
+
+Read [the skill contract](references/skill-contract.json) when determining ownership,
+authority, conditional dependencies, or handoff boundaries. It declares limits,
+not permission to execute. Preserve the active primary's final synthesis.
 
 # Environment Portfolio
 

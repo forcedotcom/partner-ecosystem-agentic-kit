@@ -1,7 +1,17 @@
 ---
 name: package-version-validation
 description: Use when creating or diagnosing managed 2GP package versions, internal build-org shape, validation timing, code coverage, installation keys, and candidate test evidence. Owns Build-org shape, validation mode, code coverage, installation keys, candidate testing, and version-create diagnostics.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "focused-advisor"
+  primary-capability: "packaging-distribution"
+  contract: "references/skill-contract.json"
 ---
+
+Read [the skill contract](references/skill-contract.json) when determining ownership,
+authority, conditional dependencies, or handoff boundaries. It declares limits,
+not permission to execute. Preserve the active primary's final synthesis.
 
 # Package Version Validation
 

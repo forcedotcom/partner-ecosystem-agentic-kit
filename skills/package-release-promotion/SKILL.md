@@ -1,7 +1,17 @@
 ---
 name: package-release-promotion
 description: Use when deciding whether an exact managed package version is ready to promote, release, recommend, list, or distribute. Owns Promotion readiness, irreversible release gate, recommended version, and evidence required before release.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "focused-advisor"
+  primary-capability: "packaging-distribution"
+  contract: "references/skill-contract.json"
 ---
+
+Read [the skill contract](references/skill-contract.json) when determining ownership,
+authority, conditional dependencies, or handoff boundaries. It declares limits,
+not permission to execute. Preserve the active primary's final synthesis.
 
 # Package Release Promotion
 

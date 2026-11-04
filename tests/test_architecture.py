@@ -30,8 +30,8 @@ class AdvisorArchitectureTests(unittest.TestCase):
             lines = skill.read_text(encoding="utf-8").splitlines()
             self.assertEqual("---", lines[0], folder.name)
             closing = lines.index("---", 1)
-            keys = {line.split(":", 1)[0] for line in lines[1:closing] if ":" in line}
-            self.assertEqual({"name", "description"}, keys, folder.name)
+            keys = {line.split(":", 1)[0] for line in lines[1:closing] if ":" in line and not line[0].isspace()}
+            self.assertEqual({"name", "description", "metadata"}, keys, folder.name)
             agent = folder / "agents/openai.yaml"
             self.assertTrue(agent.is_file(), folder.name)
             self.assertIn(f"${folder.name}", agent.read_text(encoding="utf-8"), folder.name)

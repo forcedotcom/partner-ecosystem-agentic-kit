@@ -1,7 +1,17 @@
 ---
 name: platform-constraints
 description: Identify Salesforce runtime, metadata, packaging, file, scale, timeout, performance, volume, immutability, and capability constraints. Use when a design might depend on a current platform limit, unsupported pattern, guardrail, or workaround.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "capability-router"
+  primary-capability: "platform-constraints"
+  contract: "references/skill-contract.json"
 ---
+
+Read [the skill contract](references/skill-contract.json) when determining ownership,
+authority, conditional dependencies, or handoff boundaries. It declares limits,
+not permission to execute. Preserve the active primary's final synthesis.
 
 # Platform Constraints Advisor
 

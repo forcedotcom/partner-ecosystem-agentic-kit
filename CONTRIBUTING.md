@@ -78,3 +78,17 @@ Please follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 # License
 By contributing your code, you agree to license your contribution under the terms of our project [LICENSE](LICENSE.txt) and to sign the [Salesforce CLA](https://cla.salesforce.com/sign-cla)
+
+# Skill contract maintenance
+
+All advisor skills use the metadata and contract standard in
+[docs/skill-contracts.md](docs/skill-contracts.md). Update the owning contract,
+regenerate the catalog, and run the contract checker and repository tests before
+proposing a change. Evidence-only contributions belong with their existing
+decision owner unless they establish a genuinely distinct skill boundary.
+
+For a new host or changed loading/tool behavior, follow the
+[harness compatibility procedure](docs/harness-compatibility.md). Keep one
+shared skill payload; put packaging and invocation differences in adapters.
+Require observed, content-bound compatibility evidence rather than assuming
+all desktop/IDE/cloud surfaces behave identically.

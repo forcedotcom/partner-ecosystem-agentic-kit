@@ -23,6 +23,13 @@ and evidence-backed updates without changing the overall product architecture.
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the capability map, skill inventory,
 and pull-request layering model.
 
+Every skill declares portable metadata in its header and a versioned
+`references/skill-contract.json` for ownership, mode boundaries, conditional
+dependencies, evidence, and declared maturity. The capability catalog is
+generated from these contracts. See [skill contract maintenance](docs/skill-contracts.md)
+for authoring and validation commands. Declarations do not grant permissions or
+replace commit-bound validation evidence.
+
 The two foundation entry points are:
 
 - `oem-isv-advisor`, which preserves the partner goal and routes the decision.
@@ -54,6 +61,14 @@ plugin using its technical identifier:
 ```
 
 Start a new session after installation.
+
+### Other harnesses and isolated compatibility testing
+
+Use the [harness compatibility guide](docs/harness-compatibility.md) for Cursor,
+app-based skill uploads, and explicit file-based fallback. The review-bundle
+tool packages the same versioned skills with thin host-specific guidance; it
+does not install skills or certify app behavior. Draft candidates must stay out
+of ordinary discovery folders and shared app libraries.
 
 ## Documentation setup behavior
 

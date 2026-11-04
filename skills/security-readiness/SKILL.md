@@ -1,7 +1,17 @@
 ---
 name: security-readiness
 description: Assess secure architecture, data protection, AgentExchange or AppExchange Security Review preparation, testing and scanner evidence, submission materials, and remediation readiness. Use when an OEM or ISV solution must identify security risk or prepare evidence for review without claiming guaranteed approval.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "capability-router"
+  primary-capability: "security-readiness"
+  contract: "references/skill-contract.json"
 ---
+
+Read [the skill contract](references/skill-contract.json) when determining ownership,
+authority, conditional dependencies, or handoff boundaries. It declares limits,
+not permission to execute. Preserve the active primary's final synthesis.
 
 # Security and Readiness Advisor
 

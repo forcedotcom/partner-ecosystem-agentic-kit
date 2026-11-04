@@ -1,7 +1,17 @@
 ---
 name: scratch-org-shape
 description: Use when designing or assessing project-scratch-def.json, editions, features, settings, object settings, product entitlements, or package-build shape. Owns Scratch definition as code, editions, features, settings, product entitlement checks, and package-build shape.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "focused-advisor"
+  primary-capability: "development-environment"
+  contract: "references/skill-contract.json"
 ---
+
+Read [the skill contract](references/skill-contract.json) when determining ownership,
+authority, conditional dependencies, or handoff boundaries. It declares limits,
+not permission to execute. Preserve the active primary's final synthesis.
 
 # Scratch Org Shape
 

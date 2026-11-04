@@ -1,7 +1,17 @@
 ---
 name: managed-2gp-foundation
 description: Use before creating a managed 2GP package or when validating PBO ownership, package identity, namespace, source path, and irreversible foundation decisions. Owns PBO ownership, package identity, namespace, project blueprint, and irreversible creation gates.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "focused-advisor"
+  primary-capability: "packaging-distribution"
+  contract: "references/skill-contract.json"
 ---
+
+Read [the skill contract](references/skill-contract.json) when determining ownership,
+authority, conditional dependencies, or handoff boundaries. It declares limits,
+not permission to execute. Preserve the active primary's final synthesis.
 
 # Managed 2Gp Foundation
 

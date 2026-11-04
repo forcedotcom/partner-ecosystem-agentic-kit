@@ -1,7 +1,17 @@
 ---
 name: operations-release
 description: Guide testing strategy, CI/CD, release cadence, versioning, upgrades, rollback, monitoring, regulated delivery, incident response, and lifecycle operations for OEM or ISV products. Use when a partner needs to prove a release is reliable or operate it safely over time.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "capability-router"
+  primary-capability: "operations-release"
+  contract: "references/skill-contract.json"
 ---
+
+Read [the skill contract](references/skill-contract.json) when determining ownership,
+authority, conditional dependencies, or handoff boundaries. It declares limits,
+not permission to execute. Preserve the active primary's final synthesis.
 
 # Operations and Release Advisor
 

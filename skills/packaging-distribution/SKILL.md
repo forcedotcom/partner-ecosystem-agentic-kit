@@ -1,7 +1,17 @@
 ---
 name: packaging-distribution
 description: Route and synthesize OEM or ISV decisions about packageability, managed 2GP, package architecture, versions, ancestry, promotion, migration, listings, distribution, and upgrades. Use when a partner asks whether or how a Salesforce solution should be packaged or distributed.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "capability-router"
+  primary-capability: "packaging-distribution"
+  contract: "references/skill-contract.json"
 ---
+
+Read [the skill contract](references/skill-contract.json) when determining ownership,
+authority, conditional dependencies, or handoff boundaries. It declares limits,
+not permission to execute. Preserve the active primary's final synthesis.
 
 # Packaging and Distribution Advisor
 

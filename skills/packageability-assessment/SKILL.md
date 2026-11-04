@@ -1,7 +1,17 @@
 ---
 name: packageability-assessment
 description: Use when a partner wants a read-only repository assessment for packageable metadata, source boundaries, dependencies, unsupported components, or remediation evidence. Owns Repository and metadata packageability inspection, unsupported components, boundaries, and remediation evidence.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "focused-advisor"
+  primary-capability: "packaging-distribution"
+  contract: "references/skill-contract.json"
 ---
+
+Read [the skill contract](references/skill-contract.json) when determining ownership,
+authority, conditional dependencies, or handoff boundaries. It declares limits,
+not permission to execute. Preserve the active primary's final synthesis.
 
 # Packageability Assessment
 
@@ -86,8 +96,8 @@ Return:
 5. Questions still required to reach the goal.
 6. Proposed next action and whether approval is required.
 7. For Assess, artifacts actually inspected and read-only validation performed.
-8. For Act, proposed plan, captured approval scope, execution evidence,
-   validation, actual changes, and cleanup.
+8. For a separately approved delegated Act, request the execution owner's
+   approval scope, observed changes, validation, and cleanup; do not claim local execution.
 
 ## Boundaries
 

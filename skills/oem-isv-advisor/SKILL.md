@@ -1,13 +1,26 @@
 ---
 name: oem-isv-advisor
 description: Main entrance for Salesforce OEM and ISV partner advisory work across solution discovery, packaging, development environments, implementation, platform constraints, security readiness, and operations. Use when a partner asks for guidance and the correct specialist skill or required documentation capability must be selected.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "entry-router"
+  primary-capability: "foundation"
+  contract: "references/skill-contract.json"
 ---
+
+Read [the skill contract](references/skill-contract.json) when determining ownership,
+authority, conditional dependencies, or handoff boundaries. It declares limits,
+not permission to execute. Preserve the active primary's final synthesis.
 
 # OEM/ISV Advisor
 
 Own the conversation goal and route each decision to one primary specialist.
 
 ## Start
+
+When installation, references, or tool availability differs across harnesses,
+read [portable harness handling](references/harness-runtime.md).
 
 1. Preserve the partner's stated goal. If it is unknown, ask what outcome they
    want before selecting a test, org, package, or implementation path.

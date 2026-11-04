@@ -1,7 +1,17 @@
 ---
 name: namespace-access-governance
 description: Use for namespace-org topology, namespace linking, Environment Hub inventory, package-developer access, and operation-specific least privilege. Owns Namespace-org topology, namespace linking, Environment Hub inventory, developer access, and least-privilege separation.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "focused-advisor"
+  primary-capability: "development-environment"
+  contract: "references/skill-contract.json"
 ---
+
+Read [the skill contract](references/skill-contract.json) when determining ownership,
+authority, conditional dependencies, or handoff boundaries. It declares limits,
+not permission to execute. Preserve the active primary's final synthesis.
 
 # Namespace Access Governance
 

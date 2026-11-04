@@ -1,7 +1,17 @@
 ---
 name: data-360-implementation-advisor
 description: Use for Data 360 architecture, data-kit workflow, scratch entitlement, metadata packageability, activation ordering, and partner-solution integration decisions. Owns Data 360 architecture and implementation patterns that affect partner solutions and packaging.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "focused-advisor"
+  primary-capability: "implementation-best-practices"
+  contract: "references/skill-contract.json"
 ---
+
+Read [the skill contract](references/skill-contract.json) when determining ownership,
+authority, conditional dependencies, or handoff boundaries. It declares limits,
+not permission to execute. Preserve the active primary's final synthesis.
 
 # Data 360 Implementation Advisor
 

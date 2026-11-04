@@ -1,7 +1,17 @@
 ---
 name: advisor-capability-preflight
 description: Check and configure documentation capabilities before an OEM/ISV Advisor interaction. Use when the advisor starts, when Salesforce Docs MCP or official-documentation access may be missing, when a customer asks to install or approve documentation tools, or when the active harness changes.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "capability-preflight"
+  primary-capability: "foundation"
+  contract: "references/skill-contract.json"
 ---
+
+Read [the skill contract](references/skill-contract.json) when determining ownership,
+authority, conditional dependencies, or handoff boundaries. It declares limits,
+not permission to execute. Preserve the active primary's final synthesis.
 
 # Advisor capability preflight
 
@@ -72,3 +82,10 @@ Return a compact capability receipt containing:
 
 Do not repeatedly display the receipt after readiness is established unless the
 harness, policy version, MCP identity, or customer preference changes.
+
+## Configuration authority
+
+Ask explains options; Assess inspects only approved configuration. Installing
+or connecting an MCP or recording durable preferences is configuration-only
+Act: show the exact project/harness/server scope and obtain explicit approval.
+This does not authorize org access or other domain actions.
