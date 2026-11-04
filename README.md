@@ -70,15 +70,81 @@ also start with an existing product, packaging question, or approved evidence.
 
 ## How the advisor works
 
-| Capability | Decisions it helps with |
+| Capability | Decisions it helps with | Explore its specialists |
+| --- | --- | --- |
+| [Solution discovery](skills/solution-discovery/SKILL.md) | Product fit, target users, scope, and first build | Handled directly by the capability |
+| [Packaging and distribution](skills/packaging-distribution/SKILL.md) | Package strategy, versions, dependencies, upgrades, and distribution | [7 packaging specialists](#packaging-specialists) |
+| [Development environments](skills/development-environment/SKILL.md) | Partner foundations, scratch orgs, testing, demos, and trials | [5 environment specialists](#environment-specialists) |
+| [Implementation best practices](skills/implementation-best-practices/SKILL.md) | Agentforce, APIs, MCP, and cross-product implementation patterns | [6 implementation specialists, including Headless/MCP](#implementation-specialists) |
+| [Platform constraints](skills/platform-constraints/SKILL.md) | Limits, metadata support, gaps, and workarounds | Handled directly by the capability |
+| [Security readiness](skills/security-readiness/SKILL.md) | Secure design, review preparation, evidence, and remediation | Handled directly by the capability |
+| [Operations and release](skills/operations-release/SKILL.md) | Testing, release, rollback, monitoring, and support | Handled directly by the capability |
+
+### Specialist advisors
+
+These specialists are included in the same advisor installation. Start through
+**ISV/OEM Advisor** and describe your goal; it routes to the relevant capability
+and specialists. You can name an area such as Headless/MCP in your question
+without learning the internal skill IDs. The owning capability combines the
+specialists' findings into one recommendation.
+
+Browse the linked skill instructions for scope, references, and declared
+maturity. A directory entry describes responsibility, not a claim that every
+workflow is production-validated or that execution tools are installed. Some
+specialists currently provide baseline guidance and still need deeper domain
+content and validation; their contracts record that distinction.
+
+#### Implementation specialists
+
+<details open>
+<summary>Explore Agentforce, Headless/MCP, Data 360, Slack, Tableau Next, and cross-product patterns</summary>
+
+| Specialist | What it helps you decide |
 | --- | --- |
-| Solution discovery | Product fit, target users, scope, and first build |
-| Packaging and distribution | Package strategy, versions, dependencies, upgrades, and distribution |
-| Development environments | Partner foundations, scratch orgs, testing, demos, and trials |
-| Implementation best practices | Agentforce, APIs, MCP, and cross-product implementation patterns |
-| Platform constraints | Limits, metadata support, gaps, and workarounds |
-| Security readiness | Secure design, review preparation, evidence, and remediation |
-| Operations and release | Testing, release, rollback, monitoring, and support |
+| [Headless / MCP Advisor](skills/headless-mcp-advisor/SKILL.md) | Whether native actions, direct APIs, or MCP fit the job; client/server direction; reusing existing Salesforce logic; package versus customer setup boundaries; optional HXL rich output; and delivery to Agentforce, Slackbot, Claude, or ChatGPT. Advises and assesses approved designs; delegates approved builds to execution skills. |
+| [Agentforce Implementation Advisor](skills/agentforce-implementation-advisor/SKILL.md) | Agent, topic, action, prompt template, orchestration, state, testing, and user-experience choices. |
+| [Data 360 Implementation Advisor](skills/data-360-implementation-advisor/SKILL.md) | Data architecture, data-kit workflows, enablement prerequisites, package boundaries, and activation ordering. |
+| [Slack Implementation Advisor](skills/slack-implementation-advisor/SKILL.md) | Slack applications, authentication, partner sandboxes, Salesforce integration, and packaging boundaries. |
+| [Tableau Next Implementation Advisor](skills/tableau-next-implementation-advisor/SKILL.md) | Semantic models, workspaces, visualizations, dashboards, Data 360 dependencies, and deployment ordering. |
+| [Implementation Pattern Router](skills/implementation-pattern-router/SKILL.md) | Which product-specific specialists to consult and how to combine Agentforce, Apex, APIs, prompts, MCP, and other product findings into a cross-product pattern. |
+
+Example: “We already have Salesforce business logic and want to expose one task
+to Claude and Slackbot. Do we need MCP, what belongs in our package, and what
+must each customer configure?”
+
+</details>
+
+#### Packaging specialists
+
+<details>
+<summary>Explore package strategy, packageability, foundations, validation, dependencies, promotion, and migration</summary>
+
+| Specialist | What it helps you decide |
+| --- | --- |
+| [Packaging Strategy](skills/packaging-strategy/SKILL.md) | Whether to package, which model to use, and where package and distribution boundaries belong. |
+| [Packageability Assessment](skills/packageability-assessment/SKILL.md) | What approved source and metadata can be packaged, which dependencies or unsupported components matter, and what remediation evidence is needed. |
+| [Managed 2GP Foundation](skills/managed-2gp-foundation/SKILL.md) | Package ownership, Dev Hub, namespace, source layout, and irreversible creation decisions. |
+| [Package Version Validation](skills/package-version-validation/SKILL.md) | Build-org shape, validation mode, code coverage, installation keys, candidate testing, and version-create failures. |
+| [Package Ancestry and Dependencies](skills/package-ancestry-dependencies/SKILL.md) | Version numbering, ancestry, explicit and transitive dependencies, patches, and upgrade paths. |
+| [Package Release Promotion](skills/package-release-promotion/SKILL.md) | Whether an exact version has the evidence and prerequisites needed for promotion and distribution. |
+| [Package Migration and Transfer](skills/package-migration-transfer/SKILL.md) | Managed 1GP-to-2GP migration and recovery when a managed 2GP package belongs to the wrong Dev Hub. |
+
+</details>
+
+#### Environment specialists
+
+<details>
+<summary>Explore PBO/Dev Hub, namespaces, scratch org shape, environment selection, and provisioning diagnostics</summary>
+
+| Specialist | What it helps you decide |
+| --- | --- |
+| [PBO / Dev Hub Foundation](skills/pbo-dev-hub-foundation/SKILL.md) | Partner Business Org identity, lifecycle evidence, Dev Hub selection, entitlements, and ownership recovery. |
+| [Namespace and Access Governance](skills/namespace-access-governance/SKILL.md) | Namespace-org topology, namespace linking, Environment Hub inventory, developer access, and least privilege. |
+| [Scratch Org Shape](skills/scratch-org-shape/SKILL.md) | Scratch definitions, editions, features, settings, entitlement checks, and package-build shape. |
+| [Environment Portfolio](skills/environment-portfolio/SKILL.md) | Which environment fits each job: disposable development, persistent tests, demos, trials, or customer validation. |
+| [Org Provisioning Diagnostics](skills/org-provisioning-diagnostics/SKILL.md) | Provisioning status, capacity, expiration, errors, cleanup, and health for scratch, Test/Demo, Trialforce, and template-backed environments. |
+
+</details>
 
 **Ask** guides from supplied context without inspecting your projects or orgs.
 **Assess** inspects explicitly approved evidence read-only. **Act** proposes a
