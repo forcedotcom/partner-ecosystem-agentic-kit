@@ -62,15 +62,34 @@ plugin using its technical identifier:
 
 Start a new session after installation.
 
-### Versions and prerelease upgrades
+### Beta release and updates
 
 The library/plugin version is in `VERSION` and the distribution manifests;
 individual skill versions are tracked independently in their metadata headers.
 See [GitHub Releases](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/releases),
 [release policy](docs/releasing.md), and [upgrade testing](docs/upgrade-testing.md).
-The current candidate is `0.2.0-rc.1`; it is not yet an accepted stable upgrade.
-An ordinary marketplace update tracking `main` will not switch to a candidate
-tag merely because a GitHub prerelease exists.
+The release target is **0.2.0 — Beta**, promoting the tested `0.2.0-rc.1`
+candidate. Beta describes product maturity; individual skills retain their
+declared maturity. See the [validation summary](docs/releases/0.2.0-validation.md)
+for observed behavior, installation evidence, and checks not run.
+
+After this release is merged to `main`, existing Claude Code plugin users can
+update without shell commands: open `/plugin`, select **Marketplaces**, select
+**partner-ecosystem-agentic-kit**, and choose **Update marketplace**. If an
+update remains pending, open **Installed**, select **ISV/OEM Advisor**, and choose
+**Update now**. Start a fresh session and confirm the version. Auto-update is
+optional and can be enabled in the marketplace's settings; this repository does
+not silently enable it.
+
+An ordinary marketplace update follows the configured source branch or tag.
+Publishing a GitHub Release alone does not move an installation to a different
+source. Testers pinned to the candidate branch must explicitly return their
+marketplace source to `main` to follow normal releases.
+
+Project-local copies in `.agents/skills/` or another skill folder are a different
+installation method, even if they originally came from GitHub. Update them
+using their original installer/copy mapping and source lock, preserving local
+changes and other libraries. A plugin update does not update copied files.
 
 ### Other harnesses and isolated compatibility testing
 

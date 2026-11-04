@@ -1,6 +1,14 @@
 # Owner upgrade test: 0.1.0 to 0.2.0-rc.1
 
-This is a manual acceptance test, not a claim that the upgrade already passed.
+This is the retained candidate acceptance procedure. The completed owner
+comparison and separately observed GitHub-backed installed-version update are
+summarized in [0.2.0 validation](releases/0.2.0-validation.md). The `0.2.0` Beta
+promotion keeps the candidate's skill payload unchanged. Instructions below
+intentionally retain the immutable candidate version for reproducibility; they
+do not claim that every installation method or harness has passed.
+
+## Historical candidate test setup
+
 The maintainer's older installation is a project-scoped, directory-backed
 marketplace pointing at `vendor/partner-ecosystem-agentic-kit-main`. Its plugin
 declares 0.1.0 and predates Headless MCP. Do not replace it before capturing the

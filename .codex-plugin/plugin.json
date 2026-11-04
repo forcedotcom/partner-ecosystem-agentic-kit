@@ -1,6 +1,6 @@
 {
   "name": "oem-isv-advisor",
-  "version": "0.2.0-rc.1",
+  "version": "0.2.0",
   "description": "A complete Salesforce ISV/OEM partner advisor spanning the journey from product idea through packaging, architecture, development, distribution, security, and operations.",
   "author": {
     "name": "Salesforce",

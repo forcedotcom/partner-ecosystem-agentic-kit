@@ -5,9 +5,12 @@ repository/plugin version in `VERSION`, both plugin manifests, and the Claude
 marketplace entry must agree. Skill versions and contract schema versions are
 independent; do not bump every skill just because the library is released.
 
-`0.2.0-rc.1` is the portability upgrade candidate. It is not declared stable or
-behaviorally accepted. Existing installs and stable main remain unchanged by a
-tag on a candidate branch. A GitHub release does not itself upgrade a plugin.
+The `0.2.0` Beta release promotes the tested `0.2.0-rc.1` portability candidate.
+See `releases/0.2.0-validation.md` for acceptance evidence and not-run checks.
+Beta describes product maturity; `0.2.0` is a normal SemVer version and its
+release is eligible to be latest. It does not certify all hosts or change
+individual skill maturity. A tag on a candidate branch leaves main-tracking
+installs unchanged; a GitHub release does not itself upgrade a plugin.
 
 ## Release candidate
 

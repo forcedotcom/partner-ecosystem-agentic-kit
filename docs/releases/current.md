@@ -1,41 +1,56 @@
-# ISV/OEM Advisor 0.2.0-rc.1
+# ISV/OEM Advisor 0.2.0 — Beta
 
-Prerelease for owner upgrade testing. Not the stable/latest release and not yet
-behaviorally validated across harnesses. Based on current 27-skill main,
-including Headless MCP guidance. See CHANGELOG.md for the portability changes.
+This release promotes the tested `0.2.0-rc.1` metadata/portability candidate.
+Beta is the product-maturity label. The library/plugin version is `0.2.0`;
+individual skill versions remain `1.0.0`, and each skill retains its declared
+maturity. This is not a claim that every skill or harness is fully validated.
+
+## Included
+
+- Portable metadata and versioned contracts for all 27 current skills.
+- ID-based routing, conditional Ask dependencies, and thin harness exports.
+- Scoped documentation preferences and no unnecessary web-consent prompt when
+  documentation tools are exposed.
+- Versioned plugin/source-review assets and release consistency checks.
 
 Plugin identity remains `oem-isv-advisor`; marketplace identity remains
-`partner-ecosystem-agentic-kit`. All distribution manifests use `0.2.0-rc.1`.
-Individual skill versions (`1.0.0`) and contract-format versions are independent.
+`partner-ecosystem-agentic-kit`. This promotion changes release versions and
+documentation, not the candidate's advisor instructions or domain references.
+The proposed invocation-time update reminder is not included.
 
-**Important:** publishing a GitHub prerelease does not change what a marketplace
-tracking `main` installs. Test the candidate tag or its plugin ZIP explicitly.
-Do not merge/promote to stable until the installed-version test is accepted.
+## Validation and limitations
 
-Assets:
-- `advisor-plugin.zip`: native plugin-root layout, including unchanged optional
-  MCP configuration. Host prompts/policy still govern loading and connections.
-- `advisor-source-review.zip`: complete source, plugin manifests, scripts, docs,
-  and tests for independent review; not a native skill upload.
+See [the validation summary](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/blob/v0.2.0/docs/releases/0.2.0-validation.md). The maintainer-supervised
+Claude Code comparison completed seven identical prompts before and after,
+including approved read-only evidence inspection, a separately human-approved
+one-field synthetic edit, and return to Ask. Native update and content hashes
+were checked. User-supplied plugin screenshots separately showed a GitHub-backed
+project installation move from `0.1.0` to `0.2.0-rc.1` and remain enabled.
 
-Preserve the old installation and preferences before testing. Verify which
-copy actually loads, all 27 skill IDs, representative Ask questions, an approved
-read-only Assess fixture, and an Act request that must obtain approval before
-changes. No real org mutation is required. Record old/new versions, actual
-loaded base directories/content hashes, duplicate names, and unchanged scope.
+Library tests cover all contracts, unchanged descriptions/domain-reference
+guards, source-independent extracted layouts and release-version consistency.
+Other live harnesses, real-org actions and full filesystem isolation are not
+certified by these checks. Documentation conflicts remain qualified unknowns.
 
-An unrelated normal session may still find the approved skill with the same
-name; the negative test must show it cannot load/read the **candidate copy**.
+## Update existing installations
 
-Release acceptance and detailed steps: `docs/upgrade-testing.md`.
+After merge, main-tracking Claude Code users can open `/plugin` → **Marketplaces**
+→ **partner-ecosystem-agentic-kit** → **Update marketplace**. If pending, open
+**Installed** → **ISV/OEM Advisor** → **Update now**. Start a fresh session and
+confirm `0.2.0`. Auto-update is an optional user/admin setting, not something
+this release silently enables. A GitHub Release alone does not change the
+source branch a user follows.
 
-Local verification before publication:
-- All 27 skills passed skill-format validation.
-- Library regression tests include a clean extracted-source run, installed-layout
-  resolution across five filesystem profiles, unchanged descriptions and domain
-  reference hashes, routing/dependency checks, and scoped preflight behavior.
-- Claude Code 2.1.318 native plugin validation passed. It reported listing-only
-  warnings for missing icon and privacy policy URL; no new branding/privacy
-  claims were invented to silence them. The existing optional MCP config remains.
-- No live model conversation, installed upgrade, isolation test, or org action
-  was run by these checks. Owner acceptance remains outstanding.
+Candidate-branch testers must explicitly return their marketplace source to
+`main` to follow normal releases. Standalone copied-skill installations require
+their existing copy/install procedure and source-lock update; plugin commands
+do not update those copies. Preserve local edits, other libraries and backups.
+
+## Assets
+
+- `advisor-plugin.zip`: native plugin-root payload and manifests, retaining
+  existing optional documentation MCP configuration and host prompts.
+- `advisor-source-review.zip`: complete source, manifests, checks and tests;
+  not a native single-skill upload.
+
+No PEAK console code, private captures, credentials or customer data is included.
