@@ -1,7 +1,17 @@
 ---
 name: agentforce-implementation-advisor
 description: Use for Agentforce agent, topic, action, prompt template, orchestration, state, testing, packaging, scratch-shape, and UX implementation decisions. Owns Agent, topic, action, orchestration, state, testing, and UX implementation decisions.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "focused-advisor"
+  primary-capability: "implementation-best-practices"
+  contract: "references/skill-contract.json"
 ---
+
+Follow the instructions below. Read [this skill's contract](references/skill-contract.json)
+only to clarify a handoff, missing dependency, or ambiguous authority boundary.
+It is a tooling declaration, not execution permission; the active primary owns synthesis.
 
 # Agentforce Implementation Advisor
 

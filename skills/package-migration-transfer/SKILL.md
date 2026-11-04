@@ -1,7 +1,17 @@
 ---
 name: package-migration-transfer
 description: Use for managed 1GP-to-2GP migration or recovery from a managed 2GP package created under the wrong Dev Hub. Owns Managed 1GP-to-2GP migration and wrong-Dev-Hub transfer decision trees, eligibility, preservation, and recovery.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "focused-advisor"
+  primary-capability: "packaging-distribution"
+  contract: "references/skill-contract.json"
 ---
+
+Follow the instructions below. Read [this skill's contract](references/skill-contract.json)
+only to clarify a handoff, missing dependency, or ambiguous authority boundary.
+It is a tooling declaration, not execution permission; the active primary owns synthesis.
 
 # Package Migration Transfer
 

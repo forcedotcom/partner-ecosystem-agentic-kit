@@ -1,7 +1,17 @@
 ---
 name: implementation-best-practices
 description: Route and synthesize implementation decisions for Agentforce, Data 360, Slack, Tableau Next, Apex, APIs, prompts, MCP, sub-agents, state, long-running actions, testing, and user experience. Use after product and environment decisions are known and a partner needs a scalable implementation pattern.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "capability-router"
+  primary-capability: "implementation-best-practices"
+  contract: "references/skill-contract.json"
 ---
+
+Follow the instructions below. Read [this skill's contract](references/skill-contract.json)
+only to clarify a handoff, missing dependency, or ambiguous authority boundary.
+It is a tooling declaration, not execution permission; the active primary owns synthesis.
 
 # Implementation Best Practices Advisor
 

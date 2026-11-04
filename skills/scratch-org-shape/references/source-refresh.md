@@ -5,7 +5,7 @@ edition, entitlement, API-version, or CLI claim as current.
 
 ## Current-source path
 
-1. Run `$advisor-capability-preflight`.
+1. Run the `advisor-capability-preflight` skill through the active host catalog.
 2. Prefer Salesforce Docs MCP when connected; otherwise use approved official
    Salesforce documentation read-only.
 3. Verify the exact value against the relevant source:

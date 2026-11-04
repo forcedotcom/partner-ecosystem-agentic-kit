@@ -1,7 +1,17 @@
 ---
 name: org-provisioning-diagnostics
 description: Use for scratch-org, SignupRequest, Trialforce, Test/Demo, and template provisioning status, capacity, expiration, errors, cleanup, or health diagnosis. Owns SignupRequest, Trialforce, scratch-org provisioning, expiration, capacity, health, errors, and cleanup diagnostics.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "focused-advisor"
+  primary-capability: "development-environment"
+  contract: "references/skill-contract.json"
 ---
+
+Follow the instructions below. Read [this skill's contract](references/skill-contract.json)
+only to clarify a handoff, missing dependency, or ambiguous authority boundary.
+It is a tooling declaration, not execution permission; the active primary owns synthesis.
 
 # Org Provisioning Diagnostics
 

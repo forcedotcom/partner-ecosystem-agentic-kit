@@ -138,7 +138,7 @@ class PreflightTests(unittest.TestCase):
 
     def test_entry_skill_requires_preflight_without_copying_domain_knowledge(self):
         entry = (ROOT / "skills" / "oem-isv-advisor" / "SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("$advisor-capability-preflight", entry)
+        self.assertIn("`advisor-capability-preflight`", entry)
         self.assertIn("references/routing.md", entry)
         self.assertLess(len(entry.splitlines()), 90)
 

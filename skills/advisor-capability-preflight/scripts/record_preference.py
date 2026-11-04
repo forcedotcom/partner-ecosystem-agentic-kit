@@ -16,12 +16,14 @@ def main() -> int:
     parser.add_argument("--documentation-domains", choices=("approved", "declined"), required=True)
     parser.add_argument("--mcp-install", choices=("approved", "declined", "deferred"), required=True)
     parser.add_argument("--policy-version", required=True)
+    parser.add_argument("--project-root", type=Path, default=Path.cwd())
     args = parser.parse_args()
 
     payload = {
         "schema_version": 1,
         "harness": args.harness,
         "policy_version": args.policy_version,
+        "project_root": str(args.project_root.expanduser().resolve()),
         "approved_documentation_domains": args.documentation_domains,
         "salesforce_docs_mcp_install": args.mcp_install,
         "recorded_at": datetime.now(timezone.utc).isoformat(),

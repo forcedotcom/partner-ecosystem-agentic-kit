@@ -7,9 +7,9 @@ support claim.
 1. Run `advisor-capability-preflight` and record its capability receipt.
 2. Prefer an exposed Salesforce Docs MCP tool for read-only documentation.
 3. If the relevant material is unavailable through MCP, use only the approved
-   read-only official domains in
-   `../../advisor-capability-preflight/references/documentation-policy.json` after
-   the project's documented consent path is satisfied.
+   read-only official domains returned by the `advisor-capability-preflight`
+   skill after the project's documented consent path is satisfied. Invoke that
+   skill through the host catalog; do not construct paths into its installation.
 4. Treat Partner Community, partner portals, org endpoints, and unapproved
    domains as unavailable unless the partner supplies approved evidence. Record
    the result as `unknown`; do not claim the source was reviewed.

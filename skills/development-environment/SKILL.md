@@ -1,7 +1,17 @@
 ---
 name: development-environment
 description: Route and synthesize decisions about PBO Dev Hubs, namespaces, scratch org shape, persistent development orgs, demos, trials, provisioning, developer access, and environment lifecycle. Use when a partner asks which Salesforce org or environment should perform a development, test, demo, packaging, or customer-validation job.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "capability-router"
+  primary-capability: "development-environment"
+  contract: "references/skill-contract.json"
 ---
+
+Follow the instructions below. Read [this skill's contract](references/skill-contract.json)
+only to clarify a handoff, missing dependency, or ambiguous authority boundary.
+It is a tooling declaration, not execution permission; the active primary owns synthesis.
 
 # Development Environment Advisor
 

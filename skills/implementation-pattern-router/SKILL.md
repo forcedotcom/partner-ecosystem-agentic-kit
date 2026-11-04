@@ -1,7 +1,17 @@
 ---
 name: implementation-pattern-router
 description: Use after product and environment decisions to route implementation questions across Agentforce, Data 360, Slack, Tableau Next, Apex, APIs, prompts, MCP, and dynamically discovered Salesforce skill libraries. Owns Routes product-specific implementation questions and composes cross-product findings into one recommendation.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "focused-router"
+  primary-capability: "implementation-best-practices"
+  contract: "references/skill-contract.json"
 ---
+
+Follow the instructions below. Read [this skill's contract](references/skill-contract.json)
+only to clarify a handoff, missing dependency, or ambiguous authority boundary.
+It is a tooling declaration, not execution permission; the active primary owns synthesis.
 
 # Implementation Pattern Router
 
@@ -69,8 +79,8 @@ Return:
 5. Questions still required to reach the goal.
 6. Proposed next action and whether approval is required.
 7. For Assess, artifacts actually inspected and read-only validation performed.
-8. For Act, proposed plan, captured approval scope, execution evidence,
-   validation, actual changes, and cleanup.
+8. For a separately approved delegated Act, request the execution owner's
+   approval scope, observed changes, validation, and cleanup; do not claim local execution.
 
 ## Boundaries
 

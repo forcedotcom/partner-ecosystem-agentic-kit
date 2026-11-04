@@ -1,7 +1,17 @@
 ---
 name: solution-discovery
 description: Validate an OEM or ISV product idea, target user, Salesforce fit, product boundary, business outcome, and candidate solution direction. Use when a partner is still deciding what to build, whether Salesforce is the right platform, or which advisor capability should own the next decision.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "capability-router"
+  primary-capability: "solution-discovery"
+  contract: "references/skill-contract.json"
 ---
+
+Follow the instructions below. Read [this skill's contract](references/skill-contract.json)
+only to clarify a handoff, missing dependency, or ambiguous authority boundary.
+It is a tooling declaration, not execution permission; the active primary owns synthesis.
 
 # Solution Discovery and Product Design Advisor
 

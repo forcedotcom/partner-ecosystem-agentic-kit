@@ -1,7 +1,17 @@
 ---
 name: oem-isv-advisor
 description: Main entrance for Salesforce OEM and ISV partner advisory work across solution discovery, packaging, development environments, implementation, platform constraints, security readiness, and operations. Use when a partner asks for guidance and the correct specialist skill or required documentation capability must be selected.
+metadata:
+  version: "1.0.0"
+  contract-schema: "1.0.0"
+  role: "entry-router"
+  primary-capability: "foundation"
+  contract: "references/skill-contract.json"
 ---
+
+Follow the instructions below. Read [this skill's contract](references/skill-contract.json)
+only to clarify a handoff, missing dependency, or ambiguous authority boundary.
+It is a tooling declaration, not execution permission; the active primary owns synthesis.
 
 # OEM/ISV Advisor
 
@@ -9,13 +19,32 @@ Own the conversation goal and route each decision to one primary specialist.
 
 ## Start
 
+When installation, references, or tool availability differs across harnesses,
+read [portable harness handling](references/harness-runtime.md).
+
 1. Preserve the partner's stated goal. If it is unknown, ask what outcome they
    want before selecting a test, org, package, or implementation path.
-2. Invoke `$advisor-capability-preflight` before the first time-sensitive
+2. Invoke the `advisor-capability-preflight` skill before the first time-sensitive
    Salesforce claim. Do not repeat a ready preflight on every turn.
 3. Use `references/routing.md` to select one primary capability. Invoke
    cross-cutting skills only when they materially affect the decision.
 4. The primary capability owns the final synthesis.
+
+## Routing
+
+- Product fit and what to build: `solution-discovery`.
+- Packaging and distribution: `packaging-distribution`.
+- Org and development environments: `development-environment`.
+- Implementation patterns: `implementation-best-practices`.
+- Platform boundaries: `platform-constraints`.
+- Security and review readiness: `security-readiness`.
+- Testing, release, and operations: `operations-release`.
+
+Use the catalog's ownership, modes, and maturity to select a stable skill ID.
+Resolve it through the active host catalog, including its plugin namespace.
+Invoke the selected skill before reading its own files; do not construct paths
+to another skill's contract. If multiple copies match, identify the source and
+ask which approved copy to use rather than blending versions.
 
 ## Authority
 
