@@ -46,7 +46,8 @@ capability concise and route here only when this bounded decision is active.
 ## Decision workflow
 
 1. Verify EnvironmentHubMember availability.
-2. Read actual PBO status and expiration.
+2. Read actual PBO status from the PBO's own `EnvironmentHubMember.OrgStatus`
+   record, and expiration from `Organization.TrialExpirationDate`.
 3. Inspect the four development entitlement limits live.
 4. Confirm Dev Hub and managed 2GP enablement.
 5. Route wrong-Dev-Hub recovery by package history.
