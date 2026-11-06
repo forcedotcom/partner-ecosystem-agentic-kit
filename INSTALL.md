@@ -1,4 +1,9 @@
-# Install ISV/OEM Advisor
+# Install ISV Partner Advisor
+
+> **Candidate branch, not a public release.** New identity: `isv-partner-advisor`;
+> preview version: `0.3.0-rc.1`. Existing `oem-isv-advisor` installs need the
+> [migration procedure](docs/advisor-rename-migration.md). A regular update does
+> not rename an installed plugin. Public 0.2.0 downloads still use the old name.
 
 One advisor, with its complete supporting skill library. Choose your app;
 you do not need to assemble the individual advisors yourself.
@@ -9,9 +14,9 @@ you do not need to assemble the individual advisors yourself.
 
 ## Before you install
 
-- Use the [latest published release](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/releases/latest),
-  or the approved `main` branch for normal marketplace updates. Do not point
-  everyday sessions at a draft PR or experimental branch.
+- Normal users should stay on the [latest published release](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/releases/latest).
+  For this rename test only, use the candidate branch in a dedicated test
+  profile. Do not point everyday sessions at a draft PR or experimental branch.
 - Choose the intended project and scope. Project-local folders can still be
   read by other tools with access to that project; they are not a sandbox.
 - Check for existing copies before installing. Never overwrite modified skills,
@@ -27,7 +32,7 @@ scope before approving changes; this is a request for setup, not an installer
 or a guarantee that the app supports native skills.
 
 ```text
-Help me install the complete ISV/OEM Advisor from
+Help me install the complete ISV Partner Advisor from
 https://github.com/forcedotcom/partner-ecosystem-agentic-kit.
 Read INSTALL.md and use the route for this app. Prefer its supported native
 plugin route; otherwise propose the documented project-local skill layout.
@@ -44,8 +49,8 @@ than claiming file reading is an installation.
 In a Claude Code session opened in your intended project:
 
 ```text
-/plugin marketplace add forcedotcom/partner-ecosystem-agentic-kit
-/plugin install oem-isv-advisor@partner-ecosystem-agentic-kit
+/plugin marketplace add forcedotcom/partner-ecosystem-agentic-kit#codex/isv-partner-advisor-migration
+/plugin install isv-partner-advisor@partner-ecosystem-agentic-kit
 ```
 
 Choose **project** scope for repository-shared settings, or **local** scope for
@@ -54,14 +59,14 @@ just you in that repository. In
 Start a fresh session, then invoke:
 
 ```text
-/oem-isv-advisor:oem-isv-advisor
+/isv-partner-advisor:isv-partner-advisor
 ```
 
 If you prefer commands in a terminal rather than inside the Claude chat, use:
 
 ```bash
-claude plugin marketplace add forcedotcom/partner-ecosystem-agentic-kit
-claude plugin install oem-isv-advisor@partner-ecosystem-agentic-kit --scope project
+claude plugin marketplace add forcedotcom/partner-ecosystem-agentic-kit#codex/isv-partner-advisor-migration
+claude plugin install isv-partner-advisor@partner-ecosystem-agentic-kit --scope project
 ```
 
 Marketplace registration and plugin installation are separate: adding the
@@ -76,8 +81,8 @@ we tested and what remains untested.
 ## Codex
 
 Use the host's plugin installation flow for this GitHub repository when it is
-available. Confirm that the installed plugin is **ISV/OEM Advisor** with
-technical identifier `oem-isv-advisor`. If that host cannot install this
+available. Confirm that the installed plugin is **ISV Partner Advisor** with
+technical identifier `isv-partner-advisor`. If that host cannot install this
 repository as a plugin, use the explicit project-local fallback below rather
 than inventing an install command or assuming a public directory listing.
 
@@ -91,7 +96,7 @@ MCP configuration, hooks, or automatic updates.
 Start a fresh session in that project and select the entry skill, or invoke:
 
 ```text
-$oem-isv-advisor
+$isv-partner-advisor
 ```
 
 Sources: [official skill discovery and invocation](https://learn.chatgpt.com/docs/build-skills),
@@ -104,13 +109,13 @@ These are manual, project-local skill installations, not Claude plugin installs.
 
 | App | Copy all complete `skills/` child folders into | Start using it |
 | --- | --- | --- |
-| Cursor | `<project>/.cursor/skills/` | Open Agent and select `/oem-isv-advisor` |
-| OpenCode | `<project>/.opencode/skills/` | Ask it to load the `oem-isv-advisor` skill |
+| Cursor | `<project>/.cursor/skills/` | Open Agent and select `/isv-partner-advisor` |
+| OpenCode | `<project>/.opencode/skills/` | Ask it to load the `isv-partner-advisor` skill |
 
 Download and review the released source, then copy all skill directories with
 their supporting files. For example, the entry file in Cursor must land at
-`.cursor/skills/oem-isv-advisor/SKILL.md`, not
-`.cursor/skills/skills/oem-isv-advisor/SKILL.md`.
+`.cursor/skills/isv-partner-advisor/SKILL.md`, not
+`.cursor/skills/skills/isv-partner-advisor/SKILL.md`.
 
 Check existing project, user, plugin, and compatible skill locations for
 duplicates first. Start a fresh session after installation. Confirm that the
@@ -172,7 +177,7 @@ prove documentation connectivity or authorize access to a Salesforce org.
 In a fresh session, ask:
 
 ```text
-Use the installed ISV/OEM Advisor. Confirm the installed source and scope if
+Use the installed ISV Partner Advisor. Confirm the installed source and scope if
 visible, load its entry skill, and tell me whether its supporting advisors are
 available. Stay in Ask mode. Do not inspect a Salesforce org, edit files, or
 connect tools. If you cannot verify an installation detail, mark it unknown.
@@ -185,9 +190,14 @@ the advisor must report documentation limitations honestly.
 
 ## Updates
 
+For the old-to-new identity transition, use the
+[migration helper](docs/advisor-rename-migration.md), not the normal update menu.
+The instructions below apply once the new plugin is installed and a supported
+release source has been chosen. Keep the candidate confined to its test profile.
+
 For main-tracking Claude Code plugins, open `/plugin` → **Marketplaces** →
 **partner-ecosystem-agentic-kit** → **Update marketplace**. If pending, use
-**Installed** → **ISV/OEM Advisor** → **Update now**. Start a fresh session and
+**Installed** → **ISV Partner Advisor** → **Update now**. Start a fresh session and
 verify the version. Auto-update is optional; this repository does not enable it.
 
 Copied-folder installs do not update through the plugin menu. Use the original

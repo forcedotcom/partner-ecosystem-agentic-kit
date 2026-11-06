@@ -2,7 +2,7 @@
 name: package-version-validation
 description: Use when creating or diagnosing managed 2GP package versions, internal build-org shape, validation timing, code coverage, installation keys, and candidate test evidence. Owns Build-org shape, validation mode, code coverage, installation keys, candidate testing, and version-create diagnostics.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "packaging-distribution"

@@ -1,6 +1,6 @@
 # Practitioner knowledge policy
 
-Use this policy across all seven OEM/ISV Advisor capabilities.
+Use this policy across all seven ISV Partner Advisor capabilities.
 
 ## Why this evidence exists
 

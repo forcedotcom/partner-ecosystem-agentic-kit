@@ -2,7 +2,7 @@
 name: environment-portfolio
 description: Use when choosing scratch, PDE, Test/Demo, Trialforce Source, template-backed, customer-trial, sandbox, or other partner environments for a lifecycle job. Owns Choosing scratch, PDE, test/demo, Trialforce source, template, customer trial, and other partner environments by job.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "development-environment"

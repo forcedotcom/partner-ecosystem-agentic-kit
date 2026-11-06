@@ -167,7 +167,7 @@
       "missing_behavior": "Use approved official documentation fallback; preserve unverified claims as unknown. Never probe org tools for documentation."
     },
     {
-      "id": "oem-isv-advisor",
+      "id": "isv-partner-advisor",
       "kind": "internal_skill",
       "modes": [
         "ask",
@@ -180,7 +180,7 @@
     }
   ],
   "evidence": {
-    "policy_skill": "oem-isv-advisor",
+    "policy_skill": "isv-partner-advisor",
     "practitioner_knowledge": null,
     "source_refresh": "references/source-refresh.md"
   },

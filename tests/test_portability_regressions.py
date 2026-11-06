@@ -30,10 +30,20 @@ class PortabilityRegressionTests(unittest.TestCase):
         baseline = json.loads((ROOT / "tests/fixtures/portability-baseline.json").read_text())
         self.assertEqual(27, len(baseline["descriptions"]))
         for relative, expected in baseline["descriptions"].items():
-            actual = re.search(r"^description: (.+)$", (ROOT / relative).read_text(), re.M).group(1)
+            renamed = relative.replace("oem-isv-advisor", "isv-partner-advisor")
+            # Retain the original baseline. Only the approved identity/trigger
+            # substitutions may differ; do not rebaseline knowledge changes.
+            expected = (expected.replace("OEM/ISV Advisor", "ISV Partner Advisor")
+                        .replace("Salesforce OEM and ISV", "Salesforce ISV")
+                        .replace("OEM or ISV", "ISV"))
+            actual = re.search(r"^description: (.+)$", (ROOT / renamed).read_text(), re.M).group(1)
             self.assertEqual(expected, actual, relative)
         for relative, expected in baseline["domain_reference_sha256"].items():
-            self.assertEqual(expected, hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), relative)
+            renamed = relative.replace("oem-isv-advisor", "isv-partner-advisor")
+            data = (ROOT / renamed).read_bytes()
+            if relative.endswith("/practitioner-knowledge-policy.md"):
+                data = data.replace(b"ISV Partner Advisor", b"OEM/ISV Advisor")
+            self.assertEqual(expected, hashlib.sha256(data).hexdigest(), relative)
 
     def test_extracted_layouts_resolve_without_source_checkout(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -1,8 +1,8 @@
 ---
 name: operations-release
-description: Guide testing strategy, CI/CD, release cadence, versioning, upgrades, rollback, monitoring, regulated delivery, incident response, and lifecycle operations for OEM or ISV products. Use when a partner needs to prove a release is reliable or operate it safely over time.
+description: Guide testing strategy, CI/CD, release cadence, versioning, upgrades, rollback, monitoring, regulated delivery, incident response, and lifecycle operations for ISV products. Use when a partner needs to prove a release is reliable or operate it safely over time.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "capability-router"
   primary-capability: "operations-release"

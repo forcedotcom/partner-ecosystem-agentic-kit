@@ -2,7 +2,7 @@
 name: package-ancestry-dependencies
 description: Use for package version numbering, NEXT builds, linear ancestry, explicit dependencies, transitive dependency settings, patches, and upgrade-path diagnosis. Owns Version numbering, linear ancestry, dependencies, patches, upgrade paths, and related failure diagnosis.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "packaging-distribution"

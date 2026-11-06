@@ -136,7 +136,7 @@
     }
   ],
   "evidence": {
-    "policy_skill": "oem-isv-advisor",
+    "policy_skill": "isv-partner-advisor",
     "practitioner_knowledge": null,
     "source_refresh": null
   },

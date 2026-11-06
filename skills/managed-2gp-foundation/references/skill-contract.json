@@ -150,7 +150,7 @@
     }
   ],
   "evidence": {
-    "policy_skill": "oem-isv-advisor",
+    "policy_skill": "isv-partner-advisor",
     "practitioner_knowledge": "references/practitioner-knowledge.md",
     "source_refresh": "references/source-refresh.md"
   },

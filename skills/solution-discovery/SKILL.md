@@ -1,8 +1,8 @@
 ---
 name: solution-discovery
-description: Validate an OEM or ISV product idea, target user, Salesforce fit, product boundary, business outcome, and candidate solution direction. Use when a partner is still deciding what to build, whether Salesforce is the right platform, or which advisor capability should own the next decision.
+description: Validate an ISV product idea, target user, Salesforce fit, product boundary, business outcome, and candidate solution direction. Use when a partner is still deciding what to build, whether Salesforce is the right platform, or which advisor capability should own the next decision.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "capability-router"
   primary-capability: "solution-discovery"

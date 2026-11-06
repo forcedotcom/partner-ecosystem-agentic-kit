@@ -8,10 +8,10 @@
   "description": "Installable Salesforce partner advisory operating systems and skills",
   "plugins": [
     {
-      "name": "oem-isv-advisor",
+      "name": "isv-partner-advisor",
       "source": "./",
-      "description": "ISV/OEM Advisor for the complete Salesforce partner journey from idea through operations.",
-      "version": "0.2.0",
+      "description": "ISV Partner Advisor for the complete Salesforce partner journey from idea through operations.",
+      "version": "0.3.0-rc.1",
       "category": "salesforce"
     }
   ]

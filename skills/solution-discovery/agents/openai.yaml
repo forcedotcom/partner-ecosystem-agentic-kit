@@ -1,4 +1,4 @@
 interface:
   display_name: "Solution Discovery"
   short_description: "Validate product fit and solution direction"
-  default_prompt: "Use $solution-discovery to validate this OEM/ISV product idea and recommend the next decision."
+  default_prompt: "Use $solution-discovery to validate this ISV product idea and recommend the next decision."

@@ -51,7 +51,7 @@
   "relationships": [],
   "dependencies": [
     {
-      "id": "oem-isv-advisor",
+      "id": "isv-partner-advisor",
       "kind": "internal_skill",
       "modes": [
         "ask"
@@ -61,7 +61,7 @@
       "missing_behavior": "Continue bounded Ask guidance from supplied facts and available references; label missing expertise and do not claim it was consulted."
     },
     {
-      "id": "oem-isv-advisor",
+      "id": "isv-partner-advisor",
       "kind": "internal_skill",
       "modes": [
         "assess",
@@ -85,7 +85,7 @@
     }
   ],
   "evidence": {
-    "policy_skill": "oem-isv-advisor",
+    "policy_skill": "isv-partner-advisor",
     "practitioner_knowledge": null,
     "source_refresh": null
   },

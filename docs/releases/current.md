@@ -1,56 +1,42 @@
-# ISV/OEM Advisor 0.2.0 — Beta
+# ISV Partner Advisor 0.3.0-rc.1 — rename test candidate
 
-This release promotes the tested `0.2.0-rc.1` metadata/portability candidate.
-Beta is the product-maturity label. The library/plugin version is `0.2.0`;
-individual skill versions remain `1.0.0`, and each skill retains its declared
-maturity. This is not a claim that every skill or harness is fully validated.
+Unreleased branch preview. No tag or GitHub release is created by this change.
 
-## Included
+## Identity change
 
-- Portable metadata and versioned contracts for all 27 current skills.
-- ID-based routing, conditional Ask dependencies, and thin harness exports.
-- Scoped documentation preferences and no unnecessary web-consent prompt when
-  documentation tools are exposed.
-- Versioned plugin/source-review assets and release consistency checks.
+- Product: **ISV Partner Advisor**.
+- Plugin and entry skill: `isv-partner-advisor`.
+- Claude invocation: `/isv-partner-advisor:isv-partner-advisor`.
+- Existing repository and marketplace identity remain unchanged.
+- Entry skill version: 2.0.0. Other skills: 1.0.1 for identity references and
+  branding. Contract schema and declared maturity are unchanged.
 
-Plugin identity remains `oem-isv-advisor`; marketplace identity remains
-`partner-ecosystem-agentic-kit`. This promotion changes release versions and
-documentation, not the candidate's advisor instructions or domain references.
-The proposed invocation-time update reminder is not included.
+This is an intentional install/command breaking change, not a routine update.
+OEM-specific guidance, specialist scope, and Ask/Assess/approval-gated Act
+rules remain. Historical 0.2.0 evidence and baseline fixtures are not rewritten
+to claim the new identity was already tested.
 
-## Validation and limitations
+## Migration
 
-See [the validation summary](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/blob/v0.2.0/docs/releases/0.2.0-validation.md). The maintainer-supervised
-Claude Code comparison completed seven identical prompts before and after,
-including approved read-only evidence inspection, a separately human-approved
-one-field synthetic edit, and return to Ask. Native update and content hashes
-were checked. User-supplied plugin screenshots separately showed a GitHub-backed
-project installation move from `0.1.0` to `0.2.0-rc.1` and remain enabled.
+Use [the scoped project migration guide](../advisor-rename-migration.md).
+The preview-first helper uses native Claude plugin commands, private backups,
+payload hashes, and explicit approval. It installs/verifies the candidate
+before disabling—not deleting—the old project plugin. Rollback re-enables the
+retained old plugin and pins the source to the recorded old commit.
 
-Library tests cover all contracts, unchanged descriptions/domain-reference
-guards, source-independent extracted layouts and release-version consistency.
-Other live harnesses, real-org actions and full filesystem isolation are not
-certified by these checks. Documentation conflicts remain qualified unknowns.
+Only a dedicated-profile GitHub-backed Claude project plugin is automated.
+Other install methods stop for manual handling. No production/user profiles
+or real installations were migrated while building this candidate.
 
-## Update existing installations
+## Validation status
 
-After merge, main-tracking Claude Code users can open `/plugin` → **Marketplaces**
-→ **partner-ecosystem-agentic-kit** → **Update marketplace**. If pending, open
-**Installed** → **ISV/OEM Advisor** → **Update now**. Start a fresh session and
-confirm `0.2.0`. Auto-update is an optional user/admin setting, not something
-this release silently enables. A GitHub Release alone does not change the
-source branch a user follows.
+All 55 automated library and synthetic migration/failure/rollback tests pass,
+including in an independently extracted source-review archive. Contract checks,
+knowledge-preservation guards, skill validation, and native Claude plugin
+validation pass. Existing listing warnings about icon/privacy URL remain.
+The owner must still test the actual old-to-new plugin upgrade and relevant
+Ask/Assess/Act behavior in the selected project. No new live-host result,
+cross-harness certification, or successful candidate isolation is claimed.
 
-Candidate-branch testers must explicitly return their marketplace source to
-`main` to follow normal releases. Standalone copied-skill installations require
-their existing copy/install procedure and source-lock update; plugin commands
-do not update those copies. Preserve local edits, other libraries and backups.
-
-## Assets
-
-- `advisor-plugin.zip`: native plugin-root payload and manifests, retaining
-  existing optional documentation MCP configuration and host prompts.
-- `advisor-source-review.zip`: complete source, manifests, checks and tests;
-  not a native single-skill upload.
-
-No PEAK console code, private captures, credentials or customer data is included.
+No PEAK console changes, new MCP connections, or Salesforce org actions are
+included. Do not merge or publish until review and owner acceptance.

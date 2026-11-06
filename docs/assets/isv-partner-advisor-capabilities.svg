@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1540" height="330" viewBox="0 0 1540 330" role="img" aria-labelledby="title desc">
+  <title id="title">ISV Partner Advisor capability map</title>
+  <desc id="desc">One partner goal routes to seven capabilities. Packaging, environments, and implementation coordinate focused specialists. Partners can enter at any stage.</desc>
+  <rect width="1540" height="330" rx="20" fill="#f4f8fc"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle" fill="#102a43">
+    <text x="770" y="48" font-size="30" font-weight="700">ISV Partner Advisor</text>
+    <text x="770" y="80" font-size="18">One partner goal · seven capabilities · focused specialists when needed</text>
+    <path d="M770 102V121M130 121H1410M130 121V143M343 121V143M557 121V143M770 121V143M983 121V143M1197 121V143M1410 121V143" stroke="#7b95b0" stroke-width="2" fill="none"/>
+    <g fill="#fff" stroke="#c1d3e4" stroke-width="2">
+      <rect x="30" y="143" width="200" height="130" rx="12"/>
+      <rect x="243" y="143" width="200" height="130" rx="12"/>
+      <rect x="457" y="143" width="200" height="130" rx="12"/>
+      <rect x="670" y="143" width="200" height="130" rx="12"/>
+      <rect x="883" y="143" width="200" height="130" rx="12"/>
+      <rect x="1097" y="143" width="200" height="130" rx="12"/>
+      <rect x="1310" y="143" width="200" height="130" rx="12"/>
+    </g>
+    <g font-size="18" font-weight="700">
+      <text x="130" y="180">Solution<tspan x="130" dy="25">discovery</tspan></text>
+      <text x="343" y="180">Packaging and<tspan x="343" dy="25">distribution</tspan></text>
+      <text x="557" y="180">Development<tspan x="557" dy="25">environments</tspan></text>
+      <text x="770" y="180">Implementation<tspan x="770" dy="25">best practices</tspan></text>
+      <text x="983" y="180">Platform<tspan x="983" dy="25">constraints</tspan></text>
+      <text x="1197" y="180">Security<tspan x="1197" dy="25">readiness</tspan></text>
+      <text x="1410" y="180">Operations<tspan x="1410" dy="25">and release</tspan></text>
+    </g>
+    <g font-size="15" fill="#486581">
+      <text x="130" y="245">Validate the direction</text>
+      <text x="343" y="245">7 specialists</text>
+      <text x="557" y="245">5 specialists</text>
+      <text x="770" y="245">6 specialists</text>
+      <text x="983" y="245">Check support and limits</text>
+      <text x="1197" y="245">Prepare evidence</text>
+      <text x="1410" y="245">Operate reliably</text>
+      <text x="770" y="309">Enter at any stage. Declared scope is not a validation or approval guarantee.</text>
+    </g>
+  </g>
+</svg>

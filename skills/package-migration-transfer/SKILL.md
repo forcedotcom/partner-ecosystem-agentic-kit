@@ -2,7 +2,7 @@
 name: package-migration-transfer
 description: Use for managed 1GP-to-2GP migration or recovery from a managed 2GP package created under the wrong Dev Hub. Owns Managed 1GP-to-2GP migration and wrong-Dev-Hub transfer decision trees, eligibility, preservation, and recovery.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "packaging-distribution"

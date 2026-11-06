@@ -2,7 +2,7 @@
 name: namespace-access-governance
 description: Use for namespace-org topology, namespace linking, Environment Hub inventory, package-developer access, and operation-specific least privilege. Owns Namespace-org topology, namespace linking, Environment Hub inventory, developer access, and least-privilege separation.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "development-environment"

@@ -22,7 +22,7 @@ def inspect(skills: Path) -> list[str]:
         for relation in contract["relationships"]:
             if relation["target"] not in folders:
                 errors.append(f"{name}: unresolved catalog skill ID {relation['target']}")
-    catalog = json.loads((skills / "oem-isv-advisor/references/capability-catalog.json").read_text())
+    catalog = json.loads((skills / "isv-partner-advisor/references/capability-catalog.json").read_text())
     entries = list(catalog["foundation_skills"])
     for cap in catalog["capabilities"]:
         entries.append(cap)

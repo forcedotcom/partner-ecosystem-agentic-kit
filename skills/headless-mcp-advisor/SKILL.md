@@ -2,7 +2,7 @@
 name: headless-mcp-advisor
 description: Advise Salesforce partners on Headless Toolkit and MCP client/server choices, managed-package boundaries, HXL output, and delivery to Agentforce, Slackbot, Claude, or ChatGPT. Use for architecture decisions or Salesforce DX assessments; route builds to global sf-skills.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "implementation-best-practices"
@@ -15,7 +15,7 @@ It is a tooling declaration, not execution permission; the active primary owns s
 
 # Headless MCP Advisor
 
-Enter through `oem-isv-advisor` → `implementation-best-practices`. Own the
+Enter through `isv-partner-advisor` → `implementation-best-practices`. Own the
 Headless and MCP architecture decision; coordinate with
 `agentforce-implementation-advisor` for Agentforce runtime behavior and
 `slack-implementation-advisor` for Slack integration. Route 2GP composition

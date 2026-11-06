@@ -2,7 +2,7 @@
 name: platform-constraints
 description: Identify Salesforce runtime, metadata, packaging, file, scale, timeout, performance, volume, immutability, and capability constraints. Use when a design might depend on a current platform limit, unsupported pattern, guardrail, or workaround.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "capability-router"
   primary-capability: "platform-constraints"

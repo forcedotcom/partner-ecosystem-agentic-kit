@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.0-rc.1 — ISV Partner Advisor rename preview (unreleased)
+
+- Rename branding, plugin identity, entry folder, routing references, and
+  invocation to `isv-partner-advisor`; keep the repository/marketplace name.
+- Preserve OEM-specific knowledge and authority boundaries. Remove OEM from
+  discovery descriptions and suggested prompts, not domain guidance.
+- Entry skill version becomes 2.0.0 for the ID change. Other skills become
+  1.0.1 for updated identity references/branding; their maturity is unchanged.
+- Add a preview-first Claude project-plugin migration helper with private
+  backups, payload verification, retained old install, and explicit rollback.
+- Keep the 0.2.0 test record historical. Live migration/behavior on the renamed
+  identity must be tested before promotion. No tag or release is published here.
+
 ## 0.2.0 — Beta (2026-11-04)
 
 - Promote the tested portability candidate to a normal SemVer release; Beta

@@ -1,8 +1,8 @@
 ---
-name: oem-isv-advisor
-description: Main entrance for Salesforce OEM and ISV partner advisory work across solution discovery, packaging, development environments, implementation, platform constraints, security readiness, and operations. Use when a partner asks for guidance and the correct specialist skill or required documentation capability must be selected.
+name: isv-partner-advisor
+description: Main entrance for Salesforce ISV partner advisory work across solution discovery, packaging, development environments, implementation, platform constraints, security readiness, and operations. Use when a partner asks for guidance and the correct specialist skill or required documentation capability must be selected.
 metadata:
-  version: "1.0.0"
+  version: "2.0.0"
   contract-schema: "1.0.0"
   role: "entry-router"
   primary-capability: "foundation"
@@ -13,7 +13,7 @@ Follow the instructions below. Read [this skill's contract](references/skill-con
 only to clarify a handoff, missing dependency, or ambiguous authority boundary.
 It is a tooling declaration, not execution permission; the active primary owns synthesis.
 
-# OEM/ISV Advisor
+# ISV Partner Advisor
 
 Own the conversation goal and route each decision to one primary specialist.
 

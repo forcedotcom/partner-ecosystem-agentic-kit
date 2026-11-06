@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "id": "oem-isv-advisor",
-  "title": "OEM/ISV Advisor",
+  "id": "isv-partner-advisor",
+  "title": "ISV Partner Advisor",
   "role": "entry-router",
   "capability": null,
   "maintainer": {
@@ -121,7 +121,7 @@
     }
   ],
   "evidence": {
-    "policy_skill": "oem-isv-advisor",
+    "policy_skill": "isv-partner-advisor",
     "practitioner_knowledge": null,
     "source_refresh": null
   },

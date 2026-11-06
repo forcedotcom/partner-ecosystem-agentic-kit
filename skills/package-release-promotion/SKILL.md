@@ -2,7 +2,7 @@
 name: package-release-promotion
 description: Use when deciding whether an exact managed package version is ready to promote, release, recommend, list, or distribute. Owns Promotion readiness, irreversible release gate, recommended version, and evidence required before release.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "packaging-distribution"

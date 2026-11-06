@@ -12,7 +12,7 @@ SKILL = ROOT / "skills" / "advisor-capability-preflight"
 CHECK = SKILL / "scripts" / "check_preflight.py"
 RECORD = SKILL / "scripts" / "record_preference.py"
 POLICY = SKILL / "references" / "documentation-policy.json"
-CATALOG = ROOT / "skills" / "oem-isv-advisor" / "references" / "capability-catalog.json"
+CATALOG = ROOT / "skills" / "isv-partner-advisor" / "references" / "capability-catalog.json"
 
 
 def load_check_module():
@@ -120,9 +120,9 @@ class PreflightTests(unittest.TestCase):
     def test_plugin_manifests_package_both_entry_skills(self):
         codex = json.loads((ROOT / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
         claude = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
-        self.assertEqual("oem-isv-advisor", codex["name"])
+        self.assertEqual("isv-partner-advisor", codex["name"])
         self.assertEqual(codex["version"], claude["version"])
-        self.assertTrue((ROOT / "skills" / "oem-isv-advisor" / "SKILL.md").exists())
+        self.assertTrue((ROOT / "skills" / "isv-partner-advisor" / "SKILL.md").exists())
         self.assertTrue((ROOT / "skills" / "advisor-capability-preflight" / "SKILL.md").exists())
         self.assertEqual("./.mcp.json", codex["mcpServers"])
         mcp = json.loads((ROOT / ".mcp.json").read_text(encoding="utf-8"))
@@ -137,7 +137,7 @@ class PreflightTests(unittest.TestCase):
         self.assertNotIn('value: "salesforce-docs"', metadata)
 
     def test_entry_skill_requires_preflight_without_copying_domain_knowledge(self):
-        entry = (ROOT / "skills" / "oem-isv-advisor" / "SKILL.md").read_text(encoding="utf-8")
+        entry = (ROOT / "skills" / "isv-partner-advisor" / "SKILL.md").read_text(encoding="utf-8")
         self.assertIn("`advisor-capability-preflight`", entry)
         self.assertIn("references/routing.md", entry)
         self.assertLess(len(entry.splitlines()), 90)

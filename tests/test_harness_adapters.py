@@ -56,7 +56,7 @@ class HarnessAdapterTests(unittest.TestCase):
         record.update(surface="terminal", app_version="test-fixture", model="test-fixture", tested_at="2026-11-04T12:00:00Z", installation_method="disposable-test-fixture", reviewer="unit-test", tool_catalog_status="unavailable", documentation_mcp="unavailable")
         for check in record["checks"].values():
             check.update(status="pass", evidence="Unit-test fixture only; not actual harness evidence.")
-        record["loaded_skills"] = [{"id": "oem-isv-advisor", "base_directory": "/unit-test/skills/oem-isv-advisor", "version": manifest["skill_versions"]["oem-isv-advisor"], "skill_md_sha256": manifest["file_sha256"]["skills/oem-isv-advisor/SKILL.md"]}]
+        record["loaded_skills"] = [{"id": "isv-partner-advisor", "base_directory": "/unit-test/skills/isv-partner-advisor", "version": manifest["skill_versions"]["isv-partner-advisor"], "skill_md_sha256": manifest["file_sha256"]["skills/isv-partner-advisor/SKILL.md"]}]
         record["visible_skill_sources"] = ["unit-test-fixture-only"]
         record["upgrade"] = {"from_version": "0.1.0", "to_version": "0.2.0-rc.1", "delivery_path": "unit-test", "evidence": "Fixture only, not real host evidence."}
         return record, manifest
@@ -96,14 +96,14 @@ class HarnessAdapterTests(unittest.TestCase):
 
     def test_changed_manifest_inventory_is_detected(self):
         record, manifest = self.complete_record()
-        manifest["file_sha256"]["skills/oem-isv-advisor/SKILL.md"] = "changed"
+        manifest["file_sha256"]["skills/isv-partner-advisor/SKILL.md"] = "changed"
         self.assertEqual("review_required", ADAPTER.inspect_record(record, manifest)["status"])
 
     def test_symlinks_and_hidden_payloads_are_rejected(self):
         root = self.output / "library"
         shutil.copytree(ROOT / "skills", root / "skills", ignore=shutil.ignore_patterns("__pycache__"))
         shutil.copytree(ROOT / "adapters", root / "adapters")
-        hidden = root / "skills/oem-isv-advisor/references/.env"
+        hidden = root / "skills/isv-partner-advisor/references/.env"
         hidden.write_text("benign-test")
         with self.assertRaisesRegex(ValueError, "Hidden"):
             ADAPTER.build(root, "cursor-local", self.output / "hidden.zip")

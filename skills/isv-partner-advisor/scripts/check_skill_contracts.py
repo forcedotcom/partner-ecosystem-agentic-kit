@@ -176,7 +176,7 @@ def inspect_contract(skill: Path, available: set[str] | None = None) -> dict[str
         if role == "capability-router" and capability != skill.name:
             issue("invalid_capability_alignment", "A capability router must own its matching capability.", "capability")
         if available is not None:
-            prerequisites = {"oem-isv-advisor", "advisor-capability-preflight"}
+            prerequisites = {"isv-partner-advisor", "advisor-capability-preflight"}
             if capability:
                 prerequisites.add(capability)
             for target in sorted(prerequisites - available):
@@ -264,7 +264,7 @@ def inspect_contract(skill: Path, available: set[str] | None = None) -> dict[str
                 if relation["kind"] == "routes_to" and f"`{relation['target']}`" not in text.split("---", 2)[-1]:
                     issue("undocumented_handoff", f"Declared route to {relation['target']} needs an explicit backticked ID in the body.", "relationships", "review")
         evidence = contract["evidence"]
-        if not isinstance(evidence, dict) or set(evidence) != {"policy_skill", "practitioner_knowledge", "source_refresh"} or evidence["policy_skill"] != "oem-isv-advisor":
+        if not isinstance(evidence, dict) or set(evidence) != {"policy_skill", "practitioner_knowledge", "source_refresh"} or evidence["policy_skill"] != "isv-partner-advisor":
             raise ValueError("Evidence must reference the shared policy and scoped optional evidence files.")
         for field in ("practitioner_knowledge", "source_refresh"):
             if evidence[field] is not None:
@@ -303,7 +303,7 @@ def inspect_library_contracts(root: Path) -> dict[str, Any]:
     report = inspect_contracts(paths)
     if paths and all(r["status"] == "ready" for r in report["skills"]):
         try:
-            path = _local_file(folder / "oem-isv-advisor", "references/capability-catalog.json")
+            path = _local_file(folder / "isv-partner-advisor", "references/capability-catalog.json")
             if generate_catalog(root) != json.loads(path.read_text()):
                 raise ValueError("The catalog differs from the declared contracts; regenerate it before relying on routing.")
         except (ValueError, OSError) as exc:
@@ -353,12 +353,12 @@ def main() -> int:
     report = inspect_contracts(paths)
     if args.write_catalog:
         catalog = generate_catalog(args.root)
-        target = args.root / "skills/oem-isv-advisor/references/capability-catalog.json"
+        target = args.root / "skills/isv-partner-advisor/references/capability-catalog.json"
         target.write_text(json.dumps(catalog, indent=2) + "\n", encoding="utf-8")
     else:
         try:
             catalog = generate_catalog(args.root)
-            actual = json.loads((args.root / "skills/oem-isv-advisor/references/capability-catalog.json").read_text())
+            actual = json.loads((args.root / "skills/isv-partner-advisor/references/capability-catalog.json").read_text())
             if catalog != actual:
                 report["findings"].append({"severity": "blocker", "kind": "catalog_drift", "message": "Regenerate the catalog from the contracts."})
                 report["status"] = "blocked"

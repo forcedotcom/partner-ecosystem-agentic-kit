@@ -2,7 +2,7 @@
 name: implementation-pattern-router
 description: Use after product and environment decisions to route implementation questions across Agentforce, Data 360, Slack, Tableau Next, Apex, APIs, prompts, MCP, and dynamically discovered Salesforce skill libraries. Owns Routes product-specific implementation questions and composes cross-product findings into one recommendation.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "focused-router"
   primary-capability: "implementation-best-practices"

@@ -1,7 +1,7 @@
 {
-  "name": "oem-isv-advisor",
-  "version": "0.2.0",
-  "description": "A complete Salesforce ISV/OEM partner advisor spanning the journey from product idea through packaging, architecture, development, distribution, security, and operations.",
+  "name": "isv-partner-advisor",
+  "version": "0.3.0-rc.1",
+  "description": "A complete Salesforce ISV partner advisor spanning the journey from product idea through packaging, architecture, development, distribution, security, and operations.",
   "author": {
     "name": "Salesforce",
     "url": "https://github.com/forcedotcom"
@@ -11,16 +11,15 @@
   "keywords": [
     "salesforce",
     "isv",
-    "oem",
     "partners",
     "advisor"
   ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
-    "displayName": "ISV/OEM Advisor",
+    "displayName": "ISV Partner Advisor",
     "shortDescription": "Accelerate every stage of a Salesforce partnership",
-    "longDescription": "Guides Salesforce ISV and OEM partners from idea validation through packaging, architecture, development environments, implementation, distribution, security readiness, release, and operations. Uses Ask, Assess, and approval-gated Act modes with explicit evidence and uncertainty.",
+    "longDescription": "Guides Salesforce ISV partners from idea validation through packaging, architecture, development environments, implementation, distribution, security readiness, release, and operations. Uses Ask, Assess, and approval-gated Act modes with explicit evidence and uncertainty.",
     "developerName": "Salesforce",
     "category": "Productivity",
     "capabilities": [
