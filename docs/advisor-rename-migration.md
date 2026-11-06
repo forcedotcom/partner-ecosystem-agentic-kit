@@ -19,6 +19,11 @@ identity-reference/branding patch. These version changes do not promote maturity
 
 ## Supported test installation
 
+Maintainer rehearsal: a disposable Claude Code 2.1.319 profile completed the
+native old-plugin install, renamed-plugin installation/hash verification,
+repeat-run check, and rollback. No model was invoked and the owner's project
+was not used. This checks installation mechanics, not advisory behavior.
+
 The helper supports **one existing GitHub-backed Claude Code project-scoped
 plugin** in a dedicated non-default `CLAUDE_CONFIG_DIR`. It does not migrate
 user, local, managed, synced, directory-backed, or copied-skill installations,
@@ -43,8 +48,10 @@ cd advisor-rename-test
 
 Review `scripts/migrate_advisor.py`. Run it from this checkout: it compares
 installed skill hashes with **this checkout**, so the branch and source must
-match. The default source is the candidate branch; `--ref <commit>` can pin a
-reviewed candidate commit. Do not run a remote script through a shell pipe.
+match. The default source is the candidate branch; `--ref <branch-or-tag>` selects
+another reviewed source. This Claude CLI cannot clone a raw commit as a branch;
+the helper instead verifies installed skill hashes. Do not run a remote script
+through a shell pipe.
 
 ## 2. Preview only
 
@@ -128,12 +135,16 @@ advisor session in that partial state.** Inspect the private backup and use:
 python3 scripts/migrate_advisor.py --project "$PROJECT" --claude-config-dir "$PROFILE" --rollback "$BACKUP"
 ```
 
-Type `ROLLBACK`. This repoints the marketplace to the recorded old commit,
+Type `ROLLBACK`. This repoints the marketplace to the verified private recovery copy,
 enables the retained old project plugin, and disables the candidate if present.
 It does not restore entire settings files over later unrelated edits, delete
 caches, or overwrite modified payloads. Restart Claude and verify the old
-identity is active. Rollback leaves the marketplace **pinned to the old commit**,
-not tracking `main`; return to `main` explicitly only when appropriate.
+identity is active. Rollback leaves the marketplace **using the private backup
+directory**, not tracking GitHub. **Retain that directory** until you explicitly
+change the saved source declaration and register the desired GitHub branch/tag.
+The original GitHub revision remains in the private record for audit. Returning
+to `main` is a separate decision; native CLI registration and the saved source
+declaration must agree. Do not delete the backup while it is the recovery source.
 
 If the old payload changed or disappeared, automatic rollback stops. The private
 backup's `old-plugin/` and configuration snapshots are available for reviewed

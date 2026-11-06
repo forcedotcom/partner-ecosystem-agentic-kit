@@ -22,7 +22,8 @@ Use [the scoped project migration guide](../advisor-rename-migration.md).
 The preview-first helper uses native Claude plugin commands, private backups,
 payload hashes, and explicit approval. It installs/verifies the candidate
 before disabling—not deleting—the old project plugin. Rollback re-enables the
-retained old plugin and pins the source to the recorded old commit.
+retained old plugin and uses the verified private recovery copy as its local
+marketplace source. Keep the backup until the source is explicitly changed.
 
 Only a dedicated-profile GitHub-backed Claude project plugin is automated.
 Other install methods stop for manual handling. No production/user profiles
@@ -30,10 +31,15 @@ or real installations were migrated while building this candidate.
 
 ## Validation status
 
-All 55 automated library and synthetic migration/failure/rollback tests pass,
+All 59 automated library and synthetic migration/failure/rollback tests pass,
 including in an independently extracted source-review archive. Contract checks,
 knowledge-preservation guards, skill validation, and native Claude plugin
 validation pass. Existing listing warnings about icon/privacy URL remain.
+A disposable, credential-free Claude Code 2.1.319 profile also completed native
+GitHub-backed old installation, candidate migration/hash checks, repeat-run
+verification, and recovery-source rollback. No model session was launched.
+The rehearsal exposed and corrected OS cache-path alias handling, saved source
+declaration alignment, and the CLI's lack of raw-commit marketplace cloning.
 The owner must still test the actual old-to-new plugin upgrade and relevant
 Ask/Assess/Act behavior in the selected project. No new live-host result,
 cross-harness certification, or successful candidate isolation is claimed.

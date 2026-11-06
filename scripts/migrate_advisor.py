@@ -63,6 +63,15 @@ def payload_hash(root: Path) -> str:
     return hashlib.sha256(json.dumps(hashes, sort_keys=True).encode()).hexdigest()
 
 
+def metadata_hashes(root: Path) -> dict:
+    result = {}
+    for name in (".claude-plugin/plugin.json", ".mcp.json"):
+        path = root / name
+        read_json(path)  # Apply the same symlink/JSON checks as other metadata.
+        result[name] = hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else None
+    return result
+
+
 def installation(config: Path, key: str, project: Path) -> dict | None:
     inventory = read_json(config / "plugins/installed_plugins.json")
     if inventory.get("version") != 2 or not isinstance(inventory.get("plugins"), dict):
@@ -141,6 +150,11 @@ def declare_ref(config: Path, ref: str) -> None:
     original = path.read_bytes()
     value = source_declaration(config)
     value["extraKnownMarketplaces"][MARKET]["source"]["ref"] = ref
+    replace_settings(path, original, value)
+
+
+def replace_settings(path: Path, original: bytes, value: dict) -> None:
+    config = path.parent
     fd, name = tempfile.mkstemp(prefix=".advisor-source-", dir=config)
     temporary = Path(name)
     try:
@@ -152,6 +166,20 @@ def declare_ref(config: Path, ref: str) -> None:
         os.replace(temporary, path)
     finally:
         temporary.unlink(missing_ok=True)
+
+
+def declare_recovery_source(config: Path, recovery: Path) -> None:
+    path = config / "settings.json"
+    original = path.read_bytes()
+    value = read_json(path)
+    entry = value.get("extraKnownMarketplaces", {}).get(MARKET, {})
+    source = entry.get("source", {})
+    github = source.get("source") == "github" and source.get("repo") == REPO
+    same_recovery = source == {"source": "directory", "path": str(recovery)}
+    if not (github or same_recovery):
+        raise ValueError("Marketplace declaration changed outside this migration; review recovery manually.")
+    entry["source"] = {"source": "directory", "path": str(recovery)}
+    replace_settings(path, original, value)
 
 
 def inspect(project: Path, config: Path) -> dict:
@@ -193,7 +221,7 @@ def inspect(project: Path, config: Path) -> dict:
     if not new and enabled.get(OLD_KEY) is not True:
         raise ValueError("The old project plugin is not explicitly enabled.")
     return {"project": str(project), "config": str(config), "settings": settings,
-            "old_install": old, "old_payload": payload_hash(old_root),
+            "old_install": old, "old_payload": payload_hash(old_root), "old_metadata": metadata_hashes(old_root),
             "new_install": new, "original_source": source_before(config)}
 
 
@@ -218,6 +246,8 @@ def verify_new(project: Path, config: Path) -> None:
         raise ValueError("The renamed entry skill was not installed cleanly.")
     if payload_hash(root) != payload_hash(ROOT):
         raise ValueError("Installed skill hashes differ from this checkout. Do not disable the old plugin.")
+    if metadata_hashes(root) != metadata_hashes(ROOT):
+        raise ValueError("Installed plugin/MCP metadata differs from this checkout. Do not disable the old plugin.")
     if read_json(project / ".claude/settings.json").get("enabledPlugins", {}).get(NEW_KEY) is not True:
         raise ValueError("New plugin is not enabled in project scope.")
 
@@ -274,6 +304,9 @@ def migrate(before: dict, backup: Path, ref: str, runner=native) -> dict:
                             ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
             (recovery / ".claude-plugin").mkdir()
             shutil.copyfile(old_root / ".claude-plugin/plugin.json", recovery / ".claude-plugin/plugin.json")
+            private_json(recovery / ".claude-plugin/marketplace.json", {
+                "name": MARKET, "owner": {"name": "Salesforce"}, "plugins": [
+                    {"name": OLD, "source": "./", "version": before["old_install"].get("version")} ]})
             if (old_root / ".mcp.json").exists():
                 shutil.copyfile(old_root / ".mcp.json", recovery / ".mcp.json")
             declare_ref(config, ref)
@@ -283,7 +316,7 @@ def migrate(before: dict, backup: Path, ref: str, runner=native) -> dict:
             runner(project, config, ["install", NEW_KEY, "--scope", "project"])
             verify_new(project, config)
             preserve_unrelated(before)
-            if payload_hash(old_root) != before["old_payload"]:
+            if payload_hash(old_root) != before["old_payload"] or metadata_hashes(old_root) != before["old_metadata"]:
                 raise ValueError("The old payload changed; stop and review before disabling it.")
             runner(project, config, ["disable", OLD_KEY, "--scope", "project"])
             enabled = read_json(project / ".claude/settings.json").get("enabledPlugins", {})
@@ -309,11 +342,24 @@ def rollback(backup: Path, project: Path, config: Path, runner=native) -> dict:
         return {"status": "already_rolled_back"}
     old = installation(config, OLD_KEY, project)
     if (not old or any(old.get(k) != state["old_install"].get(k) for k in ("scope", "projectPath", "installPath", "version"))
-            or payload_hash(Path(old["installPath"])) != state["old_payload"]):
+            or payload_hash(Path(old["installPath"])) != state["old_payload"]
+            or metadata_hashes(Path(old["installPath"]).resolve(strict=True)) != state["old_metadata"]):
         raise ValueError("Old native payload is no longer unchanged; manual recovery required.")
+    recovery = backup / "old-plugin"
+    if (payload_hash(recovery) != state["old_payload"] or metadata_hashes(recovery) != state["old_metadata"] or
+            read_json(recovery / ".claude-plugin/plugin.json").get("name") != OLD):
+        raise ValueError("Recovery payload does not match the backed-up old plugin.")
+    catalog = {"name": MARKET, "owner": {"name": "Salesforce"}, "plugins": [
+        {"name": OLD, "source": "./", "version": state["old_install"].get("version")} ]}
+    catalog_path = recovery / ".claude-plugin/marketplace.json"
+    if catalog_path.exists():
+        if read_json(catalog_path) != catalog:
+            raise ValueError("Recovery catalog changed; review manually.")
+    else:
+        private_json(catalog_path, catalog)
     with profile_lock(config):
-        declare_ref(config, state["original_source"].split("#", 1)[1])
-        runner(project, config, ["marketplace", "add", state["original_source"]])
+        declare_recovery_source(config, recovery)
+        runner(project, config, ["marketplace", "add", str(recovery)])
         runner(project, config, ["enable", OLD_KEY, "--scope", "project"])
         if installation(config, NEW_KEY, project):
             runner(project, config, ["disable", NEW_KEY, "--scope", "project"])
@@ -322,7 +368,7 @@ def rollback(backup: Path, project: Path, config: Path, runner=native) -> dict:
             raise ValueError("Rollback settings did not verify; stop and inspect manually.")
         state["phase"] = "rolled_back"
         private_json(backup / "migration.json", state)
-    return {"status": "rolled_back_restart_required", "marketplace": "pinned to previous commit", "candidate": "disabled; not deleted"}
+    return {"status": "rolled_back_restart_required", "marketplace": "private recovery directory; retain backup until source is changed explicitly", "candidate": "disabled or absent; not deleted"}
 
 
 def main() -> int:
@@ -337,7 +383,9 @@ def main() -> int:
     args = parser.parse_args()
     try:
         if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._/-]*", args.ref) or ".." in args.ref:
-            raise ValueError("Use an explicit branch, tag, or commit in the advisor repository.")
+            raise ValueError("Use an explicit branch or tag in the advisor repository.")
+        if re.fullmatch(r"[0-9a-fA-F]{40}|[0-9a-fA-F]{64}", args.ref):
+            raise ValueError("This Claude CLI clones a branch or tag, not a raw commit. Use a reviewed branch/tag and payload verification.")
         project, config = args.project.expanduser().resolve(strict=True), args.claude_config_dir.expanduser().resolve(strict=True)
         if config == (Path.home() / ".claude").resolve():
             raise ValueError("Select a dedicated non-default test profile, not ~/.claude.")

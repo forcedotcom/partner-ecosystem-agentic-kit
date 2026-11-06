@@ -53,11 +53,16 @@ class MigrationTests(unittest.TestCase):
         self.assertEqual(self.config, config)
         self.calls.append(args)
         if args[:2] == ["marketplace", "add"]:
-            self.assertEqual(args[2].split("#", 1)[1], migration.source_declaration(config)["extraKnownMarketplaces"][migration.MARKET]["source"]["ref"])
+            declaration = migration.read_json(config / "settings.json")["extraKnownMarketplaces"][migration.MARKET]["source"]
+            if "#" in args[2]:
+                self.assertEqual(args[2].split("#", 1)[1], declaration["ref"])
+            else:
+                self.assertEqual({"source": "directory", "path": args[2]}, declaration)
             return
         if args[0] == "install":
             shutil.copytree(ROOT / "skills", self.new / "skills", ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
             shutil.copytree(ROOT / ".claude-plugin", self.new / ".claude-plugin")
+            shutil.copyfile(ROOT / ".mcp.json", self.new / ".mcp.json")
             inventory = migration.read_json(self.inventory)
             inventory["plugins"][migration.NEW_KEY] = [{"scope": "project", "projectPath": str(project),
                 "installPath": str(self.new), "version": (ROOT / "VERSION").read_text().strip()}]
@@ -136,7 +141,7 @@ class MigrationTests(unittest.TestCase):
         self.assertEqual(42, settings["a_later_user_preference"])
         self.assertTrue(settings["enabledPlugins"][migration.OLD_KEY])
         self.assertFalse(settings["enabledPlugins"][migration.NEW_KEY])
-        self.assertEqual(migration.REPO + "#" + "a" * 40, self.calls[-3][2])
+        self.assertEqual(str(self.backup / "old-plugin"), self.calls[-3][2])
 
     def test_rollback_refuses_edited_old_payload_or_wrong_binding(self):
         self.apply()
@@ -238,6 +243,23 @@ class MigrationTests(unittest.TestCase):
         self.write(self.config / "settings.json", updated)
         with self.assertRaisesRegex(ValueError, "declaration"):
             migration.declare_ref(self.config, "main")
+
+    def test_candidate_metadata_change_does_not_disable_old(self):
+        def tamper(project, config, args):
+            self.native(project, config, args)
+            if args[0] == "install":
+                self.write(self.new / ".mcp.json", {"mcpServers": {"unexpected": {}}})
+        with self.assertRaisesRegex(ValueError, "metadata differs"):
+            self.apply(tamper)
+        self.assertTrue(migration.read_json(self.settings)["enabledPlugins"][migration.OLD_KEY])
+
+    def test_recovery_metadata_change_blocks_rollback_before_commands(self):
+        self.apply()
+        self.write(self.backup / "old-plugin/.mcp.json", {"mcpServers": {"unexpected": {}}})
+        count = len(self.calls)
+        with self.assertRaisesRegex(ValueError, "Recovery payload"):
+            migration.rollback(self.backup, self.project, self.config, self.native)
+        self.assertEqual(count, len(self.calls))
 
 
 if __name__ == "__main__":
