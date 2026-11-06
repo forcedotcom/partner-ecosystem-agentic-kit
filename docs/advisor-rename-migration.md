@@ -74,9 +74,13 @@ python3 scripts/migrate_advisor.py --project "$PROJECT" --claude-config-dir "$PR
 Type `MIGRATE` when asked. The helper:
 
 1. Rechecks the preview and takes a private configuration/payload backup.
-2. Repoints this profile's existing marketplace to the candidate source. This
+2. Aligns just this marketplace's source ref in the selected profile's
+   `extraKnownMarketplaces` declaration, then uses the native command to repoint
+   the existing marketplace to the candidate source. This
    source registration is profile-wide, not project-local, which is why a
-   dedicated test profile is required.
+   dedicated test profile is required. Other marketplace declarations, unrelated
+   settings, and managed settings are not rewritten. Project/local source
+   declarations stop for manual alignment rather than being overridden.
 3. Installs the new project plugin using native Claude commands. It checks the
    installed identity/version and full skill payload hash against the checkout.
 4. Checks unrelated settings and the original skill payload are unchanged, then

@@ -16,6 +16,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 REPO = "forcedotcom/partner-ecosystem-agentic-kit"
@@ -124,6 +125,35 @@ def source_before(config: Path) -> str:
     return f"{REPO}#{revision}"
 
 
+def source_declaration(config: Path) -> dict:
+    value = read_json(config / "settings.json")
+    entry = value.get("extraKnownMarketplaces", {}).get(MARKET, {})
+    source = entry.get("source", {})
+    if source.get("source") != "github" or source.get("repo") != REPO:
+        raise ValueError("Expected this marketplace's GitHub declaration in the selected test profile. Other/managed declarations need manual review.")
+    return value
+
+
+def declare_ref(config: Path, ref: str) -> None:
+    # Claude enforces declaration/source agreement before native repointing.
+    # Change only our entry in the explicitly selected non-default profile.
+    path = config / "settings.json"
+    original = path.read_bytes()
+    value = source_declaration(config)
+    value["extraKnownMarketplaces"][MARKET]["source"]["ref"] = ref
+    fd, name = tempfile.mkstemp(prefix=".advisor-source-", dir=config)
+    temporary = Path(name)
+    try:
+        with os.fdopen(fd, "w") as stream:
+            json.dump(value, stream, indent=2)
+            stream.write("\n")
+        if path.read_bytes() != original:
+            raise ValueError("Profile settings changed during source update; stop and preview again.")
+        os.replace(temporary, path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
 def inspect(project: Path, config: Path) -> dict:
     project, config = project.resolve(strict=True), config.resolve(strict=True)
     if not project.is_dir() or not config.is_dir():
@@ -134,6 +164,10 @@ def inspect(project: Path, config: Path) -> dict:
         raise ValueError("Keep the test project and config profile separate.")
     paths = settings_paths(project, config)
     settings = {str(path): read_json(path) for path in paths}
+    source_declaration(config)
+    for path in paths[:2]:
+        if MARKET in settings[str(path)].get("extraKnownMarketplaces", {}):
+            raise ValueError("Project/local marketplace declaration requires manual source alignment; this helper changes only the test profile declaration.")
     for path in paths[1:]:
         enabled = settings[str(path)].get("enabledPlugins", {})
         if OLD_KEY in enabled or NEW_KEY in enabled:
@@ -242,6 +276,7 @@ def migrate(before: dict, backup: Path, ref: str, runner=native) -> dict:
             shutil.copyfile(old_root / ".claude-plugin/plugin.json", recovery / ".claude-plugin/plugin.json")
             if (old_root / ".mcp.json").exists():
                 shutil.copyfile(old_root / ".mcp.json", recovery / ".mcp.json")
+            declare_ref(config, ref)
             runner(project, config, ["marketplace", "add", f"{REPO}#{ref}"])
             state["phase"] = "marketplace_repointed"
             private_json(backup / "migration.json", state)
@@ -277,6 +312,7 @@ def rollback(backup: Path, project: Path, config: Path, runner=native) -> dict:
             or payload_hash(Path(old["installPath"])) != state["old_payload"]):
         raise ValueError("Old native payload is no longer unchanged; manual recovery required.")
     with profile_lock(config):
+        declare_ref(config, state["original_source"].split("#", 1)[1])
         runner(project, config, ["marketplace", "add", state["original_source"]])
         runner(project, config, ["enable", OLD_KEY, "--scope", "project"])
         if installation(config, NEW_KEY, project):
@@ -314,7 +350,7 @@ def main() -> int:
         print(json.dumps({"status": "preview_only", "project": str(project), "claude_config_dir": str(config),
                           "source": f"{REPO}#{args.ref}", "from": OLD_KEY, "to": NEW_KEY,
                           "already_migrated": bool(before["new_install"]),
-                          "steps": ["Back up private configuration", "Repoint this test profile's marketplace", "Install and hash-verify new project plugin", "Disable old project plugin; retain its payload"],
+                          "steps": ["Back up private configuration", "Align only this marketplace's saved test-profile source ref", "Repoint this test profile's marketplace", "Install and hash-verify new project plugin", "Disable old project plugin; retain its payload"],
                           "scope": "Selected project; marketplace source changes for this entire test profile.",
                           "not_supported": "User/local/managed scopes, copied skills, directory-backed marketplaces, other harnesses, active-session verification"}, indent=2))
         if not args.apply:

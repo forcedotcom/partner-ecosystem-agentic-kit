@@ -32,7 +32,9 @@ class MigrationTests(unittest.TestCase):
         self.settings = self.project / ".claude/settings.json"
         self.write(self.settings, {"enabledPlugins": {migration.OLD_KEY: True, "other@other": True},
                                    "permissions": {"deny": ["SyntheticUnrelatedTool"]}})
-        self.write(self.config / "settings.json", {"unrelated": "preserve"})
+        self.write(self.config / "settings.json", {"unrelated": "preserve", "extraKnownMarketplaces": {
+            migration.MARKET: {"source": {"source": "github", "repo": migration.REPO}},
+            "other-market": {"source": {"source": "github", "repo": "example/other"}}}})
         self.inventory = self.config / "plugins/installed_plugins.json"
         self.write(self.inventory, {"version": 2, "plugins": {migration.OLD_KEY: [
             {"scope": "project", "projectPath": str(self.project), "installPath": str(self.old), "version": "0.2.0"}]}})
@@ -51,6 +53,7 @@ class MigrationTests(unittest.TestCase):
         self.assertEqual(self.config, config)
         self.calls.append(args)
         if args[:2] == ["marketplace", "add"]:
+            self.assertEqual(args[2].split("#", 1)[1], migration.source_declaration(config)["extraKnownMarketplaces"][migration.MARKET]["source"]["ref"])
             return
         if args[0] == "install":
             shutil.copytree(ROOT / "skills", self.new / "skills", ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
@@ -224,6 +227,17 @@ class MigrationTests(unittest.TestCase):
         self.assertEqual(str(self.config), kwargs["env"]["CLAUDE_CONFIG_DIR"])
         self.assertEqual(self.project, kwargs["cwd"])
         self.assertNotIn("shell", kwargs)
+
+    def test_source_ref_update_preserves_unrelated_profile_settings(self):
+        original = migration.read_json(self.config / "settings.json")
+        migration.declare_ref(self.config, migration.DEFAULT_REF)
+        updated = migration.read_json(self.config / "settings.json")
+        self.assertEqual(migration.unrelated_settings(original), migration.unrelated_settings(updated))
+        self.assertEqual(original["extraKnownMarketplaces"]["other-market"], updated["extraKnownMarketplaces"]["other-market"])
+        updated["extraKnownMarketplaces"][migration.MARKET]["source"]["repo"] = "other/repository"
+        self.write(self.config / "settings.json", updated)
+        with self.assertRaisesRegex(ValueError, "declaration"):
+            migration.declare_ref(self.config, "main")
 
 
 if __name__ == "__main__":
