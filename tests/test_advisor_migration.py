@@ -53,7 +53,8 @@ class MigrationTests(unittest.TestCase):
         self.assertEqual(self.config, config)
         self.calls.append(args)
         if args[:2] == ["marketplace", "add"]:
-            declaration = migration.read_json(config / "settings.json")["extraKnownMarketplaces"][migration.MARKET]["source"]
+            settings = project / ".claude/settings.json" if "--scope" in args and args[-1] == "project" else config / "settings.json"
+            declaration = migration.read_json(settings)["extraKnownMarketplaces"][migration.MARKET]["source"]
             if "#" in args[2]:
                 self.assertEqual(args[2].split("#", 1)[1], declaration["ref"])
             else:
@@ -260,6 +261,46 @@ class MigrationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Recovery payload"):
             migration.rollback(self.backup, self.project, self.config, self.native)
         self.assertEqual(count, len(self.calls))
+
+    def test_project_source_pin_requires_opt_in_and_rolls_back_with_profile(self):
+        settings = migration.read_json(self.settings)
+        settings["extraKnownMarketplaces"] = {migration.MARKET: {"source": {
+            "source": "github", "repo": migration.REPO, "ref": "old-test-branch"}},
+            "other-market": {"source": {"source": "github", "repo": "other/project"}}}
+        self.write(self.settings, settings)
+        with self.assertRaisesRegex(ValueError, "--align-project-source"):
+            self.before()
+        before = migration.inspect(self.project, self.config, align_project_source=True)
+        self.assertEqual("migrated_restart_required", migration.migrate(before, self.backup, migration.DEFAULT_REF, self.native)["status"])
+        updated = migration.read_json(self.settings)
+        self.assertEqual(migration.DEFAULT_REF, updated["extraKnownMarketplaces"][migration.MARKET]["source"]["ref"])
+        self.assertEqual(settings["extraKnownMarketplaces"]["other-market"], updated["extraKnownMarketplaces"]["other-market"])
+        migration.rollback(self.backup, self.project, self.config, self.native)
+        source = migration.read_json(self.settings)["extraKnownMarketplaces"][migration.MARKET]["source"]
+        self.assertEqual({"source": "directory", "path": str(self.backup / "old-plugin")}, source)
+
+    def test_opt_in_never_repoints_a_different_project_repository(self):
+        settings = migration.read_json(self.settings)
+        settings["extraKnownMarketplaces"] = {migration.MARKET: {"source": {
+            "source": "github", "repo": "other/project"}}}
+        self.write(self.settings, settings)
+        with self.assertRaisesRegex(ValueError, "declaration"):
+            migration.inspect(self.project, self.config, align_project_source=True)
+        self.assertFalse(self.calls)
+
+    def test_project_only_declaration_does_not_create_user_declaration(self):
+        profile = migration.read_json(self.config / "settings.json")
+        declaration = profile["extraKnownMarketplaces"].pop(migration.MARKET)
+        self.write(self.config / "settings.json", profile)
+        settings = migration.read_json(self.settings)
+        settings["extraKnownMarketplaces"] = {migration.MARKET: declaration}
+        self.write(self.settings, settings)
+        before = migration.inspect(self.project, self.config, align_project_source=True)
+        migration.migrate(before, self.backup, migration.DEFAULT_REF, self.native)
+        self.assertEqual(profile, migration.read_json(self.config / "settings.json"))
+        self.assertEqual(["--scope", "project"], self.calls[0][-2:])
+        migration.rollback(self.backup, self.project, self.config, self.native)
+        self.assertEqual(profile, migration.read_json(self.config / "settings.json"))
 
 
 if __name__ == "__main__":

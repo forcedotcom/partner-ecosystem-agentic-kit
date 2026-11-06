@@ -182,7 +182,7 @@ def declare_recovery_source(config: Path, recovery: Path) -> None:
     replace_settings(path, original, value)
 
 
-def inspect(project: Path, config: Path) -> dict:
+def inspect(project: Path, config: Path, align_project_source: bool = False) -> dict:
     project, config = project.resolve(strict=True), config.resolve(strict=True)
     if not project.is_dir() or not config.is_dir():
         raise ValueError("Project and Claude config must be existing directories.")
@@ -192,10 +192,18 @@ def inspect(project: Path, config: Path) -> dict:
         raise ValueError("Keep the test project and config profile separate.")
     paths = settings_paths(project, config)
     settings = {str(path): read_json(path) for path in paths}
-    source_declaration(config)
-    for path in paths[:2]:
-        if MARKET in settings[str(path)].get("extraKnownMarketplaces", {}):
-            raise ValueError("Project/local marketplace declaration requires manual source alignment; this helper changes only the test profile declaration.")
+    profile_source = MARKET in settings[str(paths[2])].get("extraKnownMarketplaces", {})
+    if profile_source:
+        source_declaration(config)
+    project_source = MARKET in settings[str(paths[0])].get("extraKnownMarketplaces", {})
+    if MARKET in settings[str(paths[1])].get("extraKnownMarketplaces", {}):
+        raise ValueError("Local marketplace declaration requires manual source alignment.")
+    if project_source:
+        if not align_project_source:
+            raise ValueError("Project marketplace pin found. Preview with --align-project-source to explicitly include only this project's advisor source declaration.")
+        source_declaration(project / ".claude")
+    if not profile_source and not project_source:
+        raise ValueError("No matching marketplace declaration in the selected project/profile; review source manually.")
     for path in paths[1:]:
         enabled = settings[str(path)].get("enabledPlugins", {})
         if OLD_KEY in enabled or NEW_KEY in enabled:
@@ -221,6 +229,8 @@ def inspect(project: Path, config: Path) -> dict:
     if not new and enabled.get(OLD_KEY) is not True:
         raise ValueError("The old project plugin is not explicitly enabled.")
     return {"project": str(project), "config": str(config), "settings": settings,
+            "align_project_source": project_source,
+            "profile_source": profile_source,
             "old_install": old, "old_payload": payload_hash(old_root), "old_metadata": metadata_hashes(old_root),
             "new_install": new, "original_source": source_before(config)}
 
@@ -280,7 +290,7 @@ def migrate(before: dict, backup: Path, ref: str, runner=native) -> dict:
     if backup.exists() or backup.is_symlink() or any(backup.is_relative_to(p) or p.is_relative_to(backup) for p in (project, config)):
         raise ValueError("Choose a NEW backup directory outside the project and Claude config.")
     with profile_lock(config):
-        if inspect(project, config) != before:
+        if inspect(project, config, before["align_project_source"]) != before:
             raise ValueError("Installation changed after preview; inspect again.")
         backup.mkdir(mode=0o700)
         state = {"schema_version": 1, "phase": "backed_up", **before, "candidate_ref": ref}
@@ -309,8 +319,12 @@ def migrate(before: dict, backup: Path, ref: str, runner=native) -> dict:
                     {"name": OLD, "source": "./", "version": before["old_install"].get("version")} ]})
             if (old_root / ".mcp.json").exists():
                 shutil.copyfile(old_root / ".mcp.json", recovery / ".mcp.json")
-            declare_ref(config, ref)
-            runner(project, config, ["marketplace", "add", f"{REPO}#{ref}"])
+            if before["profile_source"]:
+                declare_ref(config, ref)
+            if before["align_project_source"]:
+                declare_ref(project / ".claude", ref)
+            source_scope = ["--scope", "project"] if before["align_project_source"] else []
+            runner(project, config, ["marketplace", "add", f"{REPO}#{ref}", *source_scope])
             state["phase"] = "marketplace_repointed"
             private_json(backup / "migration.json", state)
             runner(project, config, ["install", NEW_KEY, "--scope", "project"])
@@ -358,8 +372,12 @@ def rollback(backup: Path, project: Path, config: Path, runner=native) -> dict:
     else:
         private_json(catalog_path, catalog)
     with profile_lock(config):
-        declare_recovery_source(config, recovery)
-        runner(project, config, ["marketplace", "add", str(recovery)])
+        if state.get("profile_source", True):
+            declare_recovery_source(config, recovery)
+        if state.get("align_project_source"):
+            declare_recovery_source(project / ".claude", recovery)
+        source_scope = ["--scope", "project"] if state.get("align_project_source") else []
+        runner(project, config, ["marketplace", "add", str(recovery), *source_scope])
         runner(project, config, ["enable", OLD_KEY, "--scope", "project"])
         if installation(config, NEW_KEY, project):
             runner(project, config, ["disable", NEW_KEY, "--scope", "project"])
@@ -377,6 +395,8 @@ def main() -> int:
     parser.add_argument("--claude-config-dir", required=True, type=Path)
     parser.add_argument("--ref", default=DEFAULT_REF)
     parser.add_argument("--backup-dir", type=Path)
+    parser.add_argument("--align-project-source", action="store_true",
+                        help="Explicitly include this project's existing advisor marketplace source pin; leave unrelated entries unchanged.")
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--apply", action="store_true")
     group.add_argument("--rollback", type=Path, metavar="BACKUP")
@@ -394,11 +414,13 @@ def main() -> int:
                 return 1
             print(json.dumps(rollback(args.rollback.expanduser().resolve(strict=True), project, config), indent=2))
             return 0
-        before = inspect(project, config)
+        before = inspect(project, config, args.align_project_source)
         print(json.dumps({"status": "preview_only", "project": str(project), "claude_config_dir": str(config),
                           "source": f"{REPO}#{args.ref}", "from": OLD_KEY, "to": NEW_KEY,
                           "already_migrated": bool(before["new_install"]),
-                          "steps": ["Back up private configuration", "Align only this marketplace's saved test-profile source ref", "Repoint this test profile's marketplace", "Install and hash-verify new project plugin", "Disable old project plugin; retain its payload"],
+                          "align_project_source": before["align_project_source"],
+                          "profile_source_declaration": before["profile_source"],
+                          "steps": ["Back up private configuration", "Align only this marketplace's existing source declaration(s) shown above", "Repoint this test profile's marketplace", "Install and hash-verify new project plugin", "Disable old project plugin; retain its payload"],
                           "scope": "Selected project; marketplace source changes for this entire test profile.",
                           "not_supported": "User/local/managed scopes, copied skills, directory-backed marketplaces, other harnesses, active-session verification"}, indent=2))
         if not args.apply:

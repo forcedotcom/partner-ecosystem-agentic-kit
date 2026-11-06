@@ -31,7 +31,7 @@ or real installations were migrated while building this candidate.
 
 ## Validation status
 
-All 59 automated library and synthetic migration/failure/rollback tests pass,
+All 62 automated library and synthetic migration/failure/rollback tests pass,
 including in an independently extracted source-review archive. Contract checks,
 knowledge-preservation guards, skill validation, and native Claude plugin
 validation pass. Existing listing warnings about icon/privacy URL remain.

@@ -69,6 +69,15 @@ and no network calls. The preview reads selected settings/inventory and old
 skill files, and reads the cached marketplace Git revision for rollback.
 If it stops, review the reason; do not delete files just to satisfy the check.
 
+If the preview reports an existing project marketplace pin, repeat the preview
+with `--align-project-source`. This explicitly includes just this repository's
+advisor source declaration in `.claude/settings.json`; its backup and rollback
+are included. Use the same flag for apply. Different repositories and local
+scope declarations still stop for manual review.
+If the source is declared only in project settings, the helper keeps that
+scope; it does not create a user-level declaration. If both project and profile
+declarations already exist, both matching refs are aligned and backed up.
+
 ## 3. Apply after reviewing the preview
 
 Choose a **new** backup directory outside both the test project and profile:
@@ -81,13 +90,13 @@ python3 scripts/migrate_advisor.py --project "$PROJECT" --claude-config-dir "$PR
 Type `MIGRATE` when asked. The helper:
 
 1. Rechecks the preview and takes a private configuration/payload backup.
-2. Aligns just this marketplace's source ref in the selected profile's
-   `extraKnownMarketplaces` declaration, then uses the native command to repoint
+2. Aligns just this marketplace's existing source ref in the selected
+   `extraKnownMarketplaces` declaration(s), then uses the native command to repoint
    the existing marketplace to the candidate source. This
    source registration is profile-wide, not project-local, which is why a
    dedicated test profile is required. Other marketplace declarations, unrelated
-   settings, and managed settings are not rewritten. Project/local source
-   declarations stop for manual alignment rather than being overridden.
+   settings, and managed settings are not rewritten. A matching project pin is
+   aligned only with `--align-project-source`; local declarations stop for review.
 3. Installs the new project plugin using native Claude commands. It checks the
    installed identity/version and full skill payload hash against the checkout.
 4. Checks unrelated settings and the original skill payload are unchanged, then
