@@ -207,6 +207,14 @@ class MigrationTests(unittest.TestCase):
         self.assertFalse(self.backup.exists())
         self.assertFalse(self.calls)
 
+    def test_native_install_root_alias_is_resolved_before_config_checks(self):
+        alias = self.root / "native-cache-alias"
+        alias.symlink_to(self.old, target_is_directory=True)
+        inventory = migration.read_json(self.inventory)
+        inventory["plugins"][migration.OLD_KEY][0]["installPath"] = str(alias)
+        self.write(self.inventory, inventory)
+        self.assertEqual("migrated_restart_required", self.apply()["status"])
+
     def test_native_command_is_bound_to_explicit_project_profile(self):
         from types import SimpleNamespace
         with patch.object(migration.subprocess, "run", return_value=SimpleNamespace(returncode=0)) as run:

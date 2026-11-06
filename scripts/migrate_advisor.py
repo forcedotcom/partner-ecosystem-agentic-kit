@@ -226,7 +226,9 @@ def migrate(before: dict, backup: Path, ref: str, runner=native) -> dict:
                 shutil.copyfile(path, backup / f"config-{index}.json")
                 (backup / f"config-{index}.json").chmod(0o600)
         # Disabled, not uninstalled: preserve the native old payload for rollback.
-        old_root = Path(before["old_install"]["installPath"])
+        # Native inventory may use an OS alias such as /tmp -> /private/tmp.
+        # Resolve the install root, then still reject symlinks inside payloads.
+        old_root = Path(before["old_install"]["installPath"]).resolve(strict=True)
         try:
             if read_json(ROOT / ".mcp.json") != read_json(old_root / ".mcp.json"):
                 raise ValueError("MCP configuration differs. This identity-only migration needs manual review.")

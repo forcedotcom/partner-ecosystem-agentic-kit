@@ -4,8 +4,10 @@
 
 `adapters/profiles.json` describes packaging for Codex local, Claude Code projects/plugins,
 Cursor local, Claude app surfaces, and a generic reference-only fallback.
-It is our configuration, not a new host-recognized manifest. The existing
-Claude/Codex plugin manifests and their optional MCP configuration are unchanged.
+It is our configuration, not a new host-recognized manifest. This candidate
+renames the Claude/Codex plugin and entry skill to `isv-partner-advisor` while
+retaining optional MCP configuration. See the [identity migration test](advisor-rename-migration.md);
+the 0.2.0 host evidence does not establish this renamed identity works.
 No connector is auto-connected by the new export tool. Skill metadata and the
 contract JSON do not override native permissions or act as a sandbox.
 
@@ -136,7 +138,8 @@ does not connect anything. Use `claude --plugin-dir <extracted-root>` only after
 checking that competing installed copies are excluded in that test context.
 It does not guarantee isolation. Current native support is documented at
 https://code.claude.com/docs/en/plugins/create. Check installed CLI capabilities
-before using newer flags. Actual update instructions are in `upgrade-testing.md`.
+before using newer flags. Historical 0.2.0 upgrade instructions remain in
+`upgrade-testing.md`; this identity change uses `advisor-rename-migration.md`.
 
 To produce a complete independent-review ZIP, including hidden plugin manifests
 required by the tests, run:

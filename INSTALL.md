@@ -86,7 +86,8 @@ technical identifier `isv-partner-advisor`. If that host cannot install this
 repository as a plugin, use the explicit project-local fallback below rather
 than inventing an install command or assuming a public directory listing.
 
-For a project-local fallback, download a released source archive, review it,
+For this project-local candidate test, use this reviewed branch checkout,
+not the public 0.2.0 archives with the old identity,
 and copy **every complete child folder of `skills/`** into the target project's
 `.agents/skills/`. Keep each folder's `SKILL.md`, `references/`, `scripts/`, and
 other supporting files intact. Review conflicts before copying. Do not copy
@@ -112,7 +113,7 @@ These are manual, project-local skill installations, not Claude plugin installs.
 | Cursor | `<project>/.cursor/skills/` | Open Agent and select `/isv-partner-advisor` |
 | OpenCode | `<project>/.opencode/skills/` | Ask it to load the `isv-partner-advisor` skill |
 
-Download and review the released source, then copy all skill directories with
+Review this candidate branch's source, then copy all skill directories with
 their supporting files. For example, the entry file in Cursor must land at
 `.cursor/skills/isv-partner-advisor/SKILL.md`, not
 `.cursor/skills/skills/isv-partner-advisor/SKILL.md`.
