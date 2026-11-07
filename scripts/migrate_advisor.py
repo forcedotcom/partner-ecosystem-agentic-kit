@@ -25,7 +25,7 @@ OLD = "oem-isv-advisor"
 NEW = "isv-partner-advisor"
 OLD_KEY = f"{OLD}@{MARKET}"
 NEW_KEY = f"{NEW}@{MARKET}"
-DEFAULT_REF = "codex/isv-partner-advisor-migration"
+DEFAULT_REF = "main"
 
 
 def read_json(path: Path) -> dict:
