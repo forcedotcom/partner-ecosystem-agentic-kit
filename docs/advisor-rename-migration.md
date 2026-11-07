@@ -1,8 +1,8 @@
 # Test the ISV Partner Advisor rename
 
-This is a branch-only migration candidate, **0.3.0-rc.2**, not a release.
-The public 0.2.0 release and normal users are unchanged. It builds on the
-installation/documentation work in PR #24; do not merge or tag before review
+The rename, **0.3.0-rc.2**, is on `main` but not yet a tagged release.
+The 0.2.0 release still uses the old identity. It builds on the
+installation/documentation work in PR #24; do not tag a release before review
 and acceptance of the exact candidate's upgrade evidence.
 
 | Before | Candidate |
@@ -54,18 +54,18 @@ The helper refuses recorded marketplace installations in other projects/scopes
 and recognized duplicate entry folders. These checks are not an OS sandbox or
 proof that every possible synced/global/custom source is inaccessible.
 
-## 1. Get and review the branch
+## 1. Get and review the source
 
 In a terminal, clone to a new directory outside your runtime skill folders:
 
 ```bash
-git clone --branch codex/isv-partner-advisor-migration --single-branch https://github.com/forcedotcom/partner-ecosystem-agentic-kit.git advisor-rename-test
+git clone --branch main --single-branch https://github.com/forcedotcom/partner-ecosystem-agentic-kit.git advisor-rename-test
 cd advisor-rename-test
 ```
 
 Review `scripts/migrate_advisor.py`. Run it from this checkout: it compares
 installed skill hashes with **this checkout**, so the branch and source must
-match. The default source is the candidate branch; `--ref <branch-or-tag>` selects
+match. The default source is `main`; `--ref <branch-or-tag>` selects
 another reviewed source. This Claude CLI cannot clone a raw commit as a branch;
 the helper instead verifies installed skill hashes. Do not run a remote script
 through a shell pipe.
