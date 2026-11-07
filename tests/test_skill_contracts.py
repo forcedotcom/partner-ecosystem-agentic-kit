@@ -30,7 +30,11 @@ class SkillContractTests(unittest.TestCase):
         self.assertEqual(27, len(entries))
         for entry in entries:
             report = CONTRACTS.inspect_contract(ROOT / "skills" / entry["id"])
-            expected = "2.0.0" if entry["id"] == "isv-partner-advisor" else "1.0.1"
+            updated = {"solution-discovery", "headless-mcp-advisor",
+                       "package-version-validation", "environment-portfolio",
+                       "scratch-org-shape"}
+            expected = ("2.0.1" if entry["id"] == "isv-partner-advisor"
+                        else "1.0.2" if entry["id"] in updated else "1.0.1")
             self.assertEqual(expected, report["skill_version"])
             self.assertEqual(report["skill_version"], entry["version"])
 

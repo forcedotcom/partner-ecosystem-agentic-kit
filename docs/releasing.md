@@ -29,6 +29,12 @@ installs unchanged; a GitHub release does not itself upgrade a plugin.
 7. Run the owner/pilot upgrade tests in docs/upgrade-testing.md. Record acceptance
    separately from structural tests. Do not claim all hosts passed from one run.
 
+For the `isv-partner-advisor` identity change, use
+[the rename migration procedure](advisor-rename-migration.md), not the historical
+0.1.0-to-0.2.0 procedure. Already-renamed installs use normal same-ID updates.
+Publish a matching reviewed branch revision before asking testers to fetch it;
+a local candidate or session-only plugin load is not a marketplace upgrade.
+
 Repository CI needs permission to create releases for the workflow. A maintainer
 can publish the same validated tag/assets manually if organization policy blocks
 Actions publication; record that fact. Do not enable broader org permissions as
@@ -49,12 +55,17 @@ shortening and consolidated app packaging stay separate experiments.
 
 ## Behavior impact in this candidate
 
-- Routing/dependency declarations and invocation resolution can affect handoffs.
-- Conditional Ask dependencies allow bounded guidance when a specialist is
-  missing; this is not permission to invent that specialist's findings.
-- Scoped preference reuse and skipping unused web consent change visible prompts.
-- Metadata/catalog/checker/packaging changes are structural but still need actual
-  host parsing/loading tests. Existing descriptions and domain knowledge remain.
+- Plugin/entry identity and invocation change; ordinary updates cannot migrate
+  the old ID. Retain recoverable backups and verify the active source/scope.
+- Follow-up questions reselect their capability owner before focused advisors.
+- Beta target advice separates 1GP from 2GP and leaves unverified persistent
+  test prerequisites blocked rather than inventing eligibility.
+- Scratch-template convenience settings are not universal build prerequisites.
+- Contract schema, authority modes, maturity, and original practitioner records
+  remain unchanged. Explicit clarification files scope older guidance.
+- The current [validation record](releases/0.3.0-rename-validation.md) distinguishes
+  automated checks, session-local behavior, marketplace delivery, and not-run
+  coverage. No result automatically authorizes publication or upgrades users.
 
 The legacy 0.1.0 label covered multiple source revisions before this policy.
 Preserve the actual prior installed payload/hash for rollback, not only that

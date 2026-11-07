@@ -1,15 +1,17 @@
-# ISV Partner Advisor 0.3.0-rc.1 — rename test candidate
+# ISV Partner Advisor 0.3.0-rc.2 — rename test candidate
 
-Unreleased branch preview. No tag or GitHub release is created by this change.
+Unreleased branch preview. This checkout does not create a tag or GitHub release.
+The published 0.2.0 Beta retains its old identity; it is not silently upgraded.
 
 ## Identity change
 
 - Product: **ISV Partner Advisor**.
 - Plugin and entry skill: `isv-partner-advisor`.
 - Claude invocation: `/isv-partner-advisor:isv-partner-advisor`.
+- Codex: select the entry skill or use `$isv-partner-advisor` where supported.
 - Existing repository and marketplace identity remain unchanged.
-- Entry skill version: 2.0.0. Other skills: 1.0.1 for identity references and
-  branding. Contract schema and declared maturity are unchanged.
+- Entry skill version: 2.0.1; five corrected domain skills: 1.0.2; other skills:
+  1.0.1. Contract schema, authority modes, and declared maturity are unchanged.
 
 This is an intentional install/command breaking change, not a routine update.
 OEM-specific guidance, specialist scope, and Ask/Assess/approval-gated Act
@@ -27,22 +29,38 @@ marketplace source. Keep the backup until the source is explicitly changed.
 
 Only a dedicated-profile GitHub-backed Claude project plugin is automated.
 Other install methods stop for manual handling. No production/user profiles
-or real installations were migrated while building this candidate.
+are migrated by these edits. Already-renamed plugins use
+[ordinary same-ID updates](../../INSTALL.md#updates), not the migration helper.
+
+## Behavior corrections in rc.2
+
+- Select the primary capability as each follow-up changes the partner decision;
+  do not skip it merely because a focused specialist is already available.
+- Do not reuse 1GP beta target eligibility for managed 2GP. A persistent testing
+  recommendation stays conditional on the actual eligible environment and access.
+- Do not require the password-setting-through-API convenience feature unless
+  the selected workflow needs it.
+
+OEM-specific knowledge and the original practitioner records are retained.
+Explicit clarification files scope older guidance. This follow-up includes
+bounded behavior changes, not branding alone.
 
 ## Validation status
 
-All 62 automated library and synthetic migration/failure/rollback tests pass,
-including in an independently extracted source-review archive. Contract checks,
-knowledge-preservation guards, skill validation, and native Claude plugin
-validation pass. Existing listing warnings about icon/privacy URL remain.
-A disposable, credential-free Claude Code 2.1.319 profile also completed native
-GitHub-backed old installation, candidate migration/hash checks, repeat-run
-verification, and recovery-source rollback. No model session was launched.
-The rehearsal exposed and corrected OS cache-path alias handling, saved source
-declaration alignment, and the CLI's lack of raw-commit marketplace cloning.
-The owner must still test the actual old-to-new plugin upgrade and relevant
-Ask/Assess/Act behavior in the selected project. No new live-host result,
-cross-harness certification, or successful candidate isolation is claimed.
+See the [dated rename validation record](0.3.0-rename-validation.md).
+66 automated checks (including three documentation guards) and six skill
+format checks passed. The automated suite also passed in an independently
+extracted source-review archive. A native Claude Code
+four-question Ask run of the exact frozen rc.2 payload passed the targeted
+routing/eligibility/template-scope checks. It used a session-local plugin load;
+it did not update the installed marketplace plugin to rc.2.
+
+Earlier migration/rollback mechanics and the owner's observed renamed rc.1
+installation are separate evidence. Native marketplace delivery of rc.2,
+Assess/Act, OEM-specific behavior, other hosts, and candidate isolation were
+not certified by the four-question rerun. No actual package/org action ran.
+The new archive check establishes packaging/test completeness, not an installed
+host upgrade or new behavioral coverage. Keep incomplete checks visible.
 
 No PEAK console changes, new MCP connections, or Salesforce org actions are
 included. Do not merge or publish until review and owner acceptance.

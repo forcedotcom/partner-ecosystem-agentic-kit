@@ -6,8 +6,11 @@
 Cursor local, Claude app surfaces, and a generic reference-only fallback.
 It is our configuration, not a new host-recognized manifest. This candidate
 renames the Claude/Codex plugin and entry skill to `isv-partner-advisor` while
-retaining optional MCP configuration. See the [identity migration test](advisor-rename-migration.md);
-the 0.2.0 host evidence does not establish this renamed identity works.
+retaining optional MCP configuration. See the [identity migration test](advisor-rename-migration.md)
+and [rename validation record](releases/0.3.0-rename-validation.md). The rc.2
+session-local Claude Ask rerun passed targeted checks; rc.2 marketplace delivery,
+Assess/Act, isolation, and other hosts are not thereby certified. Historical
+0.2.0 evidence is not evidence for the renamed candidate.
 No connector is auto-connected by the new export tool. Skill metadata and the
 contract JSON do not override native permissions or act as a sandbox.
 

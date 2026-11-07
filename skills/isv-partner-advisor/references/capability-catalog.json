@@ -24,7 +24,7 @@
     },
     {
       "id": "isv-partner-advisor",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "role": "entry-router",
       "modes": [
         "ask",
@@ -39,7 +39,7 @@
   "capabilities": [
     {
       "id": "solution-discovery",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "role": "capability-router",
       "modes": [
         "ask",
@@ -142,7 +142,7 @@
         },
         {
           "id": "package-version-validation",
-          "version": "1.0.1",
+          "version": "1.0.2",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -209,7 +209,7 @@
       "focused_skills": [
         {
           "id": "environment-portfolio",
-          "version": "1.0.1",
+          "version": "1.0.2",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -274,7 +274,7 @@
         },
         {
           "id": "scratch-org-shape",
-          "version": "1.0.1",
+          "version": "1.0.2",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -344,7 +344,7 @@
         },
         {
           "id": "headless-mcp-advisor",
-          "version": "1.0.1",
+          "version": "1.0.2",
           "role": "focused-advisor",
           "modes": [
             "ask",

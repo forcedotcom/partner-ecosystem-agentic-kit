@@ -4,7 +4,7 @@ The **ISV Partner Advisor** helps Salesforce partners turn an idea into a produc
 choose its architecture and packaging, prepare for security review, and guide
 it through release and operation. Start wherever you are in that journey.
 
-One advisor, with a portable library of 27 supporting skills. You do not need
+One advisor, with a portable library of 27 skills. You do not need
 to select or assemble the individual advisors yourself. The plugin's technical
 identifier is `isv-partner-advisor`.
 
@@ -12,12 +12,13 @@ identifier is `isv-partner-advisor`.
 [Latest release](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/releases/latest) ·
 [Architecture](ARCHITECTURE.md) · [Contributing](CONTRIBUTING.md)
 
-> **Rename preview — not released:** This branch tests **0.3.0-rc.1**, renaming
+> **Rename preview — not released:** This checkout declares **0.3.0-rc.2**, renaming
 > the product and entry command to **ISV Partner Advisor** / `isv-partner-advisor`.
 > The public **0.2.0 — Beta** release still uses the old identity. Existing users:
 > follow the [project migration test](docs/advisor-rename-migration.md), not a
-> normal plugin update. OEM-specific knowledge is retained. No new release or
-> successful live migration is claimed yet.
+> normal plugin update. OEM-specific knowledge is retained. See the
+> [rename validation record](docs/releases/0.3.0-rename-validation.md) for what
+> was tested; the corrected candidate is not yet a published release.
 
 ## Usage
 
@@ -31,18 +32,31 @@ Choose your app and install the complete advisor library.
 | OpenCode | [Project-local skills](INSTALL.md#cursor-and-opencode) | Ask it to load `isv-partner-advisor` |
 | ChatGPT and other chat apps | [Check app/workspace capabilities](INSTALL.md#chatgpt-and-other-chat-apps) | Native installation and supporting-skill access must be verified first |
 
-The previous identity's Claude Code upgrade was maintainer-tested; this renamed
-candidate still needs its own live upgrade test. Other routes have packaging or
-documented discovery support, not equivalent live-host validation.
+Claude Code migration mechanics were rehearsed, and the corrected renamed
+candidate passed a four-question Ask-mode CLI rerun. That session-local load
+is not proof of a marketplace upgrade to rc.2, Assess/Act coverage, or every
+skill's correctness. Other routes have packaging or documented discovery
+support, not equivalent live-host validation.
 [Compatibility details](docs/harness-compatibility.md).
 
 ## Install the advisor
+
+### Choose your starting point
+
+| What you have | What to do |
+| --- | --- |
+| No advisor installed | Follow the fresh-install steps below in a dedicated candidate test profile. |
+| The old `oem-isv-advisor` plugin | Use the [preview-first migration](docs/advisor-rename-migration.md); **Update now** does not change a plugin's identity. |
+| The new `isv-partner-advisor` plugin | Follow [ordinary updates](INSTALL.md#updates), keeping the intended project, profile, scope, and source. |
+| Copied skill folders or another app | Use the [installation-method-specific guidance](INSTALL.md#existing-users-and-the-name-change); the Claude migration script is not a universal installer. |
 
 ### Claude Code quick start
 
 For a **fresh, dedicated candidate test profile**, open Claude Code in the
 intended project and enter these commands one at a time. Existing installs
 should use the [migration helper](docs/advisor-rename-migration.md) instead.
+The remote branch must contain the reviewed candidate first; local changes
+are not available through these commands until maintainers push them.
 
 ```text
 /plugin marketplace add forcedotcom/partner-ecosystem-agentic-kit#codex/isv-partner-advisor-migration
@@ -70,8 +84,16 @@ mode, use only the context I provide and available documentation, and ask
 the questions that would materially change your recommendation.
 ```
 
-The advisor routes by your decision, not by the title of a document. It can
-also start with an existing product, packaging question, or approved evidence.
+The advisor routes by your current decision, not by the title of a document.
+As your question changes, it loads the appropriate capability owner and uses
+focused specialists for supporting findings. You do not need to start a new
+conversation or learn each specialist's command. It can also start with an
+existing product, packaging question, or approved evidence.
+
+Stay in **Ask** for advice. To inspect your actual project, explicitly authorize
+**Assess** for named files or read-only targets. **Act** requires a bounded plan
+and separate approval before material changes; installing or updating the
+advisor does not grant those permissions.
 
 ## How the advisor works
 

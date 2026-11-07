@@ -1,9 +1,9 @@
 # Test the ISV Partner Advisor rename
 
-This is a branch-only migration candidate, **0.3.0-rc.1**, not a release.
+This is a branch-only migration candidate, **0.3.0-rc.2**, not a release.
 The public 0.2.0 release and normal users are unchanged. It builds on the
 installation/documentation work in PR #24; do not merge or tag before review
-and the owner's live upgrade test.
+and acceptance of the exact candidate's upgrade evidence.
 
 | Before | Candidate |
 | --- | --- |
@@ -12,17 +12,34 @@ and the owner's live upgrade test.
 | `/oem-isv-advisor:oem-isv-advisor` | `/isv-partner-advisor:isv-partner-advisor` |
 
 The repository/marketplace stays `partner-ecosystem-agentic-kit`. OEM guidance,
-including partner-specific circumstances, is preserved. Only branding,
-discovery descriptions/prompts, entry identity, and its references change.
-The entry version is 2.0.0 because its ID changes; other skills get a 1.0.1
-identity-reference/branding patch. These version changes do not promote maturity.
+including partner-specific circumstances, is preserved. The original rename
+changes branding, discovery descriptions/prompts, entry identity, and its
+references. The rc.2 follow-up also makes the bounded behavior corrections
+listed below; it is not a branding-only payload.
+The rename initially set the entry version to 2.0.0 and other skills to 1.0.1.
+The rc.2 follow-up sets the entry to 2.0.1 and five affected skills to 1.0.2
+for decision-owner handoffs, generation-specific beta eligibility, and optional
+scratch-template scope. Other skills remain 1.0.1. Original practitioner records
+are preserved; these version changes do not promote maturity.
 
 ## Supported test installation
+
+**Choose the right path:** this helper changes an existing **old** plugin ID
+to the new ID. If `isv-partner-advisor` is already installed, use the
+[ordinary same-ID update flow](../INSTALL.md#updates), not this helper, to
+move from rc.1 to rc.2. Keep the original migration backup for recovery.
 
 Maintainer rehearsal: a disposable Claude Code 2.1.319 profile completed the
 native old-plugin install, renamed-plugin installation/hash verification,
 repeat-run check, and rollback. No model was invoked and the owner's project
 was not used. This checks installation mechanics, not advisory behavior.
+
+The owner subsequently observed the renamed rc.1 project installation. A
+four-question Claude CLI Ask-mode test of the corrected rc.2 payload passed
+the targeted checks using a session-local plugin load. It did **not** install
+rc.2 through the marketplace. See the
+[dated validation record](releases/0.3.0-rename-validation.md) for evidence and
+not-run checks; this does not establish all skills or every authority mode.
 
 The helper supports **one existing GitHub-backed Claude Code project-scoped
 plugin** in a dedicated non-default `CLAUDE_CONFIG_DIR`. It does not migrate
@@ -52,6 +69,11 @@ match. The default source is the candidate branch; `--ref <branch-or-tag>` selec
 another reviewed source. This Claude CLI cannot clone a raw commit as a branch;
 the helper instead verifies installed skill hashes. Do not run a remote script
 through a shell pipe.
+
+Check the source revision and `VERSION` before applying. Local edits are not
+available from GitHub until pushed; if the remote still contains rc.1, installing
+from it cannot produce this checkout's rc.2 payload. A mismatch must stop the
+test, not be bypassed by changing the expected version or editing a plugin cache.
 
 ## 2. Preview only
 
@@ -93,8 +115,10 @@ Type `MIGRATE` when asked. The helper:
 2. Aligns just this marketplace's existing source ref in the selected
    `extraKnownMarketplaces` declaration(s), then uses the native command to repoint
    the existing marketplace to the candidate source. This
-   source registration is profile-wide, not project-local, which is why a
-   dedicated test profile is required. Other marketplace declarations, unrelated
+   declaration's existing scope is preserved: project-only sources remain
+   project-scoped; an existing profile-level source can affect other projects
+   in that profile, which is why a dedicated test profile is required.
+   Other marketplace declarations, unrelated
    settings, and managed settings are not rewritten. A matching project pin is
    aligned only with `--align-project-source`; local declarations stop for review.
 3. Installs the new project plugin using native Claude commands. It checks the
@@ -119,7 +143,7 @@ CLAUDE_CONFIG_DIR="$PROFILE" claude
 ```
 
 Check `/plugin` → **Installed**: the new identity is enabled in project scope,
-the old one is disabled, and the version is `0.3.0-rc.1`. Then invoke:
+the old one is disabled, and the version is `0.3.0-rc.2`. Then invoke:
 
 ```text
 /isv-partner-advisor:isv-partner-advisor
@@ -132,7 +156,9 @@ approved harmless Act fixture test. Verify actual loaded paths—not just the
 model's claim. Capture pass/fail/not-run and any new permission prompts.
 
 An idempotent apply after success verifies the same new payload and makes no
-native plugin changes. Structural/synthetic tests are not live upgrade proof.
+native plugin changes. It does not upgrade an already-renamed installation to
+a different payload; use the ordinary update flow for that. Structural/synthetic
+tests are not live upgrade proof.
 
 ## Roll back or recover from a partial migration
 

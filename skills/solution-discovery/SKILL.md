@@ -2,7 +2,7 @@
 name: solution-discovery
 description: Validate an ISV product idea, target user, Salesforce fit, product boundary, business outcome, and candidate solution direction. Use when a partner is still deciding what to build, whether Salesforce is the right platform, or which advisor capability should own the next decision.
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
   contract-schema: "1.0.0"
   role: "capability-router"
   primary-capability: "solution-discovery"
@@ -37,7 +37,10 @@ journey. Route by the decision being made, not by the title of an artifact.
    lifecycle assumptions.
 4. Separate validated facts from assumptions and unknowns.
 5. Recommend proceed, reshape, investigate, or stop.
-6. Route the next bounded decision to the appropriate advisor skill.
+6. Route the next bounded decision to the appropriate advisor skill. When a
+   follow-up changes from product fit to architecture or package-build choices,
+   invoke the new capability owner before its focused specialists. Do not keep
+   synthesizing under product discovery solely because it owned the first turn.
 
 ## Routing
 

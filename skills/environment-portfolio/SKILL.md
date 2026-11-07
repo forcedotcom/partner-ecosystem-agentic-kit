@@ -2,7 +2,7 @@
 name: environment-portfolio
 description: Use when choosing scratch, PDE, Test/Demo, Trialforce Source, template-backed, customer-trial, sandbox, or other partner environments for a lifecycle job. Owns Choosing scratch, PDE, test/demo, Trialforce source, template, customer trial, and other partner environments by job.
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "development-environment"
@@ -53,6 +53,13 @@ capability concise and route here only when this bounded decision is active.
 6. State the evidence-bound access or provisioning path for the recommended
    environment. Do not assume entitlement, administrator access, or authority
    to create an environment.
+7. When package installation is part of the job, read the generation-specific
+   rules in `references/beta-eligibility.md`. Do not carry
+   1GP Test/Demo eligibility into a 2GP recommendation. For persistent beta
+   testing, consider an eligible dedicated sandbox only if access, entitlements,
+   and the data-reset/reinstall plan are established. Otherwise mark that
+   combination blocked and offer a separate scratch-org beta check plus a
+   persistent-data plan; do not claim both prove integrated 90-day operation.
 
 ## Scratch-definition handoff
 

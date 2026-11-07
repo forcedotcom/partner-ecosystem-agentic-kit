@@ -2,7 +2,7 @@
 name: headless-mcp-advisor
 description: Advise Salesforce partners on Headless Toolkit and MCP client/server choices, managed-package boundaries, HXL output, and delivery to Agentforce, Slackbot, Claude, or ChatGPT. Use for architecture decisions or Salesforce DX assessments; route builds to global sf-skills.
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "implementation-best-practices"
@@ -31,6 +31,11 @@ or ChatGPT delivery, and `references/source-refresh.md` before current platform
 or packageability claims. Run `advisor-capability-preflight` first.
 
 ## Authority and evidence
+
+For an implementation-pattern decision, if `implementation-best-practices`
+has not been loaded as the active owner, invoke it before giving the final
+recommendation. If another capability requested only a supporting MCP finding,
+return that bounded finding to it instead; do not switch owners or recurse.
 
 - **Ask:** advise from supplied context and packaged references only; label
   facts, practitioner knowledge, inference, recommendation, assumption, and

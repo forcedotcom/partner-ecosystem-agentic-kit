@@ -62,6 +62,14 @@ class PortabilityRegressionTests(unittest.TestCase):
                 self.assertTrue(status["ready"])
                 self.assertTrue(status["advisory_ready"])
 
+    def test_beta_clarifications_are_in_the_portable_runtime_payload(self):
+        files, versions = prepare_harness.payload(ROOT)
+        for skill in ("environment-portfolio", "package-version-validation"):
+            relative = f"skills/{skill}/references/beta-eligibility.md"
+            self.assertIn(relative, files)
+            self.assertEqual((ROOT / relative).read_bytes(), files[relative])
+            self.assertEqual("1.0.2", versions[skill])
+
     def test_catalog_routes_by_id_and_ask_is_not_required(self):
         checker = prepare_harness.checker(ROOT)
         report = checker.inspect_library_contracts(ROOT)
@@ -125,6 +133,6 @@ class PortabilityRegressionTests(unittest.TestCase):
             build_review_archive.build(ROOT, output)
             with zipfile.ZipFile(output) as bundle:
                 names = set(bundle.namelist())
-                for path in (".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".codex-plugin/plugin.json", ".mcp.json", "scripts/prepare_harness.py", "tests/test_preflight.py"):
+                for path in (".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".codex-plugin/plugin.json", ".mcp.json", "scripts/prepare_harness.py", "tests/test_preflight.py", "CODE_OF_CONDUCT.md", "SECURITY.md"):
                     self.assertIn(path, names)
                 self.assertFalse(any(".git/" in path or "__pycache__" in path for path in names))

@@ -1,6 +1,6 @@
 {
   "name": "isv-partner-advisor",
-  "version": "0.3.0-rc.1",
+  "version": "0.3.0-rc.2",
   "description": "A complete Salesforce ISV partner advisor spanning the journey from product idea through packaging, architecture, development, distribution, security, and operations.",
   "author": {
     "name": "Salesforce",

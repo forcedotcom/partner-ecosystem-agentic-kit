@@ -11,7 +11,7 @@
       "name": "isv-partner-advisor",
       "source": "./",
       "description": "ISV Partner Advisor for the complete Salesforce partner journey from idea through operations.",
-      "version": "0.3.0-rc.1",
+      "version": "0.3.0-rc.2",
       "category": "salesforce"
     }
   ]
