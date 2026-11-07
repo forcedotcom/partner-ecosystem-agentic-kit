@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="300" viewBox="0 0 1160 300" role="img" aria-labelledby="title desc">
+  <title id="title">ISV Partner Advisor operating model</title>
+  <desc id="desc">Preserve the partner goal, establish mode and evidence, route to the capability and specialists, then synthesize a recommendation. Material execution needs a bounded plan and explicit approval.</desc>
+  <rect width="1160" height="300" rx="20" fill="#f4f8fc"/>
+  <g font-family="Arial, sans-serif" fill="#102a43" text-anchor="middle">
+    <text x="580" y="45" font-size="28" font-weight="700">ISV Partner Advisor — operating model</text>
+    <g fill="#fff" stroke="#c1d3e4" stroke-width="2">
+      <rect x="30" y="90" width="240" height="120" rx="12"/>
+      <rect x="315" y="90" width="240" height="120" rx="12"/>
+      <rect x="600" y="90" width="240" height="120" rx="12"/>
+      <rect x="885" y="90" width="245" height="120" rx="12"/>
+    </g>
+    <path d="M275 150H305M560 150H590M845 150H875" stroke="#7b95b0" stroke-width="3"/>
+    <g font-size="20" font-weight="700">
+      <text x="150" y="125">Partner goal</text>
+      <text x="435" y="125">Mode and evidence</text>
+      <text x="720" y="125">Capability owner</text>
+      <text x="1007" y="125">One recommendation</text>
+    </g>
+    <g font-size="16" fill="#486581">
+      <text x="150" y="162">Outcome, context,<tspan x="150" dy="24">constraints, current stage</tspan></text>
+      <text x="435" y="162">Ask / Assess / Act<tspan x="435" dy="24">Sources and uncertainty</tspan></text>
+      <text x="720" y="162">Consult relevant specialists<tspan x="720" dy="24">and combine findings</tspan></text>
+      <text x="1007" y="162">Rationale, risks, unknowns,<tspan x="1007" dy="24">and next approved action</tspan></text>
+      <text x="580" y="252">Material execution: bounded plan → explicit approval → appropriate execution tools → validation</text>
+      <text x="580" y="278">Metadata and prior installation approval never grant permission to change a project or org.</text>
+    </g>
+  </g>
+</svg>

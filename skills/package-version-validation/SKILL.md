@@ -2,7 +2,7 @@
 name: package-version-validation
 description: Use when creating or diagnosing managed 2GP package versions, internal build-org shape, validation timing, code coverage, installation keys, and candidate test evidence. Owns Build-org shape, validation mode, code coverage, installation keys, candidate testing, and version-create diagnostics.
 metadata:
-  version: "1.0.0"
+  version: "1.0.2"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "packaging-distribution"
@@ -45,11 +45,26 @@ capability concise and route here only when this bounded decision is active.
 
 ## Decision workflow
 
+When this is the primary package-build decision, invoke `packaging-distribution`
+if it is not already loaded as the owner. When another capability requests only
+supporting build evidence, return that finding to the active owner instead.
+
 1. Resolve effective project and CLI configuration.
 2. Validate build-org edition, features, settings, and entitlements.
 3. Choose standard, async, or skipped validation deliberately.
 4. Choose installation-key policy without exposing secrets.
 5. Track the create request to terminal state and preserve the exact 04t.
+
+Before recommending a beta installation target, read the generation-specific
+rules in `references/beta-eligibility.md`. Keep duration, AI
+entitlement, beta eligibility, and upgradeability separate: a persistent org
+does not by itself qualify for a managed 2GP beta. Do not promote a version
+merely to bypass an unresolved testing prerequisite; promotion needs its own
+release decision and approval.
+
+For build shape, distinguish required features from a practitioner's convenience
+template. `EnableSetPasswordInApi` is optional unless the selected workflow
+needs password-setting through the API; do not inherit it automatically.
 
 ## Execution delegation
 

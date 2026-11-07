@@ -5,7 +5,7 @@ from prepare_harness import archive
 
 ROOT = Path(__file__).resolve().parents[1]
 FOLDERS = ("skills", "adapters", "scripts", "tests", "docs", ".claude-plugin", ".codex-plugin", ".github")
-FILES = ("README.md", "CONTRIBUTING.md", "ARCHITECTURE.md", "AGENTS.md", "LICENSE.txt", "VERSION", "CHANGELOG.md", ".mcp.json", ".gitignore")
+FILES = ("README.md", "INSTALL.md", "CONTRIBUTING.md", "ARCHITECTURE.md", "AGENTS.md", "CODE_OF_CONDUCT.md", "SECURITY.md", "LICENSE.txt", "VERSION", "CHANGELOG.md", ".mcp.json", ".gitignore")
 
 
 def build(root: Path, output: Path) -> None:

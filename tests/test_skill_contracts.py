@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).parents[1]
-SPEC = importlib.util.spec_from_file_location("library_contracts", ROOT / "skills/oem-isv-advisor/scripts/check_skill_contracts.py")
+SPEC = importlib.util.spec_from_file_location("library_contracts", ROOT / "skills/isv-partner-advisor/scripts/check_skill_contracts.py")
 CONTRACTS = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(CONTRACTS)
 
@@ -18,7 +18,7 @@ class SkillContractTests(unittest.TestCase):
         self.assertTrue(all(r["status"] == "ready" for r in report["skills"]), report["findings"])
 
     def test_catalog_is_reproducible_from_contracts(self):
-        actual = json.loads((ROOT / "skills/oem-isv-advisor/references/capability-catalog.json").read_text())
+        actual = json.loads((ROOT / "skills/isv-partner-advisor/references/capability-catalog.json").read_text())
         self.assertEqual(actual, CONTRACTS.generate_catalog(ROOT))
 
     def test_every_skill_has_its_own_version_in_header_and_catalog(self):
@@ -30,7 +30,12 @@ class SkillContractTests(unittest.TestCase):
         self.assertEqual(27, len(entries))
         for entry in entries:
             report = CONTRACTS.inspect_contract(ROOT / "skills" / entry["id"])
-            self.assertEqual("1.0.0", report["skill_version"])
+            updated = {"solution-discovery", "headless-mcp-advisor",
+                       "package-version-validation", "environment-portfolio",
+                       "scratch-org-shape"}
+            expected = ("2.0.1" if entry["id"] == "isv-partner-advisor"
+                        else "1.0.2" if entry["id"] in updated else "1.0.1")
+            self.assertEqual(expected, report["skill_version"])
             self.assertEqual(report["skill_version"], entry["version"])
 
     def test_readonly_advisors_do_not_own_act(self):

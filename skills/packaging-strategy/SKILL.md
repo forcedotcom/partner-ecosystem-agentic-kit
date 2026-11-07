@@ -2,7 +2,7 @@
 name: packaging-strategy
 description: Use when a partner asks whether to package, which packaging model to use, where package boundaries belong, or how packaging affects distribution and upgrades. Owns Whether, what, and how to package; managed 2GP, migration, package boundaries, and distribution model.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "packaging-distribution"

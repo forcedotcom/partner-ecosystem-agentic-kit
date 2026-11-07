@@ -1,17 +1,17 @@
-# OEM/ISV Advisor architecture
+# ISV Partner Advisor architecture
 
-This repository delivers one installable **ISV/OEM Advisor** for Salesforce
+This repository delivers one installable **ISV Partner Advisor** for Salesforce
 partners that resell, extend, embed, or distribute Salesforce solutions. The
 advisor meets the partner wherever they are in the journey and routes each
 decision through a stable operating system and capability library.
 
-![ISV/OEM Advisor seven-capability partner journey](docs/assets/isv-oem-advisor-capability-architecture.jpg)
+![ISV Partner Advisor seven-capability partner journey](docs/assets/isv-partner-advisor-capabilities.svg)
 
 ## Product architecture
 
 The installed advisor contains five layers:
 
-1. **Partner entrance:** `$oem-isv-advisor` preserves the partner's goal and
+1. **Partner entrance:** `$isv-partner-advisor` preserves the partner's goal and
    identifies the next decision regardless of lifecycle stage.
 2. **Operating system:** understand the objective, select Ask/Assess/Act,
    gather evidence, route skills, apply policy, synthesize findings, recommend
@@ -27,7 +27,7 @@ The installed advisor contains five layers:
 The advisor is the product. Capability routers and focused skills are its
 internal library; partners do not install or compose them separately.
 
-![ISV/OEM Advisor operating system](docs/assets/isv-oem-advisor-operating-system.jpg)
+![ISV Partner Advisor operating system](docs/assets/isv-partner-advisor-operating-model.svg)
 
 ## Baseline contract
 
@@ -73,7 +73,7 @@ approved action.
 
 ### Foundation
 
-- `oem-isv-advisor` — partner goal owner and entry router.
+- `isv-partner-advisor` — partner goal owner and entry router.
 - `advisor-capability-preflight` — documentation, source, and tool preflight.
 
 ### Capability 1 — Solution Discovery
@@ -124,7 +124,7 @@ approved action.
 
 The machine-readable ownership, modes, dependencies, maturity, and primary or
 supporting relationships live in
-`skills/oem-isv-advisor/references/capability-catalog.json`.
+`skills/isv-partner-advisor/references/capability-catalog.json`.
 
 ## Capability maturity
 
@@ -146,7 +146,7 @@ identify affected skills and partner decisions, and rerun affected scenarios.
 Public documentation corroborates, qualifies, scopes, or conflicts with the
 field pattern; documentation silence does not erase reviewed practitioner
 guidance. See
-`skills/oem-isv-advisor/references/practitioner-knowledge-policy.md`.
+`skills/isv-partner-advisor/references/practitioner-knowledge-policy.md`.
 
 ## Runtime rules
 

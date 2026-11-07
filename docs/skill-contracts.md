@@ -7,17 +7,17 @@ conditional relationships/dependencies, evidence pointers, output, and declared
 maturity. It grants no runtime permissions and contains no evaluator answers.
 
 The schema is at
-`skills/oem-isv-advisor/references/skill-contract.schema.json`. The portable
-checker is `skills/oem-isv-advisor/scripts/check_skill_contracts.py`.
+`skills/isv-partner-advisor/references/skill-contract.schema.json`. The portable
+checker is `skills/isv-partner-advisor/scripts/check_skill_contracts.py`.
 
 ## Maintain the library
 
 1. Edit the owning skill's contract and the relevant instructions together.
 2. Keep header identity, role, capability, and schema version consistent.
 3. Regenerate the catalog:
-   `python3 skills/oem-isv-advisor/scripts/check_skill_contracts.py . --write-catalog`
+   `python3 skills/isv-partner-advisor/scripts/check_skill_contracts.py . --write-catalog`
 4. Verify without writing:
-   `python3 skills/oem-isv-advisor/scripts/check_skill_contracts.py .`
+   `python3 skills/isv-partner-advisor/scripts/check_skill_contracts.py .`
 5. Run `python3 -m unittest discover -s tests -v`.
 
 The generated catalog is an index, not a second author-maintained contract.

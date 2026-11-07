@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.3.0-rc.2 — rename follow-up and documentation (unreleased)
+
+- Explain fresh installation, old-ID migration, same-ID updates, copied-skill
+  handling, and app-specific invocation under ISV Partner Advisor branding.
+- Keep repository/marketplace identity unchanged. OEM knowledge remains.
+- Re-evaluate capability ownership on follow-ups before using focused advisors.
+- Distinguish managed 1GP and 2GP beta installation targets; keep unverified
+  persistent-testing prerequisites explicit. Do not promote as a testing shortcut.
+- Treat password-setting-through-API as workflow-specific, not a universal
+  minimal package-build feature. Preserve original practitioner records.
+- Entry version 2.0.1; five affected skills 1.0.2; other skills remain 1.0.1.
+  Contract schema, supported modes, and declared maturity are unchanged.
+- Record 63 passing automated checks, six skill format checks, and a fresh
+  four-turn Claude Code Ask rerun of the frozen rc.2 candidate. This was a
+  session-local load, not a marketplace upgrade to rc.2 or all-host certification.
+- No tag, release, merge, or installed-user upgrade is performed by these edits.
+- Add documentation version/command/link guards; the expanded 66-test suite
+  passes in the checkout and an independently extracted source-review archive.
+- Include the linked code of conduct and security policy in source-review ZIPs.
+
+## 0.3.0-rc.1 — ISV Partner Advisor rename preview (unreleased)
+
+- Rename branding, plugin identity, entry folder, routing references, and
+  invocation to `isv-partner-advisor`; keep the repository/marketplace name.
+- Preserve OEM-specific knowledge and authority boundaries. Remove OEM from
+  discovery descriptions and suggested prompts, not domain guidance.
+- Entry skill version becomes 2.0.0 for the ID change. Other skills become
+  1.0.1 for updated identity references/branding; their maturity is unchanged.
+- Add a preview-first Claude project-plugin migration helper with private
+  backups, payload verification, retained old install, and explicit rollback.
+- Keep the 0.2.0 test record historical. Live migration/behavior on the renamed
+  identity must be tested before promotion. No tag or release is published here.
+
 ## 0.2.0 — Beta (2026-11-04)
 
 - Promote the tested portability candidate to a normal SemVer release; Beta

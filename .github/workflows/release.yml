@@ -28,4 +28,4 @@ jobs:
           if [[ "$RELEASE_TAG" == *-* ]]; then
             flags=(--prerelease --latest=false)
           fi
-          gh release create "$RELEASE_TAG" advisor-plugin.zip advisor-source-review.zip --verify-tag --title "ISV/OEM Advisor $RELEASE_TAG" --notes-file docs/releases/current.md "${flags[@]}"
+          gh release create "$RELEASE_TAG" advisor-plugin.zip advisor-source-review.zip --verify-tag --title "ISV Partner Advisor $RELEASE_TAG" --notes-file docs/releases/current.md "${flags[@]}"

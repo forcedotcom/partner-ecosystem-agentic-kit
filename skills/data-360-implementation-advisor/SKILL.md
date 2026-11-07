@@ -2,7 +2,7 @@
 name: data-360-implementation-advisor
 description: Use for Data 360 architecture, data-kit workflow, scratch entitlement, metadata packageability, activation ordering, and partner-solution integration decisions. Owns Data 360 architecture and implementation patterns that affect partner solutions and packaging.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "implementation-best-practices"

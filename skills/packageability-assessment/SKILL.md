@@ -2,7 +2,7 @@
 name: packageability-assessment
 description: Use when a partner wants a read-only repository assessment for packageable metadata, source boundaries, dependencies, unsupported components, or remediation evidence. Owns Repository and metadata packageability inspection, unsupported components, boundaries, and remediation evidence.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "packaging-distribution"

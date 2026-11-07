@@ -30,10 +30,20 @@ class PortabilityRegressionTests(unittest.TestCase):
         baseline = json.loads((ROOT / "tests/fixtures/portability-baseline.json").read_text())
         self.assertEqual(27, len(baseline["descriptions"]))
         for relative, expected in baseline["descriptions"].items():
-            actual = re.search(r"^description: (.+)$", (ROOT / relative).read_text(), re.M).group(1)
+            renamed = relative.replace("oem-isv-advisor", "isv-partner-advisor")
+            # Retain the original baseline. Only the approved identity/trigger
+            # substitutions may differ; do not rebaseline knowledge changes.
+            expected = (expected.replace("OEM/ISV Advisor", "ISV Partner Advisor")
+                        .replace("Salesforce OEM and ISV", "Salesforce ISV")
+                        .replace("OEM or ISV", "ISV"))
+            actual = re.search(r"^description: (.+)$", (ROOT / renamed).read_text(), re.M).group(1)
             self.assertEqual(expected, actual, relative)
         for relative, expected in baseline["domain_reference_sha256"].items():
-            self.assertEqual(expected, hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), relative)
+            renamed = relative.replace("oem-isv-advisor", "isv-partner-advisor")
+            data = (ROOT / renamed).read_bytes()
+            if relative.endswith("/practitioner-knowledge-policy.md"):
+                data = data.replace(b"ISV Partner Advisor", b"OEM/ISV Advisor")
+            self.assertEqual(expected, hashlib.sha256(data).hexdigest(), relative)
 
     def test_extracted_layouts_resolve_without_source_checkout(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -51,6 +61,14 @@ class PortabilityRegressionTests(unittest.TestCase):
                 status = json.loads(result.stdout)
                 self.assertTrue(status["ready"])
                 self.assertTrue(status["advisory_ready"])
+
+    def test_beta_clarifications_are_in_the_portable_runtime_payload(self):
+        files, versions = prepare_harness.payload(ROOT)
+        for skill in ("environment-portfolio", "package-version-validation"):
+            relative = f"skills/{skill}/references/beta-eligibility.md"
+            self.assertIn(relative, files)
+            self.assertEqual((ROOT / relative).read_bytes(), files[relative])
+            self.assertEqual("1.0.2", versions[skill])
 
     def test_catalog_routes_by_id_and_ask_is_not_required(self):
         checker = prepare_harness.checker(ROOT)
@@ -115,6 +133,6 @@ class PortabilityRegressionTests(unittest.TestCase):
             build_review_archive.build(ROOT, output)
             with zipfile.ZipFile(output) as bundle:
                 names = set(bundle.namelist())
-                for path in (".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".codex-plugin/plugin.json", ".mcp.json", "scripts/prepare_harness.py", "tests/test_preflight.py"):
+                for path in (".claude-plugin/plugin.json", ".claude-plugin/marketplace.json", ".codex-plugin/plugin.json", ".mcp.json", "scripts/prepare_harness.py", "tests/test_preflight.py", "CODE_OF_CONDUCT.md", "SECURITY.md"):
                     self.assertIn(path, names)
                 self.assertFalse(any(".git/" in path or "__pycache__" in path for path in names))

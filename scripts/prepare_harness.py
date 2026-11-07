@@ -38,7 +38,7 @@ def profile_for(root: Path, target: str) -> dict:
 
 
 def checker(root: Path):
-    path = root / "skills/oem-isv-advisor/scripts/check_skill_contracts.py"
+    path = root / "skills/isv-partner-advisor/scripts/check_skill_contracts.py"
     spec = importlib.util.spec_from_file_location("advisor_contract_checker", path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)

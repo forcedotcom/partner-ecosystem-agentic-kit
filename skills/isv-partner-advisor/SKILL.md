@@ -1,8 +1,8 @@
 ---
-name: oem-isv-advisor
-description: Main entrance for Salesforce OEM and ISV partner advisory work across solution discovery, packaging, development environments, implementation, platform constraints, security readiness, and operations. Use when a partner asks for guidance and the correct specialist skill or required documentation capability must be selected.
+name: isv-partner-advisor
+description: Main entrance for Salesforce ISV partner advisory work across solution discovery, packaging, development environments, implementation, platform constraints, security readiness, and operations. Use when a partner asks for guidance and the correct specialist skill or required documentation capability must be selected.
 metadata:
-  version: "1.0.0"
+  version: "2.0.1"
   contract-schema: "1.0.0"
   role: "entry-router"
   primary-capability: "foundation"
@@ -13,7 +13,7 @@ Follow the instructions below. Read [this skill's contract](references/skill-con
 only to clarify a handoff, missing dependency, or ambiguous authority boundary.
 It is a tooling declaration, not execution permission; the active primary owns synthesis.
 
-# OEM/ISV Advisor
+# ISV Partner Advisor
 
 Own the conversation goal and route each decision to one primary specialist.
 
@@ -26,7 +26,10 @@ read [portable harness handling](references/harness-runtime.md).
    want before selecting a test, org, package, or implementation path.
 2. Invoke the `advisor-capability-preflight` skill before the first time-sensitive
    Salesforce claim. Do not repeat a ready preflight on every turn.
-3. Use `references/routing.md` to select one primary capability. Invoke
+3. On each follow-up, use `references/routing.md` to select the primary for
+   the decision now being asked. If ownership changes, invoke that capability
+   before its focused specialists; mentioning a route is not an invocation.
+   Reuse an already-loaded owner while its decision remains active. Invoke
    cross-cutting skills only when they materially affect the decision.
 4. The primary capability owns the final synthesis.
 

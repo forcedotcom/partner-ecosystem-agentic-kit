@@ -1,8 +1,8 @@
 ---
 name: packaging-distribution
-description: Route and synthesize OEM or ISV decisions about packageability, managed 2GP, package architecture, versions, ancestry, promotion, migration, listings, distribution, and upgrades. Use when a partner asks whether or how a Salesforce solution should be packaged or distributed.
+description: Route and synthesize ISV decisions about packageability, managed 2GP, package architecture, versions, ancestry, promotion, migration, listings, distribution, and upgrades. Use when a partner asks whether or how a Salesforce solution should be packaged or distributed.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "capability-router"
   primary-capability: "packaging-distribution"

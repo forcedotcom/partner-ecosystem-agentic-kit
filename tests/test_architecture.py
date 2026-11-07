@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).parents[1]
-CATALOG = ROOT / "skills/oem-isv-advisor/references/capability-catalog.json"
+CATALOG = ROOT / "skills/isv-partner-advisor/references/capability-catalog.json"
 
 
 class AdvisorArchitectureTests(unittest.TestCase):
@@ -37,7 +37,7 @@ class AdvisorArchitectureTests(unittest.TestCase):
             self.assertIn(f"${folder.name}", agent.read_text(encoding="utf-8"), folder.name)
 
     def test_domain_skills_define_authority_evidence_and_delegation(self):
-        foundation = {"oem-isv-advisor", "advisor-capability-preflight"}
+        foundation = {"isv-partner-advisor", "advisor-capability-preflight"}
         for folder in sorted((ROOT / "skills").iterdir()):
             if folder.name in foundation or not (folder / "SKILL.md").is_file():
                 continue
@@ -81,10 +81,10 @@ class AdvisorArchitectureTests(unittest.TestCase):
         marketplace = json.loads(
             (ROOT / ".claude-plugin/marketplace.json").read_text(encoding="utf-8")
         )
-        self.assertEqual("oem-isv-advisor", codex["name"])
-        self.assertEqual("ISV/OEM Advisor", codex["interface"]["displayName"])
-        self.assertEqual("ISV/OEM Advisor", claude["displayName"])
-        self.assertEqual("oem-isv-advisor", marketplace["plugins"][0]["name"])
+        self.assertEqual("isv-partner-advisor", codex["name"])
+        self.assertEqual("ISV Partner Advisor", codex["interface"]["displayName"])
+        self.assertEqual("ISV Partner Advisor", claude["displayName"])
+        self.assertEqual("isv-partner-advisor", marketplace["plugins"][0]["name"])
         self.assertEqual("./skills/", codex["skills"])
         self.assertEqual("./skills/", claude["skills"])
         self.assertNotIn("PEAK", (ROOT / "ARCHITECTURE.md").read_text(encoding="utf-8"))
@@ -107,8 +107,8 @@ class AdvisorArchitectureTests(unittest.TestCase):
             self.assertIn(phrase, pattern)
 
     def test_practitioner_knowledge_is_a_product_wide_versioned_policy(self):
-        entry = (ROOT / "skills/oem-isv-advisor/SKILL.md").read_text(encoding="utf-8")
-        policy_path = ROOT / "skills/oem-isv-advisor/references/practitioner-knowledge-policy.md"
+        entry = (ROOT / "skills/isv-partner-advisor/SKILL.md").read_text(encoding="utf-8")
+        policy_path = ROOT / "skills/isv-partner-advisor/references/practitioner-knowledge-policy.md"
         self.assertIn("Read `references/practitioner-knowledge-policy.md`", entry)
         self.assertTrue(policy_path.is_file())
         policy = policy_path.read_text(encoding="utf-8")

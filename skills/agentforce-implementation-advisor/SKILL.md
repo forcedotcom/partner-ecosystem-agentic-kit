@@ -2,7 +2,7 @@
 name: agentforce-implementation-advisor
 description: Use for Agentforce agent, topic, action, prompt template, orchestration, state, testing, packaging, scratch-shape, and UX implementation decisions. Owns Agent, topic, action, orchestration, state, testing, and UX implementation decisions.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "implementation-best-practices"

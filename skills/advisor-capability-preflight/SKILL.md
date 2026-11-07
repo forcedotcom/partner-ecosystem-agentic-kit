@@ -1,8 +1,8 @@
 ---
 name: advisor-capability-preflight
-description: Check and configure documentation capabilities before an OEM/ISV Advisor interaction. Use when the advisor starts, when Salesforce Docs MCP or official-documentation access may be missing, when a customer asks to install or approve documentation tools, or when the active harness changes.
+description: Check and configure documentation capabilities before an ISV Partner Advisor interaction. Use when the advisor starts, when Salesforce Docs MCP or official-documentation access may be missing, when a customer asks to install or approve documentation tools, or when the active harness changes.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "capability-preflight"
   primary-capability: "foundation"

@@ -2,7 +2,7 @@
 name: scratch-org-shape
 description: Use when designing or assessing project-scratch-def.json, editions, features, settings, object settings, product entitlements, or package-build shape. Owns Scratch definition as code, editions, features, settings, product entitlement checks, and package-build shape.
 metadata:
-  version: "1.0.0"
+  version: "1.0.2"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "development-environment"
@@ -41,6 +41,17 @@ capability concise and route here only when this bounded decision is active.
   heading only. For a broad or unmatched request, use the documentation path
   in `references/source-refresh.md`; inspect the selected setting reference and
   field documentation before generating nested fields or values.
+
+## Template scope clarification
+
+The canonical baseline in the preserved practitioner references is a reviewed
+team template, not a universal Salesforce or managed-2GP requirement. Apply it
+to the selected job rather than inheriting every setting automatically.
+`EnableSetPasswordInApi` is optional: include it only when a documented workflow
+needs password-setting through the API. Explain that need or omit it from a
+minimal proposed build shape. This clarification scopes the older instruction
+to merge every capability into the default baseline; it does not invalidate
+the historical practitioner record or remove a feature from workflows needing it.
 
 ## Authority modes
 

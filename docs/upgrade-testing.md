@@ -1,5 +1,10 @@
 # Owner upgrade test: 0.1.0 to 0.2.0-rc.1
 
+> **Historical procedure:** the old IDs and commands below are intentional.
+> For the current rename use [advisor-rename-migration.md](advisor-rename-migration.md).
+> For an already-renamed plugin use [ordinary updates](../INSTALL.md#updates).
+> Do not follow these legacy commands to install ISV Partner Advisor rc.2.
+
 This is the retained candidate acceptance procedure. The completed owner
 comparison and separately observed GitHub-backed installed-version update are
 summarized in [0.2.0 validation](releases/0.2.0-validation.md). The `0.2.0` Beta

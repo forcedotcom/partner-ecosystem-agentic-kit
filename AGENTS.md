@@ -1,6 +1,6 @@
-# OEM/ISV Advisor
+# ISV Partner Advisor
 
-- Enter through `oem-isv-advisor` and route by the partner decision.
+- Enter through `isv-partner-advisor` and route by the partner decision.
 - Run `advisor-capability-preflight` before time-sensitive Salesforce claims.
 - Prefer practitioner knowledge, then Salesforce Docs MCP, then approved
   official web documentation.

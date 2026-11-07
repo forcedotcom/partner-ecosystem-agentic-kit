@@ -1,56 +1,66 @@
-# ISV/OEM Advisor 0.2.0 — Beta
+# ISV Partner Advisor 0.3.0-rc.2 — rename test candidate
 
-This release promotes the tested `0.2.0-rc.1` metadata/portability candidate.
-Beta is the product-maturity label. The library/plugin version is `0.2.0`;
-individual skill versions remain `1.0.0`, and each skill retains its declared
-maturity. This is not a claim that every skill or harness is fully validated.
+Unreleased branch preview. This checkout does not create a tag or GitHub release.
+The published 0.2.0 Beta retains its old identity; it is not silently upgraded.
 
-## Included
+## Identity change
 
-- Portable metadata and versioned contracts for all 27 current skills.
-- ID-based routing, conditional Ask dependencies, and thin harness exports.
-- Scoped documentation preferences and no unnecessary web-consent prompt when
-  documentation tools are exposed.
-- Versioned plugin/source-review assets and release consistency checks.
+- Product: **ISV Partner Advisor**.
+- Plugin and entry skill: `isv-partner-advisor`.
+- Claude invocation: `/isv-partner-advisor:isv-partner-advisor`.
+- Codex: select the entry skill or use `$isv-partner-advisor` where supported.
+- Existing repository and marketplace identity remain unchanged.
+- Entry skill version: 2.0.1; five corrected domain skills: 1.0.2; other skills:
+  1.0.1. Contract schema, authority modes, and declared maturity are unchanged.
 
-Plugin identity remains `oem-isv-advisor`; marketplace identity remains
-`partner-ecosystem-agentic-kit`. This promotion changes release versions and
-documentation, not the candidate's advisor instructions or domain references.
-The proposed invocation-time update reminder is not included.
+This is an intentional install/command breaking change, not a routine update.
+OEM-specific guidance, specialist scope, and Ask/Assess/approval-gated Act
+rules remain. Historical 0.2.0 evidence and baseline fixtures are not rewritten
+to claim the new identity was already tested.
 
-## Validation and limitations
+## Migration
 
-See [the validation summary](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/blob/v0.2.0/docs/releases/0.2.0-validation.md). The maintainer-supervised
-Claude Code comparison completed seven identical prompts before and after,
-including approved read-only evidence inspection, a separately human-approved
-one-field synthetic edit, and return to Ask. Native update and content hashes
-were checked. User-supplied plugin screenshots separately showed a GitHub-backed
-project installation move from `0.1.0` to `0.2.0-rc.1` and remain enabled.
+Use [the scoped project migration guide](../advisor-rename-migration.md).
+The preview-first helper uses native Claude plugin commands, private backups,
+payload hashes, and explicit approval. It installs/verifies the candidate
+before disabling—not deleting—the old project plugin. Rollback re-enables the
+retained old plugin and uses the verified private recovery copy as its local
+marketplace source. Keep the backup until the source is explicitly changed.
 
-Library tests cover all contracts, unchanged descriptions/domain-reference
-guards, source-independent extracted layouts and release-version consistency.
-Other live harnesses, real-org actions and full filesystem isolation are not
-certified by these checks. Documentation conflicts remain qualified unknowns.
+Only a dedicated-profile GitHub-backed Claude project plugin is automated.
+Other install methods stop for manual handling. No production/user profiles
+are migrated by these edits. Already-renamed plugins use
+[ordinary same-ID updates](../../INSTALL.md#updates), not the migration helper.
 
-## Update existing installations
+## Behavior corrections in rc.2
 
-After merge, main-tracking Claude Code users can open `/plugin` → **Marketplaces**
-→ **partner-ecosystem-agentic-kit** → **Update marketplace**. If pending, open
-**Installed** → **ISV/OEM Advisor** → **Update now**. Start a fresh session and
-confirm `0.2.0`. Auto-update is an optional user/admin setting, not something
-this release silently enables. A GitHub Release alone does not change the
-source branch a user follows.
+- Select the primary capability as each follow-up changes the partner decision;
+  do not skip it merely because a focused specialist is already available.
+- Do not reuse 1GP beta target eligibility for managed 2GP. A persistent testing
+  recommendation stays conditional on the actual eligible environment and access.
+- Do not require the password-setting-through-API convenience feature unless
+  the selected workflow needs it.
 
-Candidate-branch testers must explicitly return their marketplace source to
-`main` to follow normal releases. Standalone copied-skill installations require
-their existing copy/install procedure and source-lock update; plugin commands
-do not update those copies. Preserve local edits, other libraries and backups.
+OEM-specific knowledge and the original practitioner records are retained.
+Explicit clarification files scope older guidance. This follow-up includes
+bounded behavior changes, not branding alone.
 
-## Assets
+## Validation status
 
-- `advisor-plugin.zip`: native plugin-root payload and manifests, retaining
-  existing optional documentation MCP configuration and host prompts.
-- `advisor-source-review.zip`: complete source, manifests, checks and tests;
-  not a native single-skill upload.
+See the [dated rename validation record](0.3.0-rename-validation.md).
+66 automated checks (including three documentation guards) and six skill
+format checks passed. The automated suite also passed in an independently
+extracted source-review archive. A native Claude Code
+four-question Ask run of the exact frozen rc.2 payload passed the targeted
+routing/eligibility/template-scope checks. It used a session-local plugin load;
+it did not update the installed marketplace plugin to rc.2.
 
-No PEAK console code, private captures, credentials or customer data is included.
+Earlier migration/rollback mechanics and the owner's observed renamed rc.1
+installation are separate evidence. Native marketplace delivery of rc.2,
+Assess/Act, OEM-specific behavior, other hosts, and candidate isolation were
+not certified by the four-question rerun. No actual package/org action ran.
+The new archive check establishes packaging/test completeness, not an installed
+host upgrade or new behavioral coverage. Keep incomplete checks visible.
+
+No PEAK console changes, new MCP connections, or Salesforce org actions are
+included. Do not merge or publish until review and owner acceptance.

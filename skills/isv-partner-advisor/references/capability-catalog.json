@@ -11,7 +11,7 @@
   "foundation_skills": [
     {
       "id": "advisor-capability-preflight",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "role": "capability-preflight",
       "modes": [
         "ask",
@@ -23,8 +23,8 @@
       "delegates_execution_to": []
     },
     {
-      "id": "oem-isv-advisor",
-      "version": "1.0.0",
+      "id": "isv-partner-advisor",
+      "version": "2.0.1",
       "role": "entry-router",
       "modes": [
         "ask",
@@ -39,7 +39,7 @@
   "capabilities": [
     {
       "id": "solution-discovery",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "role": "capability-router",
       "modes": [
         "ask",
@@ -60,7 +60,7 @@
     },
     {
       "id": "packaging-distribution",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "role": "capability-router",
       "modes": [
         "ask",
@@ -80,7 +80,7 @@
       "focused_skills": [
         {
           "id": "managed-2gp-foundation",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -96,7 +96,7 @@
         },
         {
           "id": "package-ancestry-dependencies",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -110,7 +110,7 @@
         },
         {
           "id": "package-migration-transfer",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -126,7 +126,7 @@
         },
         {
           "id": "package-release-promotion",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -142,7 +142,7 @@
         },
         {
           "id": "package-version-validation",
-          "version": "1.0.0",
+          "version": "1.0.2",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -158,7 +158,7 @@
         },
         {
           "id": "packageability-assessment",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -173,7 +173,7 @@
         },
         {
           "id": "packaging-strategy",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -189,7 +189,7 @@
     },
     {
       "id": "development-environment",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "role": "capability-router",
       "modes": [
         "ask",
@@ -209,7 +209,7 @@
       "focused_skills": [
         {
           "id": "environment-portfolio",
-          "version": "1.0.0",
+          "version": "1.0.2",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -223,7 +223,7 @@
         },
         {
           "id": "namespace-access-governance",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -240,7 +240,7 @@
         },
         {
           "id": "org-provisioning-diagnostics",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -257,7 +257,7 @@
         },
         {
           "id": "pbo-dev-hub-foundation",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -274,7 +274,7 @@
         },
         {
           "id": "scratch-org-shape",
-          "version": "1.0.0",
+          "version": "1.0.2",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -292,7 +292,7 @@
     },
     {
       "id": "implementation-best-practices",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "role": "capability-router",
       "modes": [
         "ask",
@@ -313,7 +313,7 @@
       "focused_skills": [
         {
           "id": "agentforce-implementation-advisor",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -329,7 +329,7 @@
         },
         {
           "id": "data-360-implementation-advisor",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -344,7 +344,7 @@
         },
         {
           "id": "headless-mcp-advisor",
-          "version": "1.0.0",
+          "version": "1.0.2",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -359,7 +359,7 @@
         },
         {
           "id": "implementation-pattern-router",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "role": "focused-router",
           "modes": [
             "ask",
@@ -373,7 +373,7 @@
         },
         {
           "id": "slack-implementation-advisor",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -388,7 +388,7 @@
         },
         {
           "id": "tableau-next-implementation-advisor",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "role": "focused-advisor",
           "modes": [
             "ask",
@@ -405,7 +405,7 @@
     },
     {
       "id": "platform-constraints",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "role": "capability-router",
       "modes": [
         "ask",
@@ -425,7 +425,7 @@
     },
     {
       "id": "security-readiness",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "role": "capability-router",
       "modes": [
         "ask",
@@ -445,7 +445,7 @@
     },
     {
       "id": "operations-release",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "role": "capability-router",
       "modes": [
         "ask",

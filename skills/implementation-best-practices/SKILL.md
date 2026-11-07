@@ -2,7 +2,7 @@
 name: implementation-best-practices
 description: Route and synthesize implementation decisions for Agentforce, Data 360, Slack, Tableau Next, Apex, APIs, prompts, MCP, sub-agents, state, long-running actions, testing, and user experience. Use after product and environment decisions are known and a partner needs a scalable implementation pattern.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "capability-router"
   primary-capability: "implementation-best-practices"

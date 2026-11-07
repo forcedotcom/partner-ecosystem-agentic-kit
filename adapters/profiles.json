@@ -6,7 +6,7 @@
       "surfaces": ["terminal", "desktop-code"],
       "layout": "plugin",
       "skills_prefix": "skills",
-      "invocation": "Load the extracted plugin root with claude --plugin-dir <root> in an isolated context, then invoke /oem-isv-advisor:oem-isv-advisor. This is session loading, not a marketplace upgrade test.",
+      "invocation": "Load the extracted plugin root with claude --plugin-dir <root> in an isolated context, then invoke /isv-partner-advisor:isv-partner-advisor. This is session loading, not a marketplace upgrade test.",
       "notes": "Preserves plugin identity and namespace. Includes unchanged optional MCP configuration; the builder does not connect it. Check user/project/plugin/synced copies and managed settings. Record every invoked skill's actual base directory and version/hash. A separate config directory and project do not alone prove isolation.",
       "source": "https://code.claude.com/docs/en/plugins/create"
     },
@@ -15,7 +15,7 @@
       "surfaces": ["desktop-local", "cli", "ide"],
       "layout": "project",
       "skills_prefix": ".agents/skills",
-      "invocation": "Select the entry skill in the host UI, or use $oem-isv-advisor where supported.",
+      "invocation": "Select the entry skill in the host UI, or use $isv-partner-advisor where supported.",
       "notes": "Record the exact surface separately. Local and cloud sessions do not imply identical file or tool access. Existing plugin packaging is unchanged.",
       "source": "https://developers.openai.com/codex/skills"
     },
@@ -24,7 +24,7 @@
       "surfaces": ["terminal", "desktop-code"],
       "layout": "project",
       "skills_prefix": ".claude/skills",
-      "invocation": "Select or invoke /oem-isv-advisor in the isolated test project; plugin names can be namespaced.",
+      "invocation": "Select or invoke /isv-partner-advisor in the isolated test project; plugin names can be namespaced.",
       "notes": "Project folders, user skills, plugin skills, and synced skills may coexist. Inspect actual loaded paths and restart or use a fresh session after changing the installation.",
       "source": "https://code.claude.com/docs/en/skills"
     },
@@ -33,7 +33,7 @@
       "surfaces": ["ide-local"],
       "layout": "project",
       "skills_prefix": ".cursor/skills",
-      "invocation": "Select /oem-isv-advisor or attach it with @ in Agent.",
+      "invocation": "Select /isv-partner-advisor or attach it with @ in Agent.",
       "notes": "Cursor also discovers Claude, Codex, and .agents skill locations. A private project folder alone does not hide global skills. Cloud/remote workers need separate verification.",
       "source": "https://cursor.com/help/customization/skills"
     },
@@ -42,7 +42,7 @@
       "surfaces": ["desktop-chat", "web-chat", "cowork"],
       "layout": "individual-zips",
       "skills_prefix": null,
-      "invocation": "Upload and enable every required skill ZIP in the intended test account/workspace. Explicitly request the ISV/OEM Advisor entry skill.",
+      "invocation": "Upload and enable every required skill ZIP in the intended test account/workspace. Explicitly request the ISV Partner Advisor entry skill.",
       "notes": "The outer archive is a delivery envelope, not a single native skill upload. Cross-skill lookup, code execution, local file access, and connectors must be checked in the actual app surface. Do not assume a reference installs another skill.",
       "source": "https://support.claude.com/en/articles/12512180-use-skills-in-claude"
     },

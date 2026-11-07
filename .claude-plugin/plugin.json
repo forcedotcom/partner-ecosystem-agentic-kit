@@ -1,9 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
-  "name": "oem-isv-advisor",
-  "displayName": "ISV/OEM Advisor",
+  "name": "isv-partner-advisor",
+  "displayName": "ISV Partner Advisor",
   "description": "A complete Salesforce partner advisor spanning product discovery, packaging, architecture, development, implementation, distribution, security, release, and operations.",
-  "version": "0.2.0",
+  "version": "0.3.0-rc.2",
   "author": {
     "name": "Salesforce"
   },
@@ -13,7 +13,6 @@
   "keywords": [
     "salesforce",
     "isv",
-    "oem",
     "partners",
     "advisor"
   ]

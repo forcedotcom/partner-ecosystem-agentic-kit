@@ -1,21 +1,24 @@
 # Salesforce Partner Ecosystem Agentic Kit
 
-The **ISV/OEM Advisor** helps Salesforce partners turn an idea into a product,
+The **ISV Partner Advisor** helps Salesforce partners turn an idea into a product,
 choose its architecture and packaging, prepare for security review, and guide
 it through release and operation. Start wherever you are in that journey.
 
-One advisor, with a portable library of 27 supporting skills. You do not need
+One advisor, with a portable library of 27 skills. You do not need
 to select or assemble the individual advisors yourself. The plugin's technical
-identifier is `oem-isv-advisor`.
+identifier is `isv-partner-advisor`.
 
 [Install the Advisor](INSTALL.md) ·
 [Latest release](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/releases/latest) ·
 [Architecture](ARCHITECTURE.md) · [Contributing](CONTRIBUTING.md)
 
-> **Beta:** The current release is **0.2.0 — Beta**. Individual skills retain
-> their declared maturity. See the [validation summary](docs/releases/0.2.0-validation.md)
-> for observed behavior and checks not run; portability is not certification
-> of every app, model, or tool configuration.
+> **Rename preview — not released:** This checkout declares **0.3.0-rc.2**, renaming
+> the product and entry command to **ISV Partner Advisor** / `isv-partner-advisor`.
+> The public **0.2.0 — Beta** release still uses the old identity. Existing users:
+> follow the [project migration test](docs/advisor-rename-migration.md), not a
+> normal plugin update. OEM-specific knowledge is retained. See the
+> [rename validation record](docs/releases/0.3.0-rename-validation.md) for what
+> was tested; the corrected candidate is not yet a published release.
 
 ## Usage
 
@@ -23,25 +26,41 @@ Choose your app and install the complete advisor library.
 
 | App | Install | Start using the advisor |
 | --- | --- | --- |
-| Claude Code | [GitHub marketplace plugin](INSTALL.md#claude-code) | `/oem-isv-advisor:oem-isv-advisor` |
-| Codex | [Plugin or project-local skills](INSTALL.md#codex) | Select the entry skill or use `$oem-isv-advisor` where supported |
-| Cursor | [Project-local skills](INSTALL.md#cursor-and-opencode) | Select `/oem-isv-advisor` in Agent |
-| OpenCode | [Project-local skills](INSTALL.md#cursor-and-opencode) | Ask it to load `oem-isv-advisor` |
+| Claude Code | [GitHub marketplace plugin](INSTALL.md#claude-code) | `/isv-partner-advisor:isv-partner-advisor` |
+| Codex | [Plugin or project-local skills](INSTALL.md#codex) | Select the entry skill or use `$isv-partner-advisor` where supported |
+| Cursor | [Project-local skills](INSTALL.md#cursor-and-opencode) | Select `/isv-partner-advisor` in Agent |
+| OpenCode | [Project-local skills](INSTALL.md#cursor-and-opencode) | Ask it to load `isv-partner-advisor` |
 | ChatGPT and other chat apps | [Check app/workspace capabilities](INSTALL.md#chatgpt-and-other-chat-apps) | Native installation and supporting-skill access must be verified first |
 
-Claude Code installation/upgrade and scoped behavior were maintainer-tested.
-Other routes have packaging or documented discovery support, not equivalent
-live-host validation. [Compatibility details](docs/harness-compatibility.md).
+Claude Code migration mechanics were rehearsed, and the corrected renamed
+candidate passed a four-question Ask-mode CLI rerun. That session-local load
+is not proof of a marketplace upgrade to rc.2, Assess/Act coverage, or every
+skill's correctness. Other routes have packaging or documented discovery
+support, not equivalent live-host validation.
+[Compatibility details](docs/harness-compatibility.md).
 
 ## Install the advisor
 
+### Choose your starting point
+
+| What you have | What to do |
+| --- | --- |
+| No advisor installed | Follow the fresh-install steps below in a dedicated candidate test profile. |
+| The old `oem-isv-advisor` plugin | Use the [preview-first migration](docs/advisor-rename-migration.md); **Update now** does not change a plugin's identity. |
+| The new `isv-partner-advisor` plugin | Follow [ordinary updates](INSTALL.md#updates), keeping the intended project, profile, scope, and source. |
+| Copied skill folders or another app | Use the [installation-method-specific guidance](INSTALL.md#existing-users-and-the-name-change); the Claude migration script is not a universal installer. |
+
 ### Claude Code quick start
 
-Open Claude Code in the intended project and enter these commands one at a time:
+For a **fresh, dedicated candidate test profile**, open Claude Code in the
+intended project and enter these commands one at a time. Existing installs
+should use the [migration helper](docs/advisor-rename-migration.md) instead.
+The remote branch must contain the reviewed candidate first; local changes
+are not available through these commands until maintainers push them.
 
 ```text
-/plugin marketplace add forcedotcom/partner-ecosystem-agentic-kit
-/plugin install oem-isv-advisor@partner-ecosystem-agentic-kit
+/plugin marketplace add forcedotcom/partner-ecosystem-agentic-kit#codex/isv-partner-advisor-migration
+/plugin install isv-partner-advisor@partner-ecosystem-agentic-kit
 ```
 
 Choose **project** scope for a repository-shared configuration, or **local**
@@ -49,7 +68,7 @@ scope for just you in that repository. Review the scope and components before
 confirming. Start a fresh session, then invoke:
 
 ```text
-/oem-isv-advisor:oem-isv-advisor
+/isv-partner-advisor:isv-partner-advisor
 ```
 
 For other apps, terminal commands, copyable setup prompts, and verification,
@@ -59,14 +78,22 @@ library beside an existing plugin without checking for duplicates.
 ### Try your first question
 
 ```text
-Use the ISV/OEM Advisor. I am considering a Salesforce partner app, but have
+Use the ISV Partner Advisor. I am considering a Salesforce partner app, but have
 no implementation yet. Help me choose a sensible first build. Stay in Ask
 mode, use only the context I provide and available documentation, and ask
 the questions that would materially change your recommendation.
 ```
 
-The advisor routes by your decision, not by the title of a document. It can
-also start with an existing product, packaging question, or approved evidence.
+The advisor routes by your current decision, not by the title of a document.
+As your question changes, it loads the appropriate capability owner and uses
+focused specialists for supporting findings. You do not need to start a new
+conversation or learn each specialist's command. It can also start with an
+existing product, packaging question, or approved evidence.
+
+Stay in **Ask** for advice. To inspect your actual project, explicitly authorize
+**Assess** for named files or read-only targets. **Act** requires a bounded plan
+and separate approval before material changes; installing or updating the
+advisor does not grant those permissions.
 
 ## How the advisor works
 
@@ -83,7 +110,7 @@ also start with an existing product, packaging question, or approved evidence.
 ### Specialist advisors
 
 These specialists are included in the same advisor installation. Start through
-**ISV/OEM Advisor** and describe your goal; it routes to the relevant capability
+**ISV Partner Advisor** and describe your goal; it routes to the relevant capability
 and specialists. You can name an area such as Headless/MCP in your question
 without learning the internal skill IDs. The owning capability combines the
 specialists' findings into one recommendation.
@@ -164,7 +191,7 @@ partner-ecosystem-agentic-kit/
 ├── .claude-plugin/       # Claude plugin and marketplace manifests
 ├── .codex-plugin/        # Codex plugin manifest
 ├── skills/               # Complete 27-skill advisor library
-│   ├── oem-isv-advisor/
+│   ├── isv-partner-advisor/
 │   ├── advisor-capability-preflight/
 │   └── .../
 ├── adapters/             # Thin host-specific packaging profiles
@@ -187,9 +214,11 @@ folders carry instructions and supporting files, not automatic MCP setup or
 plugin updates. The same skill library is shared across supported layouts,
 while each host controls discovery, tools, and permissions.
 
-For Claude Code, use `/plugin` → **Marketplaces** →
+The old ID will not turn into the new ID through **Update now**. Existing users
+must first complete the [identity migration](docs/advisor-rename-migration.md).
+After migration, ordinary updates for the new plugin use `/plugin` → **Marketplaces** →
 **partner-ecosystem-agentic-kit** → **Update marketplace**, then **Installed** →
-**ISV/OEM Advisor** → **Update now** if pending. Start a fresh session and verify
+**ISV Partner Advisor** → **Update now** if pending. Start a fresh session and verify
 the version. Auto-update is optional.
 
 Copied skills must be updated through their original installer/copy mapping,

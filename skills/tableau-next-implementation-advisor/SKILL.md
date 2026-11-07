@@ -2,7 +2,7 @@
 name: tableau-next-implementation-advisor
 description: Use for Tableau Next scratch enablement, Data 360 dependencies, semantic models, workspaces, visualizations, dashboards, deployment ordering, and integration decisions. Owns Tableau Next implementation and integration decisions relevant to partner solutions.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "implementation-best-practices"

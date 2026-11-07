@@ -1,8 +1,8 @@
 ---
 name: security-readiness
-description: Assess secure architecture, data protection, AgentExchange or AppExchange Security Review preparation, testing and scanner evidence, submission materials, and remediation readiness. Use when an OEM or ISV solution must identify security risk or prepare evidence for review without claiming guaranteed approval.
+description: Assess secure architecture, data protection, AgentExchange or AppExchange Security Review preparation, testing and scanner evidence, submission materials, and remediation readiness. Use when an ISV solution must identify security risk or prepare evidence for review without claiming guaranteed approval.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "capability-router"
   primary-capability: "security-readiness"

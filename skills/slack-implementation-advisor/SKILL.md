@@ -2,7 +2,7 @@
 name: slack-implementation-advisor
 description: Use for Slack application, authentication, partner sandbox, Salesforce integration, packaging boundary, and environment decisions. Owns Slack application, authentication, packaging, and Salesforce integration implementation decisions.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   contract-schema: "1.0.0"
   role: "focused-advisor"
   primary-capability: "implementation-best-practices"
