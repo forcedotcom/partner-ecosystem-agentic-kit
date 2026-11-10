@@ -64,3 +64,20 @@ host upgrade or new behavioral coverage. Keep incomplete checks visible.
 
 No PEAK console changes, new MCP connections, or Salesforce org actions are
 included. Do not merge or publish until review and owner acceptance.
+
+## One-time installed-source repair tooling (unreleased)
+
+An already-renamed project plugin can still retain the deleted rename branch
+in its saved marketplace configuration. The separate
+[`repair_update_source.py`](../../scripts/repair_update_source.py) helper repairs
+that specific pin before ordinary updates; it does not rerun identity migration.
+See [the preview/apply instructions](../../INSTALL.md#repair-a-deleted-branch-pin).
+
+The expanded suite passes 82 tests, including 16 source-repair tests. A native
+Claude Code rehearsal in a disposable project/profile completed read-only
+preview, source repair, refresh, same-ID update, payload verification, and an
+idempotent repeat with no further changes. Its stale pin was deliberately
+seeded in the synthetic fixture after installing from main. No real user's
+configuration, gateway, model session, MCP session, or Salesforce org was used.
+This does not certify every installation scope or prove a fresh host loaded
+the plugin; actual session loading remains a separate check.
