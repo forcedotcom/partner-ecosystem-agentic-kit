@@ -1,9 +1,9 @@
 # Install ISV Partner Advisor
 
-> **Candidate branch, not a public release.** New identity: `isv-partner-advisor`;
-> preview version: `0.3.0-rc.2`. Existing `oem-isv-advisor` installs need the
+> **Pre-release on `main`.** New identity: `isv-partner-advisor`, version
+> `0.3.0-rc.2`, not yet a tagged release. Existing `oem-isv-advisor` installs need the
 > [migration procedure](docs/advisor-rename-migration.md). A regular update does
-> not rename an installed plugin. Public 0.2.0 downloads still use the old name.
+> not rename an installed plugin. The 0.2.0 release downloads still use the old name.
 
 One advisor, with its complete supporting skill library. Choose your app;
 you do not need to assemble the individual advisors yourself.
@@ -35,9 +35,10 @@ blindly replace OEM terminology inside domain references or historical records.
 
 ## Before you install
 
-- Normal users should stay on the [latest published release](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/releases/latest).
-  For this rename test only, use the candidate branch in a dedicated test
-  profile. Do not point everyday sessions at a draft PR or experimental branch.
+- Install from `main`, which carries the renamed `isv-partner-advisor`. The
+  [latest published release](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/releases/latest)
+  (0.2.0) still uses the old identity. Do not point everyday sessions at a draft
+  PR or experimental branch.
 - Choose the intended project and scope. Project-local folders can still be
   read by other tools with access to that project; they are not a sandbox.
 - Check for existing copies before installing. Never overwrite modified skills,
@@ -55,12 +56,9 @@ or a guarantee that the app supports native skills.
 ```text
 Help me install the complete ISV Partner Advisor from
 https://github.com/forcedotcom/partner-ecosystem-agentic-kit.
-I want to review the unreleased rename candidate on
-codex/isv-partner-advisor-migration, not silently change my normal installation.
-Read INSTALL.md from that same branch and use the route for this app. Verify
-that its VERSION and plugin manifests match the reviewed candidate before
-changing anything. If that revision has not been published, stop and explain.
-Prefer its supported native
+Use the main branch. Read its INSTALL.md and use the route for this app.
+Check that the plugin manifest identity is isv-partner-advisor before changing
+anything. Prefer its supported native
 plugin route; otherwise propose the documented project-local skill layout.
 Inspect existing copies first, preserve all supporting references, and ask
 before making changes. Do not overwrite modified or unrelated skills, change
@@ -72,16 +70,15 @@ than claiming file reading is an installation.
 
 ## Claude Code
 
-These commands target the **candidate branch**, not the public 0.2.0 release.
-They are for a fresh install in a dedicated test profile. The reviewed changes
-must first be available on that remote branch; a local rc.2 checkout does not
-update GitHub or existing plugins. Verify the actual installed version below.
-Do not repoint an existing everyday marketplace to a draft branch.
+These commands install from `main` (`0.3.0-rc.2`), not the 0.2.0 release
+archives. They are for a fresh install; existing `oem-isv-advisor` installs use
+the [migration procedure](docs/advisor-rename-migration.md). Verify the actual
+installed version below.
 
-In a Claude Code session opened in your intended test project and profile:
+In a Claude Code session opened in your intended project:
 
 ```text
-/plugin marketplace add forcedotcom/partner-ecosystem-agentic-kit#codex/isv-partner-advisor-migration
+/plugin marketplace add forcedotcom/partner-ecosystem-agentic-kit
 /plugin install isv-partner-advisor@partner-ecosystem-agentic-kit
 ```
 
@@ -97,7 +94,7 @@ Start a fresh session, then invoke:
 If you prefer commands in a terminal rather than inside the Claude chat, use:
 
 ```bash
-claude plugin marketplace add forcedotcom/partner-ecosystem-agentic-kit#codex/isv-partner-advisor-migration --scope project
+claude plugin marketplace add forcedotcom/partner-ecosystem-agentic-kit --scope project
 claude plugin install isv-partner-advisor@partner-ecosystem-agentic-kit --scope project
 ```
 
@@ -124,9 +121,8 @@ technical identifier `isv-partner-advisor`. If that host cannot install this
 repository as a plugin, use the explicit project-local fallback below rather
 than inventing an install command or assuming a public directory listing.
 
-For this project-local candidate test, use this reviewed branch checkout,
-not the public 0.2.0 archives with the old identity,
-and copy **every complete child folder of `skills/`** into the target project's
+For a project-local install, use a reviewed checkout of `main`, not the
+0.2.0 release archives with the old identity, and copy **every complete child folder of `skills/`** into the target project's
 `.agents/skills/`. Keep each folder's `SKILL.md`, `references/`, `scripts/`, and
 other supporting files intact. Review conflicts before copying. Do not copy
 only the entry skill or flatten its references. This installs skills, not plugin
@@ -156,7 +152,7 @@ These are manual, project-local skill installations, not Claude plugin installs.
 | Cursor | `<project>/.cursor/skills/` | Open Agent and select `/isv-partner-advisor` |
 | OpenCode | `<project>/.opencode/skills/` | Ask it to load the `isv-partner-advisor` skill |
 
-Review this candidate branch's source, then copy all skill directories with
+Review the `main` branch source, then copy all skill directories with
 their supporting files. For example, the entry file in Cursor must land at
 `.cursor/skills/isv-partner-advisor/SKILL.md`, not
 `.cursor/skills/skills/isv-partner-advisor/SKILL.md`.
@@ -218,7 +214,7 @@ prove documentation connectivity or authorize access to a Salesforce org.
 
 ## Verify installation
 
-For the candidate in this checkout, expect plugin version **0.3.0-rc.2** and
+For the current `main`, expect plugin version **0.3.0-rc.2** and
 entry ID **isv-partner-advisor**. Plugin versions, individual skill versions,
 and contract-schema versions are different; do not compare them as one number.
 The full library has 27 skills. After migration, the old entry must be disabled
@@ -262,7 +258,7 @@ specific change. Approving an installation is not approval for an org action.
 For the old-to-new identity transition, use the
 [migration helper](docs/advisor-rename-migration.md), not the normal update menu.
 The instructions below apply once the new plugin is installed and a supported
-release source has been chosen. Keep the candidate confined to its test profile.
+release source has been chosen.
 
 For a Claude Code plugin already using the new ID, open `/plugin` → **Marketplaces** →
 **partner-ecosystem-agentic-kit** → **Update marketplace**. If pending, use
@@ -289,8 +285,9 @@ the new source revision. Ask before replacing existing files. Do not switch
 someone's installation method silently.
 
 Sources pinned to a branch or tag follow that source, not automatically the
-latest GitHub release. Candidate testers must explicitly return to `main` to
-follow normal updates. See [upgrade testing](docs/upgrade-testing.md) for the
+latest GitHub release. Testers who pinned the deleted
+`codex/isv-partner-advisor-migration` branch must repoint their marketplace to
+`main` to keep receiving updates. See [upgrade testing](docs/upgrade-testing.md) for the
 separate maintainer verification procedure.
 
 ## Troubleshooting names, versions, and profiles

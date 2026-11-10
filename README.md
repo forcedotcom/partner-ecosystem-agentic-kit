@@ -12,13 +12,13 @@ identifier is `isv-partner-advisor`.
 [Latest release](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/releases/latest) ·
 [Architecture](ARCHITECTURE.md) · [Contributing](CONTRIBUTING.md)
 
-> **Rename preview — not released:** This checkout declares **0.3.0-rc.2**, renaming
-> the product and entry command to **ISV Partner Advisor** / `isv-partner-advisor`.
-> The public **0.2.0 — Beta** release still uses the old identity. Existing users:
-> follow the [project migration test](docs/advisor-rename-migration.md), not a
-> normal plugin update. OEM-specific knowledge is retained. See the
+> **Pre-release on `main`:** `main` declares **0.3.0-rc.2**, renaming the product
+> and entry command to **ISV Partner Advisor** / `isv-partner-advisor`. It is not
+> yet a tagged release; the **0.2.0 — Beta** release still uses the old identity.
+> Existing users: follow the [project migration](docs/advisor-rename-migration.md),
+> not a normal plugin update. OEM-specific knowledge is retained. See the
 > [rename validation record](docs/releases/0.3.0-rename-validation.md) for what
-> was tested; the corrected candidate is not yet a published release.
+> was tested.
 
 ## Usage
 
@@ -45,21 +45,19 @@ support, not equivalent live-host validation.
 
 | What you have | What to do |
 | --- | --- |
-| No advisor installed | Follow the fresh-install steps below in a dedicated candidate test profile. |
+| No advisor installed | Follow the fresh-install steps below. |
 | The old `oem-isv-advisor` plugin | Use the [preview-first migration](docs/advisor-rename-migration.md); **Update now** does not change a plugin's identity. |
 | The new `isv-partner-advisor` plugin | Follow [ordinary updates](INSTALL.md#updates), keeping the intended project, profile, scope, and source. |
 | Copied skill folders or another app | Use the [installation-method-specific guidance](INSTALL.md#existing-users-and-the-name-change); the Claude migration script is not a universal installer. |
 
 ### Claude Code quick start
 
-For a **fresh, dedicated candidate test profile**, open Claude Code in the
-intended project and enter these commands one at a time. Existing installs
-should use the [migration helper](docs/advisor-rename-migration.md) instead.
-The remote branch must contain the reviewed candidate first; local changes
-are not available through these commands until maintainers push them.
+For a **fresh install**, open Claude Code in the intended project and enter
+these commands one at a time. Existing installs should use the
+[migration helper](docs/advisor-rename-migration.md) instead.
 
 ```text
-/plugin marketplace add forcedotcom/partner-ecosystem-agentic-kit#codex/isv-partner-advisor-migration
+/plugin marketplace add forcedotcom/partner-ecosystem-agentic-kit
 /plugin install isv-partner-advisor@partner-ecosystem-agentic-kit
 ```
 
