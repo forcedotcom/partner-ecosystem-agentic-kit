@@ -23,6 +23,7 @@ The product is **ISV Partner Advisor**. The plugin ID and entry skill are
 | Fresh Claude Code install | Use [Claude Code](#claude-code) below; do not create another copy if one already exists. |
 | Old `oem-isv-advisor` Claude project plugin | Use the [scoped migration guide](docs/advisor-rename-migration.md) in a dedicated existing test profile. Preview, back up, install/verify the new identity, then disable the old one. A routine update cannot rename it. |
 | Already renamed Claude plugin | Use [Updates](#updates); do not rerun identity migration to update rc.1 to rc.2. |
+| Renamed Claude project plugin pinned to the deleted rename branch | Run the [one-time source repair](#repair-a-deleted-branch-pin) before ordinary updates. |
 | Codex plugin | Use the host's supported install/disable flow, verify the new ID, and preserve the old configuration for rollback. The Claude script does not migrate Codex. |
 | Copied skills in Codex, Cursor, or OpenCode | Back up the original library and local edits; reconcile against one reviewed revision. Replace the old entry folder with the new one only after reviewing conflicts, and update the supporting library together. Do not leave both entry copies active or delete unrelated skills. |
 | User-wide, local-scope, managed, synced, or directory-backed Claude plugin | Manual review is required; these are not supported by the current migration helper. Do not convert the install method silently. |
@@ -260,6 +261,10 @@ For the old-to-new identity transition, use the
 The instructions below apply once the new plugin is installed and a supported
 release source has been chosen.
 
+If your marketplace still points at the deleted rename branch, use the
+[one-time repair](#repair-a-deleted-branch-pin) first. **Update now** cannot
+fetch a repair script from a source that no longer exists.
+
 For a Claude Code plugin already using the new ID, open `/plugin` → **Marketplaces** →
 **partner-ecosystem-agentic-kit** → **Update marketplace**. If pending, use
 **Installed** → **ISV Partner Advisor** → **Update now**. Start a fresh session and
@@ -277,7 +282,7 @@ Use the actual installed scope if it is not project-scoped; do not create a
 second installation to make the example match. These commands refresh the
 configured source and update the **same** plugin ID; they do not change a
 branch pin or migrate the old identity. An already-migrated rc.1 tester uses
-this update flow after the reviewed rc.2 branch changes are pushed.
+this flow once the saved marketplace source is valid.
 
 Copied-folder installs do not update through the plugin menu. Use the original
 installer/copy mapping, preserve local changes and other libraries, and record
@@ -287,8 +292,68 @@ someone's installation method silently.
 Sources pinned to a branch or tag follow that source, not automatically the
 latest GitHub release. Testers who pinned the deleted
 `codex/isv-partner-advisor-migration` branch must repoint their marketplace to
-`main` to keep receiving updates. See [upgrade testing](docs/upgrade-testing.md) for the
+`main` to keep receiving updates using the repair below. See [upgrade testing](docs/upgrade-testing.md) for the
 separate maintainer verification procedure.
+
+### Repair a deleted branch pin
+
+This is for an **already-renamed, project-scoped Claude plugin in its existing
+dedicated non-default profile**, not a fresh install or old-ID migration.
+It recognizes only this repository's deleted
+`codex/isv-partner-advisor-migration` pin and moves it to `main`. Custom tags,
+other repositories, directory/recovery sources, local/user/managed plugin
+scopes, shared profiles, and other hosts stop for manual review.
+
+Obtain a reviewed checkout containing `scripts/repair_update_source.py` from
+`main` **after this repair change is merged**; a stale plugin cache does not
+receive the script automatically. Before merge, use the reviewed repair branch
+in a disposable test context instead. Do not pipe downloaded scripts to a shell.
+
+From that checkout, replace the project path and use the **same existing profile**
+as your installation. Do not create an empty profile for an existing-install repair:
+
+```bash
+PROJECT="/absolute/path/to/your/project"
+PROFILE="$HOME/.claude-advisor-upgrade-test"
+python3 scripts/repair_update_source.py --project "$PROJECT" --claude-config-dir "$PROFILE"
+```
+
+Preview makes no changes, backups, network calls, or native plugin calls. It
+shows source scope, installed/reviewed versions, target payload hash, and plan;
+it does not print gateway credentials or the raw settings. If it reports
+`already_tracking_main`, no repair is needed; use ordinary same-ID updates.
+
+Close all Claude sessions using the selected profile. Choose a **new private
+backup directory**, outside the project, profile, checkout, and skill-discovery
+folders, then apply the reviewed plan:
+
+```bash
+BACKUP="$HOME/advisor-source-repair-backup-1"
+python3 scripts/repair_update_source.py --project "$PROJECT" --claude-config-dir "$PROFILE" --apply --backup-dir "$BACKUP"
+```
+
+Type **REPAIR** when prompted. The helper backs up settings/inventory and the
+currently installed skill payload, aligns only existing advisor declarations,
+re-registers the same marketplace at its existing scope, refreshes it, and
+updates the same project plugin. It verifies the reviewed checkout's version,
+skill hashes, and plugin/MCP metadata. It does not uninstall/re-enable an old
+plugin, create another installation, or change gateway settings, other plugins,
+permissions, hooks, or unrelated marketplaces. Project-only sources stay
+project-scoped; matching profile/project declarations are aligned together.
+
+Start a fresh session with that profile and verify **ISV Partner Advisor** and
+the actual loaded source/version. The helper checks inventory and payload,
+not model behavior or runtime connectivity. Main can change after the checkout
+was reviewed; a hash mismatch stops rather than silently accepting newer content.
+
+If any native step or verification fails, stop and keep the private backup.
+`source-repair.json` records the phase and original state. A failure may leave
+the source repaired but the plugin not updated. Do not restore entire settings
+files over later user changes or retry the rename migration. Review which
+step failed; an ordinary update may be sufficient once the source is valid.
+The backup's `installed-plugin/` is retained for reviewed manual recovery;
+there is no automatic rollback/downgrade and no automatic backup deletion.
+Never upload this backup or its configuration snapshots to a public issue.
 
 ## Troubleshooting names, versions, and profiles
 
@@ -299,6 +364,8 @@ separate maintainer verification procedure.
   actual remote revision. A GitHub release, local edit, or version label alone
   does not update a pinned source. Refresh the marketplace, update the plugin,
   and start a fresh session before verifying the loaded path.
+- **Update fails because the rename branch was deleted:** use the
+  [source repair](#repair-a-deleted-branch-pin), not another plugin installation.
 - **Renamed rc.1 is already installed:** use ordinary same-ID updates, not the
   old-to-new migration helper. Preserve the original migration backup.
 - **Gateway/authentication fails only in the test profile:** verify the same

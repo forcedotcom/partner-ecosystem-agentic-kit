@@ -224,6 +224,11 @@ preserving local changes. Branch- or tag-pinned installs follow that source,
 not automatically the latest release. [Update instructions](INSTALL.md#updates) ·
 [Release policy](docs/releasing.md).
 
+If an existing renamed Claude plugin still tracks the deleted rename branch,
+use the [preview-first source repair](INSTALL.md#repair-a-deleted-branch-pin)
+before updating. It is separate from old-ID migration and fresh installation;
+the helper must be obtained from a reviewed checkout, not the broken source.
+
 ## Contributing and feedback
 
 Open an [issue](https://github.com/forcedotcom/partner-ecosystem-agentic-kit/issues)

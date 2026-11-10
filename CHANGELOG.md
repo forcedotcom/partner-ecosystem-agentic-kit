@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased — installed-source repair tooling
+
+- Add `scripts/repair_update_source.py`: preview-first repair of this advisor's
+  deleted branch pin for an already-renamed project plugin in a dedicated profile.
+- Back up private settings and the installed payload; align existing source
+  declarations without broadening scope, refresh/update through native Claude
+  commands, and verify the reviewed target while preserving unrelated settings.
+- Refuse custom pins, unsupported/shared scopes, unrelated sources, missing
+  installations, concurrent changes, or unexpected integration/payload changes.
+- Document one-time repair before ordinary updates. No skill content, plugin
+  identity/version, model behavior, or existing user configuration is changed
+  by adding this maintainer helper. Apply always needs explicit approval.
+- Verification: 82 automated tests pass, including 16 repair tests; a disposable
+  native Claude CLI rehearsal verified preview, repair/update, payload, preserved
+  unrelated settings, and a no-op repeat. No real installation was changed.
+
 ## 0.3.0-rc.2 — rename follow-up and documentation (unreleased)
 
 - Explain fresh installation, old-ID migration, same-ID updates, copied-skill

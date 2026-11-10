@@ -28,6 +28,9 @@ are preserved; these version changes do not promote maturity.
 to the new ID. If `isv-partner-advisor` is already installed, use the
 [ordinary same-ID update flow](../INSTALL.md#updates), not this helper, to
 move from rc.1 to rc.2. Keep the original migration backup for recovery.
+If that renamed plugin is pinned to the deleted rename branch, first use
+[the dedicated source repair](../INSTALL.md#repair-a-deleted-branch-pin).
+The migration helper's `already_migrated` result does not repair its saved source.
 
 Maintainer rehearsal: a disposable Claude Code 2.1.319 profile completed the
 native old-plugin install, renamed-plugin installation/hash verification,
