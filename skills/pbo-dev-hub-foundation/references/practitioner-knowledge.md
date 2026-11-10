@@ -68,12 +68,13 @@ Detailed LMA, FMA, and SignupRequest workflows may ultimately belong to Packagin
 - Determine which org currently has Dev Hub enabled.
 - Confirm that the PBO—not a generic DE org—is the Dev Hub used for scratch orgs and 2GP operations.
 - Confirm that both Dev Hub and second-generation packaging are enabled before diagnosing package operations.
-- Inspect the PBO's actual `Status` in Setup → Company Information or from
-  partner-supplied Partner Console evidence. The standard `Organization` query
+- Read the PBO's actual status from `EnvironmentHubMember.OrgStatus` on the
+  PBO's own member record (see "Read PBO lifecycle status through
+  `EnvironmentHubMember.OrgStatus`" below). The standard `Organization` query
   can corroborate `OrganizationType`, `TrialExpirationDate`, and `IsSandbox`,
-  but does not expose an Active/Trial status field and cannot prove `Active`.
-- For a Security Review gate, pair the query result with the partner's explicit
-  confirmation of the Company Information or Partner Console status. Label that
+  but `Organization` itself has no Active/Trial status field.
+- Use Setup → Company Information or partner-supplied Partner Console evidence
+  only when the `OrgStatus` check is unavailable or inconclusive. Label that
   confirmation as partner-provided evidence, not as an API-derived fact.
 - Distinguish `Trial`, `Active`, and `Hold` states; do not infer permanence merely because the org is currently accessible.
 - Before Security Review submission, confirm that the PBO Dev Hub that owns the managed 2GP package has Active status and that the exact package version selected for submission is promoted.
@@ -130,6 +131,53 @@ Interpretation:
 - Permission/access error: inconclusive; verify with a sufficiently privileged user or the documented App Launcher procedure.
 
 Do not require member records because a valid, newly configured PBO can have no Environment Hub members yet.
+
+### Practitioner rule: read PBO lifecycle status through `EnvironmentHubMember.OrgStatus`
+
+**Practitioner rule (SME-validated on a live PBO, 2026-10-20):** the PBO's own
+`EnvironmentHubMember` record exposes its lifecycle status in `OrgStatus`. This
+is the machine-verifiable Active/Trial check; a Company Information screenshot
+is not required when the query succeeds.
+
+**Documented (object reference, API 29.0+, retrieved 2026-10-20):** `OrgStatus`
+is a restricted picklist described as "the licensing or creation status of this
+org," with values `Active`, `Demo`, `Deleted`, `Free`, `Inactive`, and `Trial`.
+`MemberEntity` holds the member's org ID.
+
+Recommended read-only query, run against the PBO with the PBO's own org ID
+(match both 15- and 18-character forms because the stored form is not
+documented):
+
+```text
+sf data query --target-org <PBO> --json --query "SELECT MemberEntity, OrgStatus, OrgEdition, IsSandbox FROM EnvironmentHubMember WHERE MemberEntity IN ('<15-char org ID>', '<18-char org ID>')"
+```
+
+Interpretation:
+
+- `Active`: API-derived fact that the PBO is Active. It satisfies the PBO-status
+  half of the Security Review gate; promotion of the exact package version is
+  still a separate check.
+- `Trial`: not yet Active. Read `Organization.TrialExpirationDate` for the
+  actual expiration and route to activation or extension guidance.
+- `Inactive`, `Deleted`, `Free`, or `Demo`: not verified Active. Do not map
+  these values to `Hold` or to any other lifecycle state without further
+  evidence; report the exact value and verify through Company Information or
+  Salesforce support.
+- No self-record returned, or a permission error: status is inconclusive, not
+  evidence that the org is not a PBO. Fall back to Company Information or
+  Partner Console evidence and label it partner-provided.
+
+Record the target org, query time, API user, and exact `OrgStatus` value in the
+evidence ledger. Never place the org ID in shared partner output; refer to it
+by a logical alias.
+
+**Unknown (pending SME review):** whether every PBO, including a new Trial PBO,
+always has its own member record; and how a `Hold` PBO appears in `OrgStatus`,
+or whether the query is reachable at all after users lose access.
+
+**Superseded (2026-10-20):** the earlier rule that the API "does not expose an
+Active/Trial status field and cannot prove `Active`" was accurate for
+`Organization` only. It is replaced by this rule for `EnvironmentHubMember`.
 
 ### Candidate decision rules
 
@@ -299,7 +347,7 @@ The Partner Community join topic recommends using a separate partner username ev
 3. Actual org lifecycle status and expiration evidence.
 4. PBO org ID and the authenticated Dev Hub alias used by the team.
 
-Do not infer that the org is Active merely because `TrialExpirationDate` is null. Package Visualizer makes that inference in its display; the advisor must inspect the actual status from Company Information or partner-supplied Partner Console evidence.
+Do not infer that the org is Active merely because `TrialExpirationDate` is null. Package Visualizer makes that inference in its display; the advisor must read the actual status from the PBO's own `EnvironmentHubMember.OrgStatus`, falling back to Company Information or partner-supplied Partner Console evidence only when that check is inconclusive.
 
 ## Step 2 — Enable Dev Hub and Managed 2GP
 
